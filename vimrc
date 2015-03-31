@@ -53,10 +53,6 @@ command DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
 " map Q gqip
 "map Q gqap
 
-" map  <Home>
-" map!  <Home>
-" map  <End>
-" map!  <End>
 " used to format LaTeX documents
 fun! TeX_par()
     if (getline(".") != "")
