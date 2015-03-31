@@ -36,8 +36,8 @@ for file in $files; do
 	# If the dotfile exists as a symbolic link, and it's doesn't point
 	# to "$dir/$file" then move it to $olddir for backup.
 	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$file" ]; then
-		echo "Moving existing ~/.$file from ~ to $olddir"
-		mv "$HOME/.$file" "$olddir/"
+		echo "Deleting existing ~/.$file symbolic link"
+		rm "$HOME/.$file"
 	fi
 
 	if [ ! -e "$HOME/.$file" ]; then
