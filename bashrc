@@ -21,11 +21,24 @@ cat >"$CUSTOMENV" <<_EOF_
 
 _EOF_
 
-find -L ~/.bash.d/$(hostname) -type f -print0 | sort -z |while read -d $'\0' file
-do
-	echo -ne "\n#\n# FILE: $file\n#\n\n"
-	cat "$file"
-done >> "$CUSTOMENV"
+if [ -d ~/.bash.d/$(hostname) ]; then
+	find -L ~/.bash.d/$(hostname) -type f -print0 |\
+		sort -z |\
+		while read -d $'\0' file
+	do
+		echo -ne "\n#\n# FILE: $file\n#\n\n"
+		cat "$file"
+	done >> "$CUSTOMENV"
+else
+	# Use ~/.bash.d/generic if $(hostname) directory doesn't exist.
+	find -L ~/.bash.d/generic -type f -print0 |\
+		sort -z |\
+		while read -d $'\0' file
+	do
+		echo -ne "\n#\n# FILE: $file\n#\n\n"
+		cat "$file"
+	done >> "$CUSTOMENV"
+fi
 
 source "$CUSTOMENV"
 /bin/rm "$CUSTOMENV"
