@@ -29,7 +29,7 @@ if [ -d ~/.bash.d/$(hostname) ]; then
 		echo -ne "\n#\n# FILE: $file\n#\n\n"
 		cat "$file"
 	done >> "$CUSTOMENV"
-else
+elif [ -d ~/.bash.d/generic ]; then
 	# Use ~/.bash.d/generic if $(hostname) directory doesn't exist.
 	find -L ~/.bash.d/generic -type f -print0 |\
 		sort -z |\
