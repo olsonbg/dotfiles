@@ -4,32 +4,44 @@
 # dotfiles in ~/dotfiles
 ############################
 
-########## Variables
+dir=$HOME/dotfiles                    # dotfiles directory
+olddir=$HOME/dotfiles_old             # old dotfiles backup directory
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim Xresources screenrc"
 
-##########
-
 # create dotfiles_old in homedir
-echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
-mkdir -p $olddir
-echo "done"
+if [ ! -d "$olddir" ]; then
+	echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
+#	mkdir -p $olddir
+	echo "done"
+fi
 
 # change to the dotfiles directory
 echo -n "Changing to the $dir directory ..."
-cd $dir
+cd "$dir"
 echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create
 # symlinks from the homedir to any files in the ~/dotfiles directory specified
 # in $files
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+	
+	# If the dotfile exists, and it's a regular file, then move it to
+	# $olddir for backup.
+	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
+		echo "Moving existing ~/.$file from ~ to $olddir"
+		mv "$HOME/.$file" "$olddir/"
+	# If the dotfile exists as a symbolic link, and it's doesn't point
+	# to "$dir/$file" then move it to $olddir for backup.
+	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$dir/$file" ]; then
+		echo "Moving existing ~/.$file from ~ to $olddir"
+		mv "$HOME/.$file" "$olddir/"
+	fi
+
+	if [ ! -e "$HOME/.$file" ]; then
+		echo "Creating symlink to $file in home directory."
+		ln -s $dir/$file $HOME/.$file
+	fi
 done
 
