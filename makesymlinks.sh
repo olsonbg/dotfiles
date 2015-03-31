@@ -4,8 +4,9 @@
 # dotfiles in ~/dotfiles
 ############################
 
-dir=$HOME/dotfiles                    # dotfiles directory
-olddir=$HOME/dotfiles_old             # old dotfiles backup directory
+DOTFILES=dotfiles
+dir=$HOME/$DOTFILES                    # dotfiles directory
+olddir=$HOME/${DOTFILES}_old             # old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim Xresources screenrc"
@@ -34,14 +35,14 @@ for file in $files; do
 		mv "$HOME/.$file" "$olddir/"
 	# If the dotfile exists as a symbolic link, and it's doesn't point
 	# to "$dir/$file" then move it to $olddir for backup.
-	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$dir/$file" ]; then
+	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$file" ]; then
 		echo "Moving existing ~/.$file from ~ to $olddir"
 		mv "$HOME/.$file" "$olddir/"
 	fi
 
 	if [ ! -e "$HOME/.$file" ]; then
 		echo "Creating symlink to $file in home directory."
-		ln -s $dir/$file $HOME/.$file
+		ln -s $DOTFILES/$file $HOME/.$file
 	fi
 done
 
