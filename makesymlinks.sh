@@ -9,7 +9,7 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 # list of files/folders to symlink in homedir
-files="bashrc bash.d vimrc vim Xresources"
+files="bashrc bash.d vimrc vim Xresources screenrc"
 
 ##########
 

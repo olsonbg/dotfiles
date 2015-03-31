@@ -1,0 +1,13 @@
+term screen-256color
+# use visual bell
+vbell on
+# # replace ctrl-A by ctrl-O
+# escape ^Oo
+# set a big scrolling buffer
+defscrollback 5000
+# Set the caption on the bottom line
+backtick 1 5 5 true
+termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
+hardstatus string "screen (%n: %t)"
+caption string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+caption always
