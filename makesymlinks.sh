@@ -46,3 +46,4 @@ for file in $files; do
 	fi
 done
 
+echo "Setup complete."
