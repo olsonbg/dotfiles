@@ -147,4 +147,11 @@ endfunction
 
 noremap  <silent> <F9> :call Column80()<CR>
 noremap! <silent> <F9> <ESC> :call Column80()<CR>
+
+"
+" Manpage for word under cursor via 'K' in command mode
+"
+runtime! ftplugin/man.vim
+noremap <buffer> <silent> K :exe "Man" expand('<cword>') <CR>
+
 " vim:tw=76:ts=4:sw=2
