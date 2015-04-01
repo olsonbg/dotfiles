@@ -26,6 +26,12 @@ let NERDShutUp      = 1   " Don't warn on unsupported filetype
 let NERDSpaceDelims = 1   " Put a space between comment delimiter and text
 let mapleader       = '\' " Use \ as leader for NERD commands
 
+" maps NERDTree to F10
+" (normal, visual and operator-pending modes)
+noremap <silent> <F10> :NERDTreeToggle<CR>
+" (also in insert and command-line modes)
+noremap! <silent> <F10> <ESC>:NERDTreeToggle<CR>
+
 " Enable Vim 7+ spell checking
 au BufRead *.tex setlocal spell spelllang=en_us
 " Go to next misspelled word
@@ -122,4 +128,23 @@ endif
 hi SpellBad cterm=underline ctermfg=red ctermbg=none
 hi SpellRare cterm=underline ctermfg=green ctermbg=none
 hi SpellLocal cterm=underline ctermfg=green ctermbg=none
+
+
+"
+" We must be able to show the 80 column limit with F9...
+" Hitting F9 again will toggle back to normal.
+"
+function! Column80 ()
+    if exists('+colorcolumn')
+        " Show column 80
+        if &colorcolumn == ""
+            set colorcolumn=80
+        else
+            set colorcolumn=
+        endif
+    endif
+endfunction
+
+noremap  <silent> <F9> :call Column80()<CR>
+noremap! <silent> <F9> <ESC> :call Column80()<CR>
 " vim:tw=76:ts=4:sw=2
