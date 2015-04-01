@@ -13,3 +13,6 @@
 [submodule "vim/bundle/AnsiEsc"]
 	path = vim/bundle/AnsiEsc
 	url = git://github.com/powerman/vim-plugin-AnsiEsc.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar

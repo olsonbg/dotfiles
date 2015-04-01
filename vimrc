@@ -148,6 +148,9 @@ endfunction
 noremap  <silent> <F9> :call Column80()<CR>
 noremap! <silent> <F9> <ESC> :call Column80()<CR>
 
+noremap  <silent> w80 :vertical resize 80
+
+set tags+=/usr/include/tags
 "
 " Manpage for word under cursor via 'K' in command mode
 "
