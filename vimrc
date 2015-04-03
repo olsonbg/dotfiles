@@ -24,7 +24,7 @@ set list
 " NERD Commenter
 let NERDShutUp      = 1   " Don't warn on unsupported filetype
 let NERDSpaceDelims = 1   " Put a space between comment delimiter and text
-let mapleader       = '\' " Use \ as leader for NERD commands
+let mapleader       = ',' " Use \ as leader for NERD commands
 
 " maps NERDTree to F10
 " (normal, visual and operator-pending modes)
@@ -149,12 +149,34 @@ noremap  <silent> <F9> :call Column80()<CR>
 noremap! <silent> <F9> <ESC> :call Column80()<CR>
 
 noremap  <silent> w80 :vertical resize 80
+" Increase/Decrease horizontally split window
+" noremap _ :resize +1<CR>
+" noremap - :resize -1<CR>
+" Increase/Decrease vertically split window
+noremap _ :vertical resize +1<CR>
+noremap - :vertical resize -1<CR>
 
-set tags+=/usr/include/tags
+set tags+=~/Projects/tags/tags-base
+"set tags+=~/Projects/tags/tags-extras
 "
 " Manpage for word under cursor via 'K' in command mode
 "
 runtime! ftplugin/man.vim
 noremap <buffer> <silent> K :exe "Man" expand('<cword>') <CR>
+
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+au BufNewFile,BufRead,BufEnter *.cpp,*.h set omnifunc=omni#cpp#complete#Main
+highlight Pmenu guibg=brown gui=bold ctermbg=lightblue ctermfg=black
 
 " vim:tw=76:ts=4:sw=2
