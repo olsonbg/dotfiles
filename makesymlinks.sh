@@ -9,7 +9,7 @@ dir=$HOME/$DOTFILES                    # dotfiles directory
 olddir=$HOME/${DOTFILES}_old             # old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
-files="bashrc bash.d vimrc vim Xresources screenrc"
+files="bashrc bash.d vimrc vim Xresources screenrc screenrc-ide"
 
 # create dotfiles_old in homedir
 if [ ! -d "$olddir" ]; then
