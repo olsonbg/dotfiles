@@ -156,8 +156,10 @@ noremap  <silent> w80 :vertical resize 80
 noremap _ :vertical resize +1<CR>
 noremap - :vertical resize -1<CR>
 
+set tags+=~/Projects/tags/tags-core
 set tags+=~/Projects/tags/tags-base
 "set tags+=~/Projects/tags/tags-extras
+"set tags+=~/Projects/tags/tags-boost
 "
 " Manpage for word under cursor via 'K' in command mode
 "
@@ -165,6 +167,7 @@ runtime! ftplugin/man.vim
 noremap <buffer> <silent> K :exe "Man" expand('<cword>') <CR>
 
 " OmniCppComplete
+au BufNewFile,BufRead,BufEnter *.cpp,*.h set omnifunc=omni#cpp#complete#Main
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
@@ -176,7 +179,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-au BufNewFile,BufRead,BufEnter *.cpp,*.h set omnifunc=omni#cpp#complete#Main
 highlight Pmenu guibg=brown gui=bold ctermbg=lightblue ctermfg=black
 
 " vim:tw=76:ts=4:sw=2
