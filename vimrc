@@ -6,10 +6,12 @@ execute pathogen#infect()
 
 set incsearch
 set formatoptions=tcqr
-set cinoptions=(0
+set cinoptions=(0,u0,U0
 set laststatus=2
 set tabstop=4
 set shiftwidth=4
+set softtabstop=0
+set noexpandtab
 set showbreak=\ \ \ \ \ \
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
@@ -21,6 +23,7 @@ set whichwrap=b,s,<,>,[,]
 set printoptions=paper:letter
 set listchars=tab:>-,trail:-
 set list
+filetype plugin indent on
 " NERD Commenter
 let NERDShutUp      = 1   " Don't warn on unsupported filetype
 let NERDSpaceDelims = 1   " Put a space between comment delimiter and text
