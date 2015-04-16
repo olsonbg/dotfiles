@@ -14,7 +14,7 @@ files="bashrc bash.d vimrc vim Xresources screenrc screenrc-ide"
 # create dotfiles_old in homedir
 if [ ! -d "$olddir" ]; then
 	echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
-#	mkdir -p $olddir
+	mkdir -p $olddir
 	echo "done"
 fi
 
