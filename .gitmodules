@@ -16,3 +16,7 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+[submodule "vim/bundle/vimoutliner"]
+	path = vim/bundle/vimoutliner
+	url = https://github.com/noelhenson/vimoutliner
+	branch = tables

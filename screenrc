@@ -1,6 +1,8 @@
 term screen-256color
 # use visual bell
 vbell on
+# enable utf8
+defutf8 on
 # # replace ctrl-A by ctrl-O
 # escape ^Oo
 # set a big scrolling buffer
