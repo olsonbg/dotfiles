@@ -63,11 +63,11 @@ function __prompt_command()
 		"0	0") # equal to upstream
 			p="=" ;;
 		"0	"*) # ahead of upstream
-			p=">" ;;
+			p="+${count#0	}" ;;
 		*"	0") # behind upstream
-			p="<" ;;
+			p="-${count%	0}" ;;
 		*)	    # diverged from upstream
-			p="<>" ;;
+			p="+${count#*	}-${count%	*}" ;;
 		esac
 
 		PS1+=" $Color_On[$branch$s$p]$NONE"
