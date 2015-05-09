@@ -13,14 +13,16 @@ R='\]'
 SUS=`ps T |grep -v "grep"|grep -c " su"|grep -v "^0"`
 
 if [ $TERM = "linux"  -o $TERM = "xterm" -o $TERM = "xterm-256color" -o $TERM = "rxvt-unicode-256color" -o $TERM = "screen-256color" ] ; then
-	export PS1="$E$CYAN$R\h($E$YEL$R\u$E$CYAN$R)[$E$RED$R\$?$E$CYAN$R]$E$YEL$R$SUS$E$NONE$CYAN$R:\w/>$E$NONE$R "
+	export PS1="$E$CYAN$R\h($E$YEL$R\u$E$CYAN$R)[$E$RED$R\$?$E$CYAN$R]$E$YEL$R$SUS$E$NONE$CYAN$R:\w/"'$(__git_ps1 " [%s]")'">$E$NONE$R "
 elif [ $TERM = "screen-256color" ]; then
-	export PS1="$E$BLUE$R\h($E$YEL$R\u$E$BLUE$R)[$E$RED$R\$?$E$BLUE$R]$E$YEL$R$SUS$E$NONE$BLUE$R:\w/>$E$NONE$R "
+	export PS1="$E$BLUE$R\h($E$YEL$R\u$E$BLUE$R)[$E$RED$R\$?$E$BLUE$R]$E$YEL$R$SUS$E$NONE$BLUE$R:\w/"'$(__git_ps1 " [%s]")'">$E$NONE$R "
 	
 else
-	export PS1="\h(\u)[\$?]$SUS:\w/> "
+	export PS1="\h(\u)[\$?]$SUS:\w/"'$(__git_ps1 " [%s]")'"> "
 fi
 
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUPSTREAM="auto"
 #
 # unset values...
 #

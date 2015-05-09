@@ -14,6 +14,8 @@ xterm*faceName: Monospace
 xterm*faceSize: 10
 xterm*boldName: Inconsolata
 !
+XMgrace*geometry: 1034x700
+!
 URxvt*font: xft:Inconsolata:size=11:antialias=true
 URxvt*boldFont: xft:Inconsolata:bold:size=11:antialias=true
 URxvt.geometry: 80x30
