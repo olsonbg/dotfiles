@@ -16,14 +16,14 @@ xterm*boldName: Inconsolata
 !
 XMgrace*geometry: 1034x700
 !
-URxvt*font: xft:Inconsolata:size=11:antialias=true
-URxvt*boldFont: xft:Inconsolata:bold:size=11:antialias=true
+URxvt*font: xft:Inconsolata:size=10:antialias=true
+URxvt*boldFont: xft:Inconsolata:bold:size=10:antialias=true
 URxvt.geometry: 80x30
 URxvt*background: black
 URxvt*foreground: grey
-URxvt.keysym.C-0: command:\033]710;xft:Inconsolata:size=11:antialias=true\007\033\]711;xft:Inconsolata:bold:size=11:antialias=true\007
+URxvt.keysym.C-0: command:\033]710;xft:Inconsolata:size=10:antialias=true\007\033\]711;xft:Inconsolata:bold:size=10:antialias=true\007
 URxvt.keysym.C-minus: command:\033]710;xft:Inconsolata:size=9:antialias=true\007\033\]711;xft:Inconsolata:bold:size=9:antialias=true\007
-URxvt.keysym.C-equal: command:\033]710;xft:Inconsolata:size=12:antialias=true\007\033\]711;xft:Inconsolata:bold:size=12:antialias=true\007
+URxvt.keysym.C-equal: command:\033]710;xft:Inconsolata:size=11:antialias=true\007\033\]711;xft:Inconsolata:bold:size=11:antialias=true\007
 URxvt.keysym.C-7: command:\033[8;20;80t
 URxvt.keysym.C-8: command:\033[8;30;80t
 URxvt.keysym.C-9: command:\033[8;40;80t
