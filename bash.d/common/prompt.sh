@@ -47,11 +47,30 @@ function __prompt_command()
 			branch=$(git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD)
 		fi
 
+		# Anything stashed?
 		local s
 		if $(git rev-parse --verify --quiet refs/stash >/dev/null); then
 			s="$"
 		fi
-		PS1+=" $Color_On[$branch$s]$NONE"
+
+		# How many commits we are ahead/behind our upstream
+		local p
+		local count=$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
+
+		case "$count" in
+		"") # no upstream
+			p="" ;;
+		"0	0") # equal to upstream
+			p="=" ;;
+		"0	"*) # ahead of upstream
+			p=">" ;;
+		*"	0") # behind upstream
+			p="<" ;;
+		*)	    # diverged from upstream
+			p="<>" ;;
+		esac
+
+		PS1+=" $Color_On[$branch$s$p]$NONE"
 	fi
 
 	# PS1+='$(__git_ps1 " [%s]")'
