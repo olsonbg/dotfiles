@@ -20,3 +20,6 @@
 	path = vim/bundle/vimoutliner
 	url = https://github.com/noelhenson/vimoutliner
 	branch = tables
+[submodule "vim/bundle/atelier-schemes"]
+	path = vim/bundle/atelier-schemes
+	url = https://github.com/atelierbram/vim-colors_atelier-schemes.git
