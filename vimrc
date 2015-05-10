@@ -119,20 +119,6 @@ function! LastModified()
 endfun
 autocmd BufWritePre * call LastModified()
 
-" From: ~/.vim/colors/ir_black.vim
-colorscheme ir_black
-set background=light
-set background=dark
-if version >= 700 " Vim 7.x specific colors
-  hi Search         guifg=NONE        guibg=NONE        gui=underline ctermfg=black       ctermbg=yellow      cterm=NONE
-endif
-
-"hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=red ctermbg=none
-hi SpellRare cterm=underline ctermfg=green ctermbg=none
-hi SpellLocal cterm=underline ctermfg=green ctermbg=none
-
-
 "
 " We must be able to show the 80 column limit with F9...
 " Hitting F9 again will toggle back to normal.
@@ -182,6 +168,7 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-highlight Pmenu guibg=brown gui=bold ctermbg=lightblue ctermfg=black
 
-" vim:tw=76:ts=4:sw=2
+colorscheme ir_black-bgo
+
+" vim:tw=76:ts=4:sw=4

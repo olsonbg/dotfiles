@@ -36,6 +36,7 @@ URxvt*iconFile:   /usr/share/icons/Tango/scalable/apps/terminal.svg
 URxvt*urlLauncher: webcamWrapper chromium-browser
 URxvt*loginShell: false
 URxvt*saveLines: 1024
+URxvt.intensityStyles: false
 !URxvt.perl-ext-common: default,tabbed
 !URxvt.tabbed.tabbar-fg: 6
 !URxvt.tabbed.tabbar-bg: 8
