@@ -14,6 +14,7 @@ set softtabstop=0
 set noexpandtab
 set showbreak=\ \ \ \ \ \
 set nocompatible        " Use Vim defaults (much better!)
+set t_Co=16
 set bs=2                " allow backspacing over everything in insert mode
 set backup              " keep a backup file
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
@@ -169,6 +170,8 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-colorscheme ir_black-bgo
+"colorscheme ir_black-bgo
+set bg=light
+colorscheme solarized
 
 " vim:tw=76:ts=4:sw=4

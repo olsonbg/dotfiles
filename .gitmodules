@@ -23,3 +23,6 @@
 [submodule "vim/bundle/atelier-schemes"]
 	path = vim/bundle/atelier-schemes
 	url = git://github.com/atelierbram/vim-colors_atelier-schemes.git
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
