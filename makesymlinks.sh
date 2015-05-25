@@ -9,7 +9,8 @@ dir=$HOME/$DOTFILES                    # dotfiles directory
 olddir=$HOME/${DOTFILES}_old             # old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
-files="bashrc bash.d vimrc vim Xresources screenrc screenrc-ide tmux.conf"
+files=bashrc bash.d vimrc vim screenrc screenrc-ide tmux.conf \
+      Xresources
 
 # create dotfiles_old in homedir
 if [ ! -d "$olddir" ]; then

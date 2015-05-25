@@ -171,7 +171,12 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 "colorscheme ir_black-bgo
-set bg=light
+let s:solarized_shell_theme=$SOLARIZED_THEME
+if s:solarized_shell_theme == "light"
+	set bg=light
+else
+	set bg=dark
+endif
+let g:solarized_visibility="low"
 colorscheme solarized
-
 " vim:tw=76:ts=4:sw=4
