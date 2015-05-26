@@ -173,9 +173,9 @@ set completeopt=menuone,menu,longest,preview
 "colorscheme ir_black-bgo
 let s:solarized_shell_theme=$SOLARIZED_THEME
 if s:solarized_shell_theme == "light"
-	set bg=light
+	set background=light
 else
-	set bg=dark
+	set background=dark
 endif
 let g:solarized_visibility="low"
 colorscheme solarized

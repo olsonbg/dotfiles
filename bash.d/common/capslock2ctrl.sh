@@ -1,2 +1,4 @@
 # Use my caps lock key as a control key.
-setxkbmap -option ctrl:nocaps
+if [ ! -z $DISPLAY ]; then
+	setxkbmap -option ctrl:nocaps
+fi
