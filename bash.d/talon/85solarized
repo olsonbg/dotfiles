@@ -1,1 +1,1 @@
-../common/solarized.sh
+export SOLARIZED=light
