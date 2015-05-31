@@ -1,9 +1,4 @@
-#!/bin/sh
-#
-
-if [ -z $TERM ]; then
-	NUMCOLORS=8
-else
+if [ "$TERM" != "dumb" ]; then
 	NUMCOLORS=$(tput colors)
 fi
 
