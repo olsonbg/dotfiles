@@ -35,10 +35,13 @@ syn keyword btclRepeat		while for foreach break continue
 " For BTCL
 syn keyword btclAccelrysStatement	forcefield minimize dynamics vdWTailCorrection
 syn keyword btclAccelrysStatement	writeFile readFile command print echo
+syn keyword btclAccelrysStatement	peek
 syn keyword btclAccelrysRepeat		execute
 syn keyword btclAccelrysType		timestep initial_temperature ensemble
 syn keyword btclAccelrysType		temperature_control_method
 syn keyword btclAccelrysType		decay_constant temperature deviation
+syn keyword btclAccelrysType		press_choice press_decay_constant
+syn keyword btclAccelrysType		pressure_control_method q_ratio
 syn keyword btclAccelrysType		frequency first_step last_step
 syn keyword btclAccelrysType		table filename
 syn keyword btclAccelrysType		average average batch_average batch_sd batch_size
@@ -52,6 +55,7 @@ syn keyword btclAccelrysType		archive frame
 syn keyword btclAccelrysType		separate_coulomb vdw summation_method
 syn keyword btclAccelrysType		cutoff spline_width buffer_width
 syn keyword btclAccelrysType		coulomb dielectric_value
+syn keyword btclAccelrysType		ewald_accuracy update_width
 
 
 
@@ -60,7 +64,8 @@ syn keyword btclAccelrysType		coulomb dielectric_value
 syn match btclVarRef "$\(\(::\)\?\([[:alnum:]_.]*::\)*\)\a[a-zA-Z0-9_.]*"
 	" ${...} may contain any character except '}'
 syn match btclVarRef "${[^}]*}"
-
+syn keyword btclVarRef                  NVE NPT NVT nose berendsen_pc
+syn keyword btclVarRef                  ewald atom_based
 syn keyword btclTodo contained	TODO
 
 
