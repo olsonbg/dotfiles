@@ -91,15 +91,28 @@
 
 xterm*background: S_base03
 xterm*foreground: S_base0
-xterm*font: 8x13
+!xterm*font: 8x13
 xterm*boldMode: false
 ! Truetype fonts.
 xterm*faceName: Monospace
-!xterm*faceName: inconsolata
+!xterm*faceName: Inconsolata
 xterm*faceSize: 10
 xterm*boldName: Inconsolata
 !
+XMgrace*renderTable: variable
+XMgrace*renderTable.variable.fontName: Liberation Sans
+XMgrace*renderTable.variable.fontType: FONT_IS_XFT
+XMgrace*renderTable.variable.fontSize: 9
+XMgrace*background: #fdf6e3
+XMgrace*foreground: #657b83
+XMgrace*XmText*background: #eee8d5
+XMgrace*XMPushButton*background: #eee8d5
+XMgrace*XmFileSelectionBox*XmList.background: #eee8d5
+XMgrace*XmFileSelectionBox*XmTextField.background: #eee8d5
+XMgrace*XmPushButton.background: #eee8d5
+XMgrace*XmPushButton.foreground: #586e75
 XMgrace*geometry: 1034x700
+!XMgrace*font: xft:arial:size=10:antialias=true
 !
 URxvt.allow_bold: false
 URxvt*font: xft:Inconsolata:size=10:antialias=true

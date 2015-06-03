@@ -64,7 +64,7 @@ syn keyword btclAccelrysType		ewald_accuracy update_width
 syn match btclVarRef "$\(\(::\)\?\([[:alnum:]_.]*::\)*\)\a[a-zA-Z0-9_.]*"
 	" ${...} may contain any character except '}'
 syn match btclVarRef "${[^}]*}"
-syn keyword btclVarRef                  NVE NPT NVT nose berendsen_pc
+syn keyword btclVarRef                  NVE NPT NVT nose berendsen_pc andersen
 syn keyword btclVarRef                  ewald atom_based
 syn keyword btclTodo contained	TODO
 
