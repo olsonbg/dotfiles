@@ -9,6 +9,14 @@ solarized_theme() {
 		# TTYs are black.
 		export SOLARIZED_THEME=dark;
 	fi
+
+	# Make sure the dircolors theme matches the current
+	# solarized theme (dark/light).
+	if [ "$SOLARIZED_THEME" == "dark" ]; then
+		eval $(dircolors ~/.bash.d/themes/dircolors.ansi-light)
+	elif [ "$SOLARIZED_THEME" == "light" ]; then
+		eval $(dircolors ~/.bash.d/themes/dircolors.ansi-dark)
+	fi
 }
 
 #Toggle solarized light and dark themes.
@@ -30,7 +38,7 @@ solarized() {
 	# Update the colors
 	echo -ne "${Solarized}"
 
-	# Update the environmental variable
+	# Update the environmental variable and dircolors.
 	solarized_theme
 }
 
