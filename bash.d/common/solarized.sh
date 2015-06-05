@@ -22,7 +22,7 @@ solarized() {
 		ln -sf ~/dotfiles/Xresources-dark ~/.Xresources
 	fi
 
-	if [ -n $DISPLAY ]; then
+	if [ -n "$DISPLAY" ]; then
 		# Only run xrdb if in X.
 		xrdb ~/.Xresources
 	fi
