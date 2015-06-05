@@ -4,11 +4,6 @@ solarized_theme() {
 	SOLARIZED_THEME=$(basename $(readlink ~/.Xresources))
 	export SOLARIZED_THEME=${SOLARIZED_THEME/Xresources-/}
 
-	if [ -z $DISPLAY ]; then
-		# Not in X, probably a TTY. Set background to dark since most 
-		# TTYs are black.
-		export SOLARIZED_THEME=dark;
-	fi
 
 	# Make sure the dircolors theme matches the current
 	# solarized theme (dark/light).
@@ -27,7 +22,10 @@ solarized() {
 		ln -sf ~/dotfiles/Xresources-dark ~/.Xresources
 	fi
 
-	xrdb ~/.Xresources
+	if [ -n $DISPLAY ]; then
+		# Only run xrdb if in X.
+		xrdb ~/.Xresources
+	fi
 
 	# Get the foreground, background, and cursor colors.
 	local FG=$(sed -e '/^#define S_base0 /!d' -e 's/^#define S_base0 *//' ~/.Xresources)
