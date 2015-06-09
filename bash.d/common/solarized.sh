@@ -3,6 +3,8 @@
 solarized_theme() {
 	SOLARIZED_THEME=$(basename $(readlink ~/.Xresources))
 	export SOLARIZED_THEME=${SOLARIZED_THEME/Xresources-/}
+
+	[[ -z "$COLORFGBG" ]] && export COLORFGBG="12;default;8"
 }
 
 solarized-get-color() {
