@@ -1,28 +1,37 @@
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen
+	ignore = all
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter
+	ignore = all
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular
+	ignore = all
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+	ignore = all
 [submodule "vim/bundle/AnsiEsc"]
 	path = vim/bundle/AnsiEsc
 	url = git://github.com/powerman/vim-plugin-AnsiEsc.git
+	ignore = all
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+	ignore = all
 [submodule "vim/bundle/vimoutliner"]
 	path = vim/bundle/vimoutliner
 	url = git://github.com/noelhenson/vimoutliner
 	branch = tables
+	ignore = all
 [submodule "vim/bundle/atelier-schemes"]
 	path = vim/bundle/atelier-schemes
 	url = git://github.com/atelierbram/vim-colors_atelier-schemes.git
+	ignore = all
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+	ignore = all
