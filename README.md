@@ -7,6 +7,7 @@ dotfiles
 * [Usage](#usage)
  * [Using solarized theme](#solarized-scheme)
  * [Host specific settings](#host-specific-settings)
+ * [Font (Inconsolata)](#font)
 
 # Installation
 
@@ -51,8 +52,16 @@ $ git submodule foreach git pull origin master
 
 # Usage
 ## Solarized scheme
-When first installed, the dark [solarized](https://github.com/altercation/solarized) color scheme is used. The light or dark color schemes can be selected by using the `solarized-light` and `solarized-dark` commands, respectively. The command `solarized` will toggle between solarized-dark and solarize-light schemes.
+When first installed, the dark [solarized](https://github.com/altercation/solarized) color scheme is used. The light or dark color schemes can be selected by using the `solarized-light` and `solarized-dark` commands, respectively. The command `solarized` will toggle between solarized-dark and solarize-light schemes. The new color scheme will take effect immediately, with a few caveats:
+
+* To enable the new color scheme in a currently running tmux session follow these steps:
+  1. Detatch from tmux,
+  2. Change the color scheme, with one of the previously listed commands,
+  3. reattach to the tmux session.
+* When already running vim. (TODO)
 
 ## Host Specific Settings
 Settings for specific hosts can be placed in `bash.d/hosts/<hostname>`, where `<hostname>` is the hostname of the machine as returned from the command `hostname`. If there is no matching folder for a host, then the settings in `bash.d/hosts/generic` will be used.
 
+## Font
+The [Inconsolata](https://www.google.com/fonts/specimen/Inconsolata) font is used in [xterm](http://invisible-island.net/xterm/), and [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The font is not included with this repository, so it will need to be installed.
