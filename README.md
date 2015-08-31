@@ -24,16 +24,22 @@ $ git submodule update
 ```
 
 ## Create symlinks
-Current dotfiles are backed up to ~/dotfiles_old, with the current date-time added to the end of the filename(s).
+Current dotfiles are backed up to the ~/dotfiles_old directorory, with the current date-time added to the end of the filename(s).
 ```bash
 $ ~/dotfiles/makesymlinks.sh
+```
+
+To activate the new settings, it's easiest to open a new terminal. Methods to activate the new settings in a currently running terminal vary, but one of the following commands may work
+```
+. ~/.bash_profile
+. ~/.bashrc
 ```
 
 # Upgrading
 
 ## Get the latest version
 ```bash
-$ cd !/dotfiles
+$ cd ~/dotfiles
 $ git pull
 ```
 
