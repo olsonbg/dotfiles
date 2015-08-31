@@ -5,8 +5,9 @@
 ############################
 
 DOTFILES=dotfiles
+DOTFILES_BACKUP=${DOTFILES}_old
 dir=$HOME/$DOTFILES                      # dotfiles directory
-olddir=$HOME/${DOTFILES}_old             # old dotfiles backup directory
+olddir=$HOME/${DOTFILES_BACKUP}          # old dotfiles backup directory
 datetag=$(date +%Y-%m-%d-%H%M%S)         # appended to backup files.
 
 # list of files/folders to symlink in homedir
@@ -29,22 +30,26 @@ echo "done"
 # symlinks from the homedir to any files in the ~/dotfiles directory specified
 # in $files
 for file in $files; do
+	# Some of the dotfiles in $files may by symbolic links, therefore need to
+	# get the canonicalized file name for linking to the users home directory.
+	CANON_FILE=$(readlink -f $file | sed -e s:^$dir/::)
 	
 	# If the dotfile exists, and it's a regular file, then move it to
 	# $olddir for backup.
 	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
 		echo "Moving existing ~/.$file from ~ to $olddir"
 		mv "$HOME/.$file" "$olddir/$file-$datetag"
+
 	# If the dotfile exists as a symbolic link, and it doesn't point
-	# to "$dir/$file" then move it to $olddir for backup.
-	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$file" ]; then
-		echo "Moving existing ~/.$file symbolic link"
+	# to the correct file, then move it to $olddir for backup.
+	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$CANON_FILE" ]; then
+		echo "Backing up ~/.$file to ${DOTFILES_BACKUP}/$file-$datetag"
 		mv "$HOME/.$file" "$olddir/$file-$datetag"
 	fi
 
 	if [ ! -e "$HOME/.$file" ]; then
-		echo "Creating symlink to $file in home directory."
-		ln -s $DOTFILES/$file $HOME/.$file
+		echo -n "Creating symlink: "
+		ln -sv "$DOTFILES/$CANON_FILE" "$HOME/.$file"
 	fi
 done
 
