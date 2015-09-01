@@ -5,6 +5,8 @@ solarized_theme() {
 	export SOLARIZED_THEME=${SOLARIZED_THEME/Xresources-/}
 
 	[[ -z "$COLORFGBG" ]] && export COLORFGBG="12;default;8"
+
+	true
 }
 
 solarized-get-color() {
