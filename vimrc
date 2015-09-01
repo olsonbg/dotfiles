@@ -170,17 +170,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-" Version 7.4 patch 769 (273) need this hack to get solarized
-" dark/light themes correctly from terminal. Actually I'm not sure which
-" specific patch, but 273 works and 769 needs this, so I'm going to check
-" for patch 274 as a cutoff.
-if !has('gui_running') && (v:version == 704) && has("patch-7.4.274")
-	if &background == 'light'
-		set background=light
-	else
-		set background=dark
-	endif
-endif
 let g:solarized_visibility="low"
 colorscheme solarized
 " vim:tw=76:ts=4:sw=4
