@@ -55,7 +55,6 @@ solarized() {
 	local SOLARIZED_SCHEME=$(basename $(readlink ~/.Xresources))
 	SOLARIZED_SCHEME=${SOLARIZED_SCHEME/Xresources-/}
 
-	echo "Solarized scheme: $SOLARIZED_SCHEME"
 	if [ "$SOLARIZED_SCHEME" == "dark" ]; then
 		solarized-switch light
 	elif [ "$SOLARIZED_SCHEME" == "light" ]; then
