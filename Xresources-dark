@@ -74,13 +74,12 @@
 *pointerColorForeground:  S_base1
 !! Done - Solarized scheme 
 
-!xterm*font: 8x13
 xterm*boldMode: false
 ! Truetype fonts.
-!xterm*faceName: Monospace
-xterm*faceName: Inconsolata
-xterm*faceSize: 10
-xterm*boldName: Inconsolata
+xterm*faceName: xft:Inconsolata:size=10:antialias=true:regular:autohint=true:hinting=true
+xterm*boldName: xft:Inconsolata:size=10:antialias=true:regular:autohint=true:hinting=true
+xterm*italicFont: xft:Inconsolata:size=10:antialias=true:oblique:autohint=true:hinting=true
+xterm*bolditalicFont: xft:Inconsolata:size=10:antialias=true:oblique:autohint=true:hinting=true
 !
 XMgrace*renderTable: variable
 XMgrace*renderTable.variable.fontName: Liberation Sans
@@ -98,9 +97,10 @@ XMgrace*geometry: 1034x700
 !XMgrace*font: xft:arial:size=10:antialias=true
 !
 URxvt.allow_bold: false
-URxvt*font: xft:Inconsolata:size=10:antialias=true
-URxvt*boldFont: xft:Inconsolata:size=10:antialias=true
-!URxvt*boldFont: xft:Inconsolata:bold:size=10:antialias=true
+URxvt*font: xft:Inconsolata:size=10:antialias=true:regular:autohint=true:hinting=true
+URxvt*boldFont: xft:Inconsolata:size=10:antialias=true:regular:autohint=true:hinting=true
+URxvt*italicFont: xft:Inconsolata:size=10:antialias=true:oblique:autohint=true:hinting=true
+URxvt*bolditalicFont: xft:Inconsolata:size=10:antialias=true:oblique:autohint=true:hinting=true
 URxvt.geometry: 80x30
 URxvt*keysym.Super_L-W: command:\033]10;white\007\033]11;black\007
 URxvt.keysym.C-0: command:\033]710;xft:Inconsolata:size=10:antialias=true\007

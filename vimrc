@@ -24,6 +24,9 @@ set whichwrap=b,s,<,>,[,]
 set printoptions=paper:letter
 set listchars=tab:>-,trail:-
 set list
+" The next two allow italics
+set t_ZH=[3m
+set t_ZR=[23m
 filetype plugin indent on
 " NERD Commenter
 let NERDShutUp      = 1   " Don't warn on unsupported filetype
@@ -170,6 +173,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-let g:solarized_visibility="low"
+let g:solarized_visibility="normal"
 colorscheme solarized
 " vim:tw=76:ts=4:sw=4
