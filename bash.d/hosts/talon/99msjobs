@@ -1,0 +1,4 @@
+export MSJOBS_NORMAL=$(tput sgr0)
+export MSJOBS_QUEUED=$(tput smso)$(tput setaf 3)
+export MSJOBS_FAILED=$(tput setaf 1)
+export MSJOBS_RUNNING=$(tput setaf 2)
