@@ -53,4 +53,10 @@ for file in $files; do
 	fi
 done
 
+# Update to color pallette.
+if [ -n "$DISPLAY" ]; then
+	# Only run xrdb if in X.
+	xrdb ~/.Xresources
+fi
+
 echo "Setup complete."
