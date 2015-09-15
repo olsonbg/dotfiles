@@ -3,9 +3,10 @@ solarized-getScheme() {
 	local currentScheme=~/.Xresources.d/current-scheme
 
 	if [ ! -e "$currentScheme" ]; then
-		echo "[solarized-getScheme()] File not found: $currentScheme"
-		return
+		# Set default scheme to SOLARIZED_LIGHT.
+		solarized-setScheme LIGHT
 	fi
+
 	# Get the current color scheme
 	sed -e "s:^#define SOLARIZED_::" "$currentScheme"|tr [:upper:] [:lower:]
 }
@@ -14,7 +15,6 @@ solarized-getScheme() {
 solarized-setScheme() {
 	local currentScheme=~/.Xresources.d/current-scheme
 
-	local scheme=
 	# Set the current color scheme
 	echo "#define SOLARIZED_${1^^}" > $currentScheme
 }

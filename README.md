@@ -56,7 +56,7 @@ $ git submodule foreach git pull origin master
 
 # Usage
 ## Solarized scheme
-When first installed, the dark [solarized](https://github.com/altercation/solarized) color scheme is used. The light or dark color schemes can be selected by using the `solarized-light` or `solarized-dark` commands, respectively. The command `solarized` will toggle between solarized-dark and solarize-light schemes. The new color scheme will take effect immediately, with a few [caveats](#caveats).
+When first installed, the light [solarized](https://github.com/altercation/solarized) color scheme is used. The light or dark color schemes can be selected by using the `solarized-light` or `solarized-dark` commands, respectively. The command `solarized` will toggle between solarized-dark and solarize-light schemes. The new color scheme will take effect immediately, with a few [caveats](#caveats).
 
 The `solarized` command writes a single line to the .Xresources.d/current-scheme file, either
 ```bash
