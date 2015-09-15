@@ -53,9 +53,13 @@ for file in $files; do
 	fi
 done
 
+# Create default current-scheme file.
+if [ ! -e ~/.Xresources.d/current-scheme ]; then
+	echo "#define SOLARIZED_LIGHT" > ~/.Xresources.d/current-scheme
+fi
+
 # Update to color pallette.
 if [ -n "$DISPLAY" ]; then
-	[[ ! -e ~/.Xresources.d/current-scheme ]] && touch ~/.Xresources.d/current-scheme
 	# Only run xrdb if in X.
 	xrdb ~/.Xresources
 fi
