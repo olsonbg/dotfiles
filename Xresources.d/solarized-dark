@@ -1,0 +1,9 @@
+!! Dark  bg:fg = base03:base0
+*background:              S_base03
+*foreground:              S_base0
+*fadeColor:               S_base03
+
+*fading:                  40
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1

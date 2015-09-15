@@ -1,0 +1,6 @@
+xterm*boldMode: false
+! Truetype fonts.
+xterm*faceName: xft:Inconsolata:size=11:regular
+xterm*boldName: xft:Inconsolata:size=11:regular
+xterm*italicFont: xft:Inconsolata:size=11:oblique
+xterm*bolditalicFont: xft:Inconsolata:size=11:oblique

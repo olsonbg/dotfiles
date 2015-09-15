@@ -1,0 +1,9 @@
+!! Light bg:fg = base3 :base00
+*background:              S_base3
+*foreground:              S_base00
+*fadeColor:               S_base3
+
+*fading:                  40
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1

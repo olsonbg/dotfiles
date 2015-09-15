@@ -1,1 +1,30 @@
-Xresources-dark
+! Took the SOLARIZED_LIGHT/DARK if/else statements from:
+! http://unix.stackexchange.com/questions/58528/xresources-color-settings
+!
+! current-scheme contains one of the two following lines, set by solarized bash
+! script:
+! #define SOLARIZED_LIGHT
+! #define SOLARIZED_DARK
+#include ".Xresources.d/current-scheme"
+
+! The following if statements cause the scheme to default to SOLARIZED_LIGHT
+! for ambiguous defines.
+#if !defined(SOLARIZED_LIGHT) && !defined(SOLARIZED_DARK)
+#define SOLARIZED_LIGHT
+#elif defined(SOLARIZED_LIGHT) && defined(SOLARIZED_DARK)
+#undef SOLARIZED_DARK
+#endif
+
+#include ".Xresources.d/solarized-scheme"
+#include ".Xresources.d/xft"
+#include ".Xresources.d/xterm"
+#include ".Xresources.d/rxvt"
+#include ".Xresources.d/grace"
+
+#ifdef SOLARIZED_LIGHT
+#include ".Xresources.d/solarized-light"
+#endif
+
+#ifdef SOLARIZED_DARK
+#include ".Xresources.d/solarized-dark"
+#endif
