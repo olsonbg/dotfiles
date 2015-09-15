@@ -82,7 +82,7 @@ fun! TeX_par()
 endfun
 
 autocmd BufRead *.tex        map Q :call TeX_par()<CR>
-autocmd BufRead *.tex        map! ]i \item 
+autocmd BufRead *.tex        map! ]i \item
 autocmd BufRead *.tex        map! ]bi \begin{itemize}
 autocmd BufRead *.tex        map! ]ei \end{itemize}
 autocmd BufRead *.tex        map! ]be \begin{enumerate}
@@ -101,13 +101,10 @@ autocmd BufRead *.tex        map! ]p2 \subparagraph{
 autocmd BufRead *.tex        map! ]f \frac{
 autocmd BufRead *.tex        map! ]o \overline{
 autocmd BufRead *.tex        map! ]u \underline{
-autocmd BufRead *.tex        map! ]bf {\bf 
+autocmd BufRead *.tex        map! ]bf {\bf
 
 " set # to toggle line numbers on and off:
-map \o# o:se nu<CR>:se nonu<esc>-:map \o# "wp<CR>
-map \d# "w2dd
-map \x# "xdd@x"xpk
-map # ma3L\o#\x#\d#`a:<CR>
+map # :set invnumber<CR>
 
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 " " 'Last modified: Tue May 26, 2009  06:44PM
@@ -175,4 +172,17 @@ set completeopt=menuone,menu,longest,preview
 
 let g:solarized_visibility="normal"
 colorscheme solarized
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" unicode symbols
+" ❰❱❮❯❭❬❨❩❪❫⎨⎬
+let g:airline_left_sep = '⎬'
+let g:airline_right_sep = '⎨'
+let g:airline_symbols.crypt = 'c'
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.branch = '⅄'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 " vim:tw=76:ts=4:sw=4
