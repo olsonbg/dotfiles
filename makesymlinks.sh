@@ -33,7 +33,7 @@ for file in $files; do
 	# Some of the dotfiles in $files may by symbolic links, therefore need to
 	# get the canonicalized file name for linking to the users home directory.
 	CANON_FILE=$(readlink -f $file | sed -e s:^$dir/::)
-	
+
 	# If the dotfile exists, and it's a regular file, then move it to
 	# $olddir for backup.
 	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
