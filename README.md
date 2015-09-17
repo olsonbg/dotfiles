@@ -8,6 +8,7 @@ dotfiles
  * [Using solarized color scheme](#solarized-scheme)
  * [Host specific settings](#host-specific-settings)
  * [Font (Inconsolata)](#font)
+ * [rxvt-unicode terminal](#rxvt-unicode)
 * [Caveats](#caveats)
  * [Tmux](#tmux)
  * [Multiple Terminals Open](#multiple-terminals-open)
@@ -80,18 +81,28 @@ Settings for specific hosts can be placed in `bash.d/hosts/<hostname>`, where `<
 ## Font
 The [Inconsolata](https://www.google.com/fonts/specimen/Inconsolata) font is used in [xterm](http://invisible-island.net/xterm/), and [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The font is not included with this repository, so it will need to be installed.
 
-## Caveats
+## rxvt-unicode
+As mentioned [previously](#font), the Inconsolata font is used in rxvt-unicode. The default font size is 11, however, the font size of a currently open terminal can be changed with one of the following:
 
-### Tmux
+
+| Key Sequence | Font size |
+| :------------|:---------:|
+| Control-8    | 9         |
+| Control-9    | 10        |
+| Control-0    | 11        |
+
+# Caveats
+
+## Tmux
 To enable the new color scheme in a currently running tmux session follow these steps:
   1. Detatch from tmux,
   2. Change the color scheme, with one of the previously listed commands,
   3. reattach to the tmux session.
 
-### Multiple terminals open
+## Multiple terminals open
 When changing the solarized scheme in a terminal, the new scheme will take effect immediately in that terminal, but not in others that are currently running. To activate the new colors in other terminals, use either the `solarized-light` or `solarized-dark` command in each open terminal.
 
-### KDE
+## KDE
 To load the Xresources file on KDE login, this small script needs to be placed in the KDE Autostart directory (~/.kde4/Autostart).
 ```bash
 #!/bin/sh
