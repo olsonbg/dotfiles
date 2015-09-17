@@ -1,8 +1,8 @@
 URxvt.allow_bold: false
-URxvt*font: xft:Inconsolata:regular:size=10
-URxvt*boldFont: xft:Inconsolata:regular:size=10
-URxvt*italicFont: xft:Inconsolata:italic:size=10
-URxvt*bolditalicFont: xft:Inconsolata:italic:size=10
+URxvt*font: xft:Inconsolata:regular:size=11
+URxvt*boldFont: xft:Inconsolata:regular:size=11
+URxvt*italicFont: xft:Inconsolata:italic:size=11
+URxvt*bolditalicFont: xft:Inconsolata:italic:size=11
 URxvt.geometry: 80x30
 !
 ! Change font on the fly.
@@ -31,7 +31,7 @@ URxvt*scrollColor: #000000
 URxvt*saveLine:   5000
 URxvt*borderless: 1
 URxvt*iconFile:   /usr/share/icons/Tango/scalable/apps/terminal.svg
-URxvt*urlLauncher: webcamWrapper chromium-browser
+URxvt*urlLauncher: chromium-browser
 URxvt*loginShell: false
 URxvt*saveLines: 1024
 URxvt.intensityStyles: false

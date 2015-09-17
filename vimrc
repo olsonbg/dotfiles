@@ -31,16 +31,14 @@ filetype plugin indent on
 " NERD Commenter
 let NERDShutUp      = 1   " Don't warn on unsupported filetype
 let NERDSpaceDelims = 1   " Put a space between comment delimiter and text
-let mapleader       = ',' " Use \ as leader for NERD commands
+let mapleader       = ',' " Use , as leader for NERD commands
 
-" maps NERDTree to F10
-" (normal, visual and operator-pending modes)
-noremap <silent> <F10> :NERDTreeToggle<CR>
-" (also in insert and command-line modes)
-noremap! <silent> <F10> <ESC>:NERDTreeToggle<CR>
 
 " Enable Vim 7+ spell checking
 au BufRead *.tex setlocal spell spelllang=en_us
+au BufRead *.txt setlocal spell spelllang=en_us
+au BufRead *.md  setlocal spell spelllang=en_us
+
 " Go to next misspelled word
 map <F2> ]s
 " Suggestions for misspelled word
@@ -51,6 +49,7 @@ map ,ts :s/\t/    /g<CR>:noh<CR>
 " In text files, always limit the width of text to 76 characters
 autocmd BufRead *.txt set tw=76
 autocmd BufRead *.tex set tw=76
+autocmd BufRead *.md  set tw=76
 "autocmd BufRead *.html      set filetype=php
 "autocmd BufRead *.php       set filetype=php
 "autocmd BufRead *.inc       set filetype=php
@@ -62,9 +61,6 @@ function ComputeVer(verstring)
 endfunction
 
 command DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
-" Don't use Ex mode, use Q for formatting
-" map Q gqip
-"map Q gqap
 
 " used to format LaTeX documents
 fun! TeX_par()
@@ -103,9 +99,6 @@ autocmd BufRead *.tex        map! ]o \overline{
 autocmd BufRead *.tex        map! ]u \underline{
 autocmd BufRead *.tex        map! ]bf {\bf
 
-" set # to toggle line numbers on and off:
-map # :set invnumber<CR>
-
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 " " 'Last modified: Tue May 26, 2009  06:44PM
 " " Restores position using s mark.
@@ -135,16 +128,35 @@ function! Column80 ()
     endif
 endfunction
 
+"
+" Custom keymaps
+"
+" set # to toggle line numbers on and off:
+map # :set invnumber<CR>
+
+" maps NERDTree to F10
+" (normal, visual and operator-pending modes)
+noremap <silent> <F10> :NERDTreeToggle<CR>:vert resize 25<CR>
+" (also in insert and command-line modes)
+noremap! <silent> <F10> <ESC>:NERDTreeToggle<CR>:vert resize 25<CR>
+
+" maps Tagbar to F11
+noremap <silent> <F11> :TagbarToggle<CR>
+noremap! <silent> <F11> <ESC>:TagbarToggle<CR>
+
+" maps highlighting column 80 to <F9>
 noremap  <silent> <F9> :call Column80()<CR>
 noremap! <silent> <F9> <ESC> :call Column80()<CR>
 
+" Resize current window to 80 width
 noremap  <silent> w80 :vertical resize 80
+
 " Increase/Decrease horizontally split window
 " noremap _ :resize +1<CR>
 " noremap - :resize -1<CR>
 " Increase/Decrease vertically split window
-noremap _ :vertical resize +1<CR>
-noremap - :vertical resize -1<CR>
+" noremap _ :vertical resize +1<CR>
+"noremap - :vertical resize -1<CR>
 
 set tags+=~/Projects/tags/tags-core
 set tags+=~/Projects/tags/tags-base
@@ -168,10 +180,25 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+"set completeopt=menuone,menu,longest,preview
+" The next few lines are from:
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+set completeopt=menuone,longest,preview
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" <C-@> is Control-Space in vim on a terminal.
+inoremap <expr> <C-@> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 let g:solarized_visibility="normal"
 colorscheme solarized
+
+"
+" vim-airline settings
+"
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
