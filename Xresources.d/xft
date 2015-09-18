@@ -1,8 +1,9 @@
 !Xft*dpi: 102
 Xft*antialias: true
+Xft*autohint: false
 Xft*rgba: rgb
 Xft*hinting: true
-Xft*hintstyle: hintmedium
+Xft*hintstyle: hintfull
 Xft*lcdfilter: lcddefault
 
 ! MyNFont=11 sets font size to 11.
