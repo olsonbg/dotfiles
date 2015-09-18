@@ -1,6 +1,18 @@
+MSJOBS_NORMAL=""
+MSJOBS_QUEUED=""
+MSJOBS_FAILED=""
+MSJOBS_RUNNING=""
+
 if [ "$TERM" != "dumb" ]; then
-	export MSJOBS_NORMAL=$(tput sgr0)
-	export MSJOBS_QUEUED=$(tput smso)$(tput setaf 3)
-	export MSJOBS_FAILED=$(tput setaf 1)
-	export MSJOBS_RUNNING=$(tput sitm)$(tput setaf 2)
+	MSJOBS_NORMAL=$(tput sgr0)
+	MSJOBS_QUEUED=$(tput smso)$(tput setaf 3)
+	MSJOBS_FAILED=$(tput setaf 1)
+	MSJOBS_RUNNING=$(tput sitm)$(tput setaf 2)
 fi
+
+export MSJOBS_NORMAL
+export MSJOBS_QUEUED
+export MSJOBS_FAILED
+export MSJOBS_RUNNING
+
+# vim:ft=sh
