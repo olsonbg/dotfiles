@@ -8,13 +8,13 @@
 
 # Set TERM to a standard value, depending upon to color capabilities of the
 # terminal.
-if [ "$TERM" != "dumb" ]; then
-	NUMCOLORS=$(tput colors)
-fi
+#if [ "$TERM" != "dumb" ]; then
+#	NUMCOLORS=$(tput colors)
+#fi
 
-case "$NUMCOLORS" in
-	256) export TERM=xterm-256color
-	     ;;
-	*)   export TERM=xterm-color
-esac
+#case "$NUMCOLORS" in
+#	256) export TERM=xterm-256color
+#	     ;;
+#	*)   export TERM=xterm-color
+#esac
 
