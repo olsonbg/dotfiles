@@ -1,6 +1,11 @@
+!
+! Truetype fonts defined in ~/.Xresources.d/xft.
+!
+xterm*faceName:       MyNFont=11
+xterm*boldName:       MyBFont=11
+xterm*italicFont:     MyIFont=11
+xterm*bolditalicFont: MyBIFont=11
+!
 xterm*boldMode: false
-! Truetype fonts.
-xterm*faceName: xft:Inconsolata:size=11:regular
-xterm*boldName: xft:Inconsolata:size=11:regular
-xterm*italicFont: xft:Inconsolata:size=11:oblique
-xterm*bolditalicFont: xft:Inconsolata:size=11:oblique
+
+! vim:ft=xdefaults

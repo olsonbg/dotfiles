@@ -5,24 +5,24 @@
 ! Then open a new terminal for the new setting to take affect
 !
 !!Source http://github.com/altercation/solarized
-!!SOLARIZED HEX     16/8 TERMCOL  
-!!--------- ------- ---- -------  
-!!base03    #002b36  8/4 brblack  
-!!base02    #073642  0/4 black    
-!!base01    #586e75 10/7 brgreen  
-!!base00    #657b83 11/7 bryellow 
-!!base0     #839496 12/6 brblue   
-!!base1     #93a1a1 14/4 brcyan   
-!!base2     #eee8d5  7/7 white    
-!!base3     #fdf6e3 15/7 brwhite  
-!!yellow    #b58900  3/3 yellow   
-!!orange    #cb4b16  9/3 brred    
-!!red       #dc322f  1/1 red      
-!!magenta   #d33682  5/5 magenta  
+!!SOLARIZED HEX     16/8 TERMCOL
+!!--------- ------- ---- -------
+!!base03    #002b36  8/4 brblack
+!!base02    #073642  0/4 black
+!!base01    #586e75 10/7 brgreen
+!!base00    #657b83 11/7 bryellow
+!!base0     #839496 12/6 brblue
+!!base1     #93a1a1 14/4 brcyan
+!!base2     #eee8d5  7/7 white
+!!base3     #fdf6e3 15/7 brwhite
+!!yellow    #b58900  3/3 yellow
+!!orange    #cb4b16  9/3 brred
+!!red       #dc322f  1/1 red
+!!magenta   #d33682  5/5 magenta
 !!violet    #6c71c4 13/5 brmagenta
-!!blue      #268bd2  4/4 blue     
-!!cyan      #2aa198  6/6 cyan     
-!!green     #859900  2/2 green    
+!!blue      #268bd2  4/4 blue
+!!cyan      #2aa198  6/6 cyan
+!!green     #859900  2/2 green
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -61,4 +61,6 @@
 
 !! Dark  bg:fg = base03:base0
 !! Light bg:fg = base3 :base00
-!! Done - Solarized scheme 
+!! Done - Solarized scheme
+
+! vim:ft=xdefaults

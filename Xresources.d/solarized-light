@@ -7,3 +7,5 @@
 *cursorColor:             S_base1
 *pointerColorBackground:  S_base01
 *pointerColorForeground:  S_base1
+
+! vim:ft=xdefaults

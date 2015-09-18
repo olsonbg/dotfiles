@@ -1,23 +1,31 @@
+!
+! Truetype fonts defined in ~/.Xresources.d/xft
+!
+URxvt*font:           MyNFont=11
+URxvt*boldFont:       MyBFont=11
+URxvt*italicFont:     MyIFont=11
+URxvt*bolditalicFont: MyBIFont=11
+
 URxvt.allow_bold: false
-URxvt*font: xft:Inconsolata:regular:size=11
-URxvt*boldFont: xft:Inconsolata:regular:size=11
-URxvt*italicFont: xft:Inconsolata:italic:size=11
-URxvt*bolditalicFont: xft:Inconsolata:italic:size=11
 URxvt.geometry: 80x30
 !
 ! Change font on the fly.
 !
+!  Font size 12.
+!
+URxvt.keysym.C-minus: command:\033]710;MyNFont=12\007\033]711;MyBFont=12\007\033]712;MyIFont=12\007\033]713;MyBIFont=12\007
+!
 !  Font size 11.
 !
-URxvt.keysym.C-0: command:\033]710;xft:Inconsolata:regular:size=11\007\033]711;xft:Inconsolata:regular:size=11\007\033]712;xft:Inconsolata:italic:size=11\007\033]713;xft:Inconsolata:italic:size=11\007
+URxvt.keysym.C-0: command:\033]710;MyNFont=11\007\033]711;MyBFont=11\007\033]712;MyIFont=11\007\033]713;MyBIFont=11\007
 !
 !  Font size 10.
 !
-URxvt.keysym.C-9: command:\033]710;xft:Inconsolata:regular:size=10\007\033]711;xft:Inconsolata:regular:size=10\007\033]712;xft:Inconsolata:italic:size=10\007\033]713;xft:Inconsolata:italic:size=10\007
+URxvt.keysym.C-9: command:\033]710;MyNFont=10\007\033]711;MyBFont=10\007\033]712;MyIFont=10\007\033]713;MyBIFont=10\007
 !
 !  Font size 9.
 !
-URxvt.keysym.C-8: command:\033]710;xft:Inconsolata:regular:size=9\007\033]711;xft:Inconsolata:regular:size=9\007\033]712;xft:Inconsolata:italic:size=9\007\033]713;xft:Inconsolata:italic:size=9\007
+URxvt.keysym.C-8: command:\033]710;MyNFont=9\007\033]711;MyBFont=9\007\033]712;MyIFont=9\007\033]713;MyBIFont=9\007
 !
 ! Resize the window.
 !
@@ -45,3 +53,5 @@ URxvt.intensityStyles: false
 !URxvt.transparent: true
 !URxvt.tintColor: black
 !URxvt.shading: 18
+
+! vim:ft=xdefaults
