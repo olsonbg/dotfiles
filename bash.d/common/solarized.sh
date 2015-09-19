@@ -42,7 +42,7 @@ solarized-misc() {
 
 	# If tmux server is running, tell it to reload tmux.conf
 	if tmux info &>/dev/null; then
-		tmux source-file ~/.tmux.conf
+		tmux source-file ~/.tmux.conf >/dev/null
 	fi
 }
 
