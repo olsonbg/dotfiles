@@ -39,10 +39,6 @@ au BufRead *.tex setlocal spell spelllang=en_us
 au BufRead *.txt setlocal spell spelllang=en_us
 au BufRead *.md  setlocal spell spelllang=en_us
 
-" Go to next misspelled word
-map <F2> ]s
-" Suggestions for misspelled word
-map <F3> z=
 " Convert each <TAB> in a selection to 4 <SPACE>s.
 map ,ts :s/\t/    /g<CR>:noh<CR>
 
@@ -55,26 +51,37 @@ autocmd BufRead *.md  set tw=76
 "autocmd BufRead *.inc       set filetype=php
 
 function ComputeVer(verstring)
-"  exe "let g:" . a:verstring . " = ". v:version/ 100
-  let g:verstring = v:version/100
-  let g:verstring = g:verstring.".".(v:version - g:verstring*100)
+	"  exe "let g:" . a:verstring . " = ". v:version/ 100
+	let g:verstring = v:version/100
+	let g:verstring = g:verstring.".".(v:version - g:verstring*100)
+endfunction
+
+function! MarkdownView()
+	if &filetype != "markdown"
+		echo "Not a markdown file according to 'set filetype?'"
+		return
+	endif
+	write
+	let l:htmlfile = "/dev/shm/".expand('%:t').".html"
+	silent execute "!mdv ".expand('%:p')." ".l:htmlfile
+	redraw!
 endfunction
 
 command DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
 
 " used to format LaTeX documents
 fun! TeX_par()
-    if (getline(".") != "")
-        let op_wrapscan = &wrapscan
-        set nowrapscan
-        let par_begin = '^%\|^\s*\\begin{\|^\s*\\\['
-        let par_end = '^%\|^\s*\\end{\|^\s*\\\]'
-        exe '?'.par_end.'?+'
-        norm V
-        exe '/'.par_begin.'/-'
-        norm gq
-        let &wrapscan = op_wrapscan
-    endif
+	if (getline(".") != "")
+		let op_wrapscan = &wrapscan
+		set nowrapscan
+		let par_begin = '^%\|^\s*\\begin{\|^\s*\\\['
+		let par_end = '^%\|^\s*\\end{\|^\s*\\\]'
+		exe '?'.par_end.'?+'
+		norm V
+		exe '/'.par_begin.'/-'
+		norm gq
+		let &wrapscan = op_wrapscan
+	endif
 endfun
 
 autocmd BufRead *.tex        map Q :call TeX_par()<CR>
@@ -103,13 +110,13 @@ autocmd BufRead *.tex        map! ]bf {\bf
 " " 'Last modified: Tue May 26, 2009  06:44PM
 " " Restores position using s mark.
 function! LastModified()
-        if &modified
-                normal ms
-                let n = min([20, line("$")])
-                exe '1,' . n . 's#^\(.\{,10}Last modified: \).*#\1' .
-                \ strftime('%c') . '#e'
-                normal `s
-        endif
+	if &modified
+		normal ms
+		let n = min([20, line("$")])
+		exe '1,' . n . 's#^\(.\{,10}Last modified: \).*#\1' .
+		\ strftime('%c') . '#e'
+		normal `s
+	endif
 endfun
 autocmd BufWritePre * call LastModified()
 
@@ -118,14 +125,14 @@ autocmd BufWritePre * call LastModified()
 " Hitting F9 again will toggle back to normal.
 "
 function! Column80 ()
-    if exists('+colorcolumn')
-        " Show column 80
-        if &colorcolumn == ""
-            set colorcolumn=80
-        else
-            set colorcolumn=
-        endif
-    endif
+	if exists('+colorcolumn')
+		" Show column 80
+		if &colorcolumn == ""
+			set colorcolumn=80
+		else
+			set colorcolumn=
+		endif
+	endif
 endfunction
 
 "
@@ -147,6 +154,15 @@ noremap! <silent> <F11> <ESC>:TagbarToggle<CR>
 " maps highlighting column 80 to <F9>
 noremap  <silent> <F9> :call Column80()<CR>
 noremap! <silent> <F9> <ESC> :call Column80()<CR>
+
+" Go to next misspelled word
+map <F2> ]s
+" Suggestions for misspelled word
+map <F3> z=
+
+" Convert markdown to html and show in browser.
+noremap  <silent> <F4> :call MarkdownView()<CR>
+noremap! <silent> <F4> <ESC> :call MarkdownView()<CR>
 
 " Resize current window to 80 width
 noremap  <silent> w80 :vertical resize 80
