@@ -12,7 +12,7 @@ datetag=$(date +%Y-%m-%d-%H%M%S)         # appended to backup files.
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
-       tmux.conf Xresources.d Xresources"
+       tmux.conf tmux.d Xresources.d Xresources"
 
 # create dotfiles_old in homedir
 if [ ! -d "$olddir" ]; then
@@ -53,9 +53,14 @@ for file in $files; do
 	fi
 done
 
-# Create default current-scheme file.
+# Create default Xresouces current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ]; then
 	echo "#define SOLARIZED_LIGHT" > ~/.Xresources.d/current-scheme
+fi
+
+# Create default tmux current-scheme file.
+if [ ! -e ~/.tmux.d/current-scheme ]; then
+	echo "source-file ~/.tmux.d/solarized-light" > ~/.tmux.d/current-scheme
 fi
 
 # Update to color pallette.

@@ -28,6 +28,24 @@ solarized-dircolors() {
 	eval $(dircolors ~/.bash.d/themes/dircolors.ansi-${1})
 }
 
+solarized-tmux() {
+	echo "source-file ~/.tmux.d/solarized-$(solarized-getScheme)" > .tmux.d/current-scheme
+}
+
+# Update configuration of programs that use solarized color scheme.
+solarized-misc() {
+	# Set dircolors
+	eval $(dircolors ~/.bash.d/themes/dircolors.ansi-${1})
+
+	# Set colors for tmux
+	echo "source-file ~/.tmux.d/solarized-${1}" > ~/.tmux.d/current-scheme
+
+	# If tmux server is running, tell it to reload tmux.conf
+	if tmux info &>/dev/null; then
+		tmux source-file ~/.tmux.conf
+	fi
+}
+
 solarized-switch() {
 	local solarizedScheme=~/.Xresources.d/solarized-scheme
 
@@ -61,8 +79,8 @@ solarized-switch() {
 	# Update the foreground and background.
 	echo -ne "${Solarized}"
 
-	# Update the dircolors.
-	solarized-dircolors "$1"
+	# Update the programs that use solarized scheme.
+	solarized-misc "$1"
 }
 
 solarized-dark() {
@@ -75,9 +93,6 @@ solarized-light() {
 
 #Toggle solarized light and dark themes.
 solarized() {
-	# Get the current scheme
-	local SOLARIZED_SCHEME=$(solarized-getScheme)
-
 	case "$(solarized-getScheme)" in
 		dark)
 			solarized-light
@@ -91,5 +106,5 @@ solarized() {
 	esac
 }
 
-# Set dircolors to the currently used solarized scheme
-solarized-dircolors $(solarized-getScheme)
+# Update the programs that use solarized scheme.
+solarized-misc $(solarized-getScheme)
