@@ -1,0 +1,6 @@
+--recurse
+--tag-relative=yes
+--exclude=.git
+--c++-kinds=+p
+--fields=+iaS
+--extra=+q
