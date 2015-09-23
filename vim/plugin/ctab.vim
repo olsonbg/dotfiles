@@ -79,9 +79,13 @@ if exists('g:ctab_enable_default_filetype_maps') && ctab_enable_default_filetype
   endif
 endif
 
-if !exists('g:ctab_disable_tab_maps') || ! g:ctab_disable_tab_maps
-  exe  'imap '.s:buff_map.'<silent> <expr> <tab> <SID>InsertSmartTab()'
-  exe  'inoremap '.s:buff_map.'<silent> <expr> <BS> <SID>DoSmartDelete()."\<BS>"'
+if s:buff_map != ''
+  if (&filetype =~ '^\(cpp\|idl\|c\)$' )
+    if !exists('g:ctab_disable_tab_maps') || ! g:ctab_disable_tab_maps
+      exe  'imap '.s:buff_map.'<silent> <expr> <tab> <SID>InsertSmartTab()'
+      exe  'inoremap '.s:buff_map.'<silent> <expr> <BS> <SID>DoSmartDelete()."\<BS>"'
+    endif
+  endif
 endif
 
 "exe 'imap '.s:buff_map.'<silent> <expr> <BS> <SID>KeepDelLine()."\<BS>"
@@ -272,16 +276,19 @@ if ! exists('g:ctab_disable_checkalign') || g:ctab_disable_checkalign==0
     endif
   endfun
 
-  "exe 'inoremap '.s:buff_map.'<silent> <CR> <CR><c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
-  exe 'inoremap '.s:buff_map.'<silent> <expr> <CR> <SID>CheckCR()'
-  exe 'nnoremap '.s:buff_map.'<silent> o o<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
-  exe 'nnoremap '.s:buff_map.'<silent> O O<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
+  if s:buff_map != ''
+    if (&filetype =~ '^\(cpp\|idl\|c\)$' )
+      "exe 'inoremap '.s:buff_map.'<silent> <CR> <CR><c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
+      exe 'inoremap '.s:buff_map.'<silent> <expr> <CR> <SID>CheckCR()'
+      exe 'nnoremap '.s:buff_map.'<silent> o o<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
+      exe 'nnoremap '.s:buff_map.'<silent> O O<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
+      " Ok.. now re-evaluate the = re-indented section
 
-  " Ok.. now re-evaluate the = re-indented section
-
-  " The only way I can think to do this is to remap the =
-  " so that it calls the original, then checks all the indents.
-  exe 'map '.s:buff_map.'<silent> <expr> = <SID>SetupEqual()'
+      " The only way I can think to do this is to remap the =
+      " so that it calls the original, then checks all the indents.
+      exe 'map '.s:buff_map.'<silent> <expr> = <SID>SetupEqual()'
+    endif
+  endif
   fun! s:SetupEqual()
     set operatorfunc=CtabRedoIndent
     " Call the operator func so we get the range
@@ -339,11 +346,14 @@ fun! s:RetabIndent( bang, firstl, lastl, tab )
   if newtabstop != &tabstop | let &tabstop = newtabstop | endif
 endfun
 
+if s:buff_map != ''
+  if (&filetype =~ '^\(cpp\|idl\|c\)$' )
 
-" Retab the indent of a file - ie only the first nonspace.
-"   Optional argument specified the value of the new tabstops
-"   Bang (!) causes trailing whitespace to be gobbled.
-com! -nargs=? -range=% -bang -bar RetabIndent call <SID>RetabIndent(<q-bang>,<line1>, <line2>, <q-args> )
-
+    " Retab the indent of a file - ie only the first nonspace.
+    "   Optional argument specified the value of the new tabstops
+    "   Bang (!) causes trailing whitespace to be gobbled.
+    com! -nargs=? -range=% -bang -bar RetabIndent call <SID>RetabIndent(<q-bang>,<line1>, <line2>, <q-args> )
+  endif
+endif
 
 " vim: sts=2 sw=2 et
