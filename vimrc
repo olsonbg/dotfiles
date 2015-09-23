@@ -18,7 +18,8 @@ set backup              " keep a backup file
 set showcmd
 set whichwrap=b,s,<,>,[,]
 set printoptions=paper:letter
-set listchars=tab:>-,trail:-
+"set listchars=tab:>-,trail:-
+set listchars=tab:❱▶,trail:◀
 set list
 " The next two allow italics
 set t_ZH=[3m
@@ -128,10 +129,10 @@ set pumheight=7
 set splitbelow
 
 " For plugin/ctab.vim
-let g:ctab_filetype_maps = 1
+" let g:ctab_filetype_maps = 1
 let g:ctab_enable_default_filetype_maps = 1
 
-let g:solarized_visibility="normal"
+let g:solarized_visibility="low"
 colorscheme solarized
 
 "
@@ -152,4 +153,7 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.branch = 'β'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '⎬'
+let g:airline#extensions#tabline#left_alt_sep = '⎨'
 " vim:tw=76:ts=4:sw=4
