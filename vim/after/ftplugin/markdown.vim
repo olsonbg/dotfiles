@@ -15,6 +15,3 @@ endfunction
 " Convert markdown to html and show in browser.
 noremap  <buffer> <silent> <F4> :call MarkdownView()<CR>
 noremap! <buffer> <silent> <F4> <ESC> :call MarkdownView()<CR>
-
-inoremap <buffer>   <tab> <c-r>=Smart_TabComplete(1,0)<CR>
-inoremap <buffer> <s-tab> <c-r>=Smart_TabComplete(0,0)<CR>

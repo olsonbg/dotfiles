@@ -17,10 +17,9 @@ let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
-inoremap <buffer>   <tab> <c-r>=Smart_TabComplete(1,0)<CR>
-inoremap <buffer> <s-tab> <c-r>=Smart_TabComplete(0,0)<CR>
-
 setlocal tags+=~/Projects/tags/tags-core
 setlocal tags+=~/Projects/tags/tags-base
 "setlocal tags+=~/Projects/tags/tags-extras
 "setlocal tags+=~/Projects/tags/tags-boost
+
+call SuperTabSetDefaultCompletionType("<c-x><c-o>")

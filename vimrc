@@ -135,6 +135,8 @@ let g:ctab_enable_default_filetype_maps = 1
 let g:solarized_visibility="low"
 colorscheme solarized
 
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabDefaultCompletionType = 'context'
 "
 " vim-airline settings
 "
