@@ -12,7 +12,8 @@ datetag=$(date +%Y-%m-%d-%H%M%S)         # appended to backup files.
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
-       tmux.conf tmux.d Xresources.d Xresources ctags"
+       tmux.conf tmux.d Xresources.d Xresources ctags \
+       terminfo"
 
 # create dotfiles_old in homedir
 if [ ! -d "$olddir" ]; then
