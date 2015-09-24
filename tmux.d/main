@@ -6,7 +6,7 @@ bind C-a send-prefix
 # https://wiki.archlinux.org/index.php/Tmux#Fix_reverse-video.2Fitalic_mode_in_urxvt
 # I also copied the terminfo file to /usr/share/terminfo/s/ so root user knows
 # about this also.
-set -g default-terminal "screen-256colors.rxvt"
+set -g default-terminal "screen-256color.rxvt"
 
 set-option -g status-utf8 on
 set-option -g utf8 on
