@@ -1,0 +1,7 @@
+# Add to git global configuration with:
+#
+# git config --global core.excludesfile ~/.gitignore_global
+
+*~
+*.swp
+tags
