@@ -6,6 +6,14 @@ setlocal shiftwidth=4
 setlocal formatoptions=tcqr
 setlocal cinoptions=(0,u0,U0
 
+setlocal spell spelllang=en_us
+
+
+" For matching \todo statement in doxygen markups
+syn match MyTodo /\v\\todo/ containedin=.*Comment,vimCommentTitle
+hi def link myTodo Todo
+
+
 " OmniCppComplete
 setlocal omnifunc=omni#cpp#complete#Main
 let OmniCpp_NamespaceSearch = 1
