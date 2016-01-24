@@ -16,7 +16,7 @@ fun! TeX_par()
 endfun
 
 map  <buffer> Q :call TeX_par()<CR>
-map! <buffer> ]i \item
+map! <buffer> ]i  \item
 map! <buffer> ]bi \begin{itemize}
 map! <buffer> ]ei \end{itemize}
 map! <buffer> ]be \begin{enumerate}
@@ -32,8 +32,8 @@ map! <buffer> ]s2 \subsection{
 map! <buffer> ]s3 \subsubsection{
 map! <buffer> ]p1 \paragraph{
 map! <buffer> ]p2 \subparagraph{
-map! <buffer> ]f \frac{
-map! <buffer> ]o \overline{
-map! <buffer> ]u \underline{
-map! <buffer> ]bf {\bf
+map! <buffer> ]f  \frac{
+map! <buffer> ]o  \overline{
+map! <buffer> ]u  \underline{
+map! <buffer> ]bf \textbf{
 
