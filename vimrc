@@ -129,8 +129,7 @@ set pumheight=7
 set splitbelow
 
 " For plugin/ctab.vim
-" let g:ctab_filetype_maps = 1
-let g:ctab_enable_default_filetype_maps = 1
+let g:ctab_filetype_maps=1
 
 let g:solarized_visibility="low"
 colorscheme solarized

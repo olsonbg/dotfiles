@@ -1,10 +1,15 @@
+" Recommended for smart tabs plugin
 setlocal noexpandtab
-setlocal autoindent
-setlocal tabstop=4
-setlocal softtabstop=4
+setlocal softtabstop=0
 setlocal shiftwidth=4
-setlocal formatoptions=tcqr
+setlocal tabstop=4
+setlocal cindent
 setlocal cinoptions=(0,u0,U0
+" End recommended
+
+setlocal copyindent
+setlocal autoindent
+setlocal formatoptions=tcqr
 
 setlocal spell spelllang=en_us
 
