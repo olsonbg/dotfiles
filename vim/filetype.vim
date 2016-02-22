@@ -4,6 +4,7 @@ if exists("did_load_filetypes")
 endif
 
 augroup filetypedetect
+au   BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 au!  BufNewFile,BufReadPost *.m       setfiletype octave
 au!  BufNewFile,BufReadPost *res2     setfiletype patfit
 au!  BufNewFile,BufReadPost *cont2    setfiletype patfit

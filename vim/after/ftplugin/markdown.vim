@@ -8,7 +8,7 @@ function! MarkdownView()
 	endif
 	write
 	let l:htmlfile = "/dev/shm/".expand('%:t').".html"
-	silent execute "!mdv ".expand('%:p')." ".l:htmlfile
+	silent execute "!mdv \"".expand('%:p')."\" \"".l:htmlfile."\""
 	redraw!
 endfunction
 
