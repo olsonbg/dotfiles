@@ -7,9 +7,13 @@ Xft*hintstyle: hintfull
 Xft*lcdfilter: lcddefault
 
 ! MyNFont=11 sets font size to 11.
-#define MyNFont  xft:Inconsolata:regular:antialias=true:size
-#define MyBFont  xft:Inconsolata:regular:antialias=true:size
-#define MyIFont  xft:Inconsolata:italic:antialias=true:size
-#define MyBIFont xft:Inconsolata:italic:antialias=true:size
+!#define MyNFont  xft:Inconsolata:regular:antialias=true:size
+!#define MyBFont  xft:Inconsolata:regular:antialias=true:size
+!#define MyIFont  xft:Inconsolata:italic:antialias=true:size
+!#define MyBIFont xft:Inconsolata:italic:antialias=true:size
 
+#define MyNFont  xft:Inconsolata for Powerline:medium:antialias=true:size
+#define MyBFont  xft:Inconsolata for Powerline:medium:antialias=true:size
+#define MyIFont  xft:Inconsolata for Powerline:italic:antialias=true:size
+#define MyBIFont xft:Inconsolata for Powerline:italic:antialias=true:size
 ! vim:ft=xdefaults

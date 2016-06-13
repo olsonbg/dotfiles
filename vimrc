@@ -117,8 +117,8 @@ noremap <buffer> <silent> K :exe "Man" expand('<cword>') <CR>
 
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-" The next few lines are from:
-" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+" The next few lines are from http://vim.wikia.com titled:
+" Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 set completeopt=menuone,longest,preview
 "inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
@@ -208,22 +208,47 @@ let g:SuperTabDefaultCompletionType = 'context'
 "
 " vim-airline settings
 "
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
+let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = '⎬'
-let g:airline_right_sep = '⎨'
-let g:airline_symbols.crypt = 'c'
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.branch = 'β'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '⎬'
-let g:airline#extensions#tabline#left_alt_sep = '⎨'
+" Set to zero if not using a powerline patched font
+let g:airline_powerline_fonts = 1
+
+if g:airline_powerline_fonts == 0
+	let g:airline_left_sep = '⎬'
+	let g:airline_right_sep = '⎨'
+	let g:airline_symbols.crypt = 'c'
+	let g:airline_symbols.linenr = ''
+	let g:airline_symbols.branch = 'β'
+	let g:airline_symbols.paste = '∥'
+	let g:airline_symbols.whitespace = 'Ξ'
+
+	let g:airline#extensions#tabline#left_sep = '⎬'
+	let g:airline#extensions#tabline#left_alt_sep = '⎨'
+endif
+
+let g:airline_symbols.maxlinenr = ''
+
+" shortform text
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
 
 " easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
