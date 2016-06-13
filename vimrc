@@ -162,6 +162,27 @@ map! <C-v>ch χ
 map! <C-v>ps ψ
 map! <C-v>om ω
 " Math {{{1
+map! <C-v>s1 ₁
+map! <C-v>s2 ₂
+map! <C-v>s3 ₃
+map! <C-v>s4 ₄
+map! <C-v>s- ₋
+map! <C-v>s+ ₊
+map! <C-v>s( ₍
+map! <C-v>s) ₎
+
+map! <C-v>S1 ¹
+map! <C-v>S2 ²
+map! <C-v>S3 ³
+map! <C-v>S4 ⁴
+map! <C-v>S- ⁻
+map! <C-v>S+ ⁺
+map! <C-v>S( ⁽
+map! <C-v>S) ⁾
+
+map! <C-v>Mx x
+map! <C-v>Mp ±
+
 map! <C-v>ll →
 map! <C-v>hh ⇌
 map! <C-v>kk ↑
@@ -193,8 +214,6 @@ if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 
-" unicode symbols
-" ❰❱❮❯❭❬❨❩❪❫⎨⎬ β
 let g:airline_left_sep = '⎬'
 let g:airline_right_sep = '⎨'
 let g:airline_symbols.crypt = 'c'
