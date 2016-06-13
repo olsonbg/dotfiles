@@ -27,10 +27,8 @@ set t_ZR=[23m
 
 filetype plugin indent on
 
-" NERD Commenter
-let NERDShutUp      = 1   " Don't warn on unsupported filetype
-let NERDSpaceDelims = 1   " Put a space between comment delimiter and text
-let mapleader       = ',' " Use , as leader for NERD commands
+let mapleader       = ',' " Use , as leader.
+
 
 " Convert each <TAB> in a selection to 4 <SPACE>s.
 map ,ts :s/\t/    /g<CR>:noh<CR>
@@ -79,8 +77,7 @@ endfunction
 " set # to toggle line numbers on and off:
 map # :set invnumber<CR>
 
-" maps NERDTree to F10
-" (normal, visual and operator-pending modes)
+" maps NERDTree to F10 (normal, visual and operator-pending modes)
 noremap <silent> <F10> :NERDTreeToggle<CR>:vert resize 25<CR>
 " (also in insert and command-line modes)
 noremap! <silent> <F10> <ESC>:NERDTreeToggle<CR>:vert resize 25<CR>
@@ -113,158 +110,181 @@ noremap  <silent> w80 :vertical resize 80
 " Manpage for word under cursor via 'K' in command mode
 "
 runtime! ftplugin/man.vim
-noremap <buffer> <silent> K :exe "Man" expand('<cword>') <CR>
 
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " The next few lines are from http://vim.wikia.com titled:
 " Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 set completeopt=menuone,longest,preview
-"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" <C-@> is Control-Space in vim on a terminal.
-"inoremap <expr> <C-@> pumvisible() ? '<C-n>' :
-"  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 set pumheight=7
 set splitbelow
 
-" Greek {{{1
-map! <C-v>GA Γ
-map! <C-v>DE Δ
-map! <C-v>TH Θ
-map! <C-v>LA Λ
-map! <C-v>XI Ξ
-map! <C-v>PI Π
-map! <C-v>SI Σ
-map! <C-v>PH Φ
-map! <C-v>PS Ψ
-map! <C-v>OM Ω
-map! <C-v>al α
-map! <C-v>be β
-map! <C-v>ga γ
-map! <C-v>de δ
-map! <C-v>ep ε
-map! <C-v>ze ζ
-map! <C-v>et η
-map! <C-v>th θ
-map! <C-v>io ι
-map! <C-v>ka κ
-map! <C-v>la λ
-map! <C-v>mu μ
-map! <C-v>nu ν
-map! <C-v>xi ξ
-map! <C-v>pi π
-map! <C-v>rh ρ
-map! <C-v>si σ
-map! <C-v>ta τ
-map! <C-v>ph ϕ
-map! <C-v>ch χ
-map! <C-v>ps ψ
-map! <C-v>om ω
-" Math {{{1
-map! <C-v>s1 ₁
-map! <C-v>s2 ₂
-map! <C-v>s3 ₃
-map! <C-v>s4 ₄
-map! <C-v>s- ₋
-map! <C-v>s+ ₊
-map! <C-v>s( ₍
-map! <C-v>s) ₎
+function! UnicodeShortCutsSetup ()
+	" Greek {{{1
+	map! <C-v>GA Γ
+	map! <C-v>DE Δ
+	map! <C-v>TH Θ
+	map! <C-v>LA Λ
+	map! <C-v>XI Ξ
+	map! <C-v>PI Π
+	map! <C-v>SI Σ
+	map! <C-v>PH Φ
+	map! <C-v>PS Ψ
+	map! <C-v>OM Ω
+	map! <C-v>al α
+	map! <C-v>be β
+	map! <C-v>ga γ
+	map! <C-v>de δ
+	map! <C-v>ep ε
+	map! <C-v>ze ζ
+	map! <C-v>et η
+	map! <C-v>th θ
+	map! <C-v>io ι
+	map! <C-v>ka κ
+	map! <C-v>la λ
+	map! <C-v>mu μ
+	map! <C-v>nu ν
+	map! <C-v>xi ξ
+	map! <C-v>pi π
+	map! <C-v>rh ρ
+	map! <C-v>si σ
+	map! <C-v>ta τ
+	map! <C-v>ph ϕ
+	map! <C-v>ch χ
+	map! <C-v>ps ψ
+	map! <C-v>om ω
+	" Math {{{1
+	map! <C-v>s1 ₁
+	map! <C-v>s2 ₂
+	map! <C-v>s3 ₃
+	map! <C-v>s4 ₄
+	map! <C-v>s- ₋
+	map! <C-v>s+ ₊
+	map! <C-v>s( ₍
+	map! <C-v>s) ₎
 
-map! <C-v>S1 ¹
-map! <C-v>S2 ²
-map! <C-v>S3 ³
-map! <C-v>S4 ⁴
-map! <C-v>S- ⁻
-map! <C-v>S+ ⁺
-map! <C-v>S( ⁽
-map! <C-v>S) ⁾
+	map! <C-v>S1 ¹
+	map! <C-v>S2 ²
+	map! <C-v>S3 ³
+	map! <C-v>S4 ⁴
+	map! <C-v>S- ⁻
+	map! <C-v>S+ ⁺
+	map! <C-v>S( ⁽
+	map! <C-v>S) ⁾
 
-map! <C-v>Mx x
-map! <C-v>Mp ±
+	map! <C-v>Mx x
+	map! <C-v>Mp ±
 
-map! <C-v>ll →
-map! <C-v>hh ⇌
-map! <C-v>kk ↑
-map! <C-v>jj ↓
-map! <C-v>= ∝
-map! <C-v>~ ≈
-map! <C-v>!= ≠
-map! <C-v>!> ⇸
-map! <C-v>~> ↝
-map! <C-v>>= ≥
-map! <C-v><= ≤
-map! <C-v>0  °
-map! <C-v>ce ¢
-map! <C-v>*  •
+	map! <C-v>ll →
+	map! <C-v>hh ⇌
+	map! <C-v>kk ↑
+	map! <C-v>jj ↓
+	map! <C-v>= ∝
+	map! <C-v>~ ≈
+	map! <C-v>!= ≠
+	map! <C-v>!> ⇸
+	map! <C-v>~> ↝
+	map! <C-v>>= ≥
+	map! <C-v><= ≤
+	map! <C-v>0  °
+	map! <C-v>ce ¢
+	map! <C-v>*  •
+endfunction
+
+"
+" NERD Commenter
+"
+function! NERDCommenterSetup ()
+	let g:NERDShutUp      = 1   " Don't warn on unsupported filetype
+	let g:NERDSpaceDelims = 1   " Put a space between comment delimiter and text
+endfunction
+
+"
 " For plugin/ctab.vim
-let g:ctab_filetype_maps=1
+"
+function! CtabSetup ()
+	let g:ctab_filetype_maps=1
 
-let g:solarized_visibility="low"
-colorscheme solarized
+	let g:solarized_visibility="low"
+	colorscheme solarized
 
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabDefaultCompletionType = 'context'
+	let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+	let g:SuperTabDefaultCompletionType = 'context'
+endfunction
+
 "
 " vim-airline settings
 "
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
-let g:airline#extensions#whitespace#mixed_indent_algo = 2
-let g:airline#extensions#tabline#enabled = 1
+function! AirlineSetup ()
+	let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+	let g:airline#extensions#whitespace#mixed_indent_algo = 2
+	let g:airline#extensions#tabline#enabled = 1
 
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
+	if !exists('g:airline_symbols')
+		let g:airline_symbols = {}
+	endif
 
-" Set to zero if not using a powerline patched font
-let g:airline_powerline_fonts = 1
+	" Set to zero if not using a powerline patched font
+	let g:airline_powerline_fonts = 1
 
-if g:airline_powerline_fonts == 0
-	let g:airline_left_sep = '⎬'
-	let g:airline_right_sep = '⎨'
-	let g:airline_symbols.crypt = 'c'
-	let g:airline_symbols.linenr = ''
-	let g:airline_symbols.branch = 'β'
-	let g:airline_symbols.paste = '∥'
-	let g:airline_symbols.whitespace = 'Ξ'
+	if g:airline_powerline_fonts == 0
+		let g:airline_left_sep = '⎬'
+		let g:airline_right_sep = '⎨'
+		let g:airline_symbols.crypt = 'c'
+		let g:airline_symbols.linenr = ''
+		let g:airline_symbols.branch = 'β'
+		let g:airline_symbols.paste = '∥'
+		let g:airline_symbols.whitespace = 'Ξ'
 
-	let g:airline#extensions#tabline#left_sep = '⎬'
-	let g:airline#extensions#tabline#left_alt_sep = '⎨'
-endif
+		let g:airline#extensions#tabline#left_sep = '⎬'
+		let g:airline#extensions#tabline#left_alt_sep = '⎨'
+	endif
 
-let g:airline_symbols.maxlinenr = ''
+	let g:airline_symbols.maxlinenr = ''
 
-" shortform text
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
+	" shortform text
+	let g:airline_mode_map = {
+	  \ '__' : '-',
+	  \ 'n'  : 'N',
+	  \ 'i'  : 'I',
+	  \ 'R'  : 'R',
+	  \ 'c'  : 'C',
+	  \ 'v'  : 'V',
+	  \ 'V'  : 'V',
+	  \ '' : 'V',
+	  \ 's'  : 'S',
+	  \ 'S'  : 'S',
+	  \ '' : 'S',
+	  \ }
+endfunction
 
-
+"
 " easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+"
+function! EasyMotionSetup ()
+	let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" Jump to anywhere you want with minimal keystrokes, with just one key
-" binding.  `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-"nmap s <Plug>(easymotion-overwin-f2)
+	" Jump to anywhere you want with minimal keystrokes, with just one key
+	" binding.  `s{char}{label}`
+	nmap s <Plug>(easymotion-overwin-f)
+	" or
+	" `s{char}{char}{label}`
+	" Need one more keystroke, but on average, it may be more comfortable.
+	"nmap s <Plug>(easymotion-overwin-f2)
 
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+	" Turn on case insensitive feature
+	let g:EasyMotion_smartcase = 1
 
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+	" JK motions: Line motions
+	map <Leader>j <Plug>(easymotion-j)
+	map <Leader>k <Plug>(easymotion-k)
+endfunction
+
+" exit 
+call UnicodeShortCutsSetup()
+call NERDCommenterSetup()
+call CtabSetup()
+call AirlineSetup()
+call EasyMotionSetup()
+
 " vim:tw=76:ts=4:sw=4
