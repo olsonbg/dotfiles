@@ -7,7 +7,7 @@ dotfiles
 * [Usage](#usage)
  * [Using solarized color scheme](#solarized-scheme)
  * [Host specific settings](#host-specific-settings)
- * [Font (Inconsolata)](#font)
+ * [Font (Inconsolata with Powerline symbols)](#font)
  * [rxvt-unicode terminal](#rxvt-unicode)
 * [Caveats](#caveats)
  * [Tmux](#tmux)
@@ -30,8 +30,8 @@ $ git submodule update
 ```
 
 ## Create symlinks
-Current dotfiles are backed up to the ~/dotfiles_old directory, with the
-current date-time added to the end of the filename(s).
+Current dotfiles are backed up to the `~/dotfiles-<datetime>` directory,
+where `<datetime>` is the current date and time.
 ```bash
 $ ~/dotfiles/makesymlinks.sh
 ```
@@ -94,10 +94,11 @@ command `hostname`. If there is no matching folder for a host, then the
 settings in `bash.d/hosts/generic` will be used.
 
 ## Font
-The [Inconsolata](https://www.google.com/fonts/specimen/Inconsolata) font is
-used in [xterm](http://invisible-island.net/xterm/), and
-[rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The font
-is not included with this repository, so it will need to be installed.
+The [Inconsolata](https://github.com/powerline/fonts) font pre-patched with
+Powerline symbols is used in [xterm](http://invisible-island.net/xterm/),
+and [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The
+font is included with this repository and symbolically linked to from the
+`~/.fonts` directory.
 
 ## rxvt-unicode
 As mentioned [previously](#font), the Inconsolata font is used in
