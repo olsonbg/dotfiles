@@ -5,27 +5,29 @@
 ############################
 
 DOTFILES=dotfiles
-DOTFILES_BACKUP=${DOTFILES}_old
 dir=$HOME/$DOTFILES                      # dotfiles directory
-olddir=$HOME/${DOTFILES_BACKUP}          # old dotfiles backup directory
-datetag=$(date +%Y-%m-%d-%H%M%S)         # appended to backup files.
+datetag=$(date +%Y%m%d-%H%M%S)         # appended to backup files.
+BACKUPDIR=$HOME/${DOTFILES}-$datetag     # backup directory for dotfiles
+
+# Uncomment the DEBUG line for debugging
+#DEBUG=echo
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
        tmux.conf tmux.d Xresources.d Xresources ctags \
        terminfo gitignore_global"
 
-# create dotfiles_old in homedir
-if [ ! -d "$olddir" ]; then
-	echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
-	mkdir -p $olddir
-	echo "done"
+# create dotfiles backup directory
+if [ ! -d "$BACKUPDIR" ]; then
+	echo -n "Creating $BACKUPDIR for backup... "
+	$DEBUG mkdir -p $BACKUPDIR
+	echo "done."
 fi
 
 # change to the dotfiles directory
-echo -n "Changing to the $dir directory ..."
+echo -n "Changing to the $dir directory... "
 cd "$dir"
-echo "done"
+echo "done."
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create
 # symlinks from the homedir to any files in the ~/dotfiles directory specified
@@ -36,38 +38,57 @@ for file in $files; do
 	CANON_FILE=$(readlink -f $file | sed -e s:^$dir/::)
 
 	# If the dotfile exists, and it's a regular file, then move it to
-	# $olddir for backup.
+	# $BACKUPDIR for backup.
 	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
-		echo "Moving existing ~/.$file from ~ to $olddir"
-		mv "$HOME/.$file" "$olddir/$file-$datetag"
+		echo "Moving existing ~/.$file to $BACKUPDIR"
+		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
+
+	# If the destination is a directory, and not a symbolic link, then move it
+	# to $BACKU{DIR for backup.
+	elif [ -d "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
+		#$DEBUG rsync --remove-source-files -av $HOME/.fonts/Inconsolata-powerline $BACKUPDIR/fonts
+		#$DEBUG rm -rf $HOME/.fonts/Inconsolata-powerline
+		echo "Backing up ~/.$file to $BACKUPDIR"
+		$DEBUG mkdir -p $BACKUPDIR/$file
+		$DEBUG rsync --remove-source-files -a $HOME/.$file/ $BACKUPDIR/$file/
+		$DEBUG rm -rf $HOME/.$file
 
 	# If the dotfile exists as a symbolic link, and it doesn't point
-	# to the correct file, then move it to $olddir for backup.
+	# to the correct file, then move it to $BACKUPDIR for backup.
 	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$CANON_FILE" ]; then
-		echo "Backing up ~/.$file to ${DOTFILES_BACKUP}/$file-$datetag"
-		mv "$HOME/.$file" "$olddir/$file-$datetag"
+		echo "Backing up ~/.$file to ${BACKUPDIR}/$file"
+		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
 	fi
 
 	if [ ! -e "$HOME/.$file" ]; then
 		echo -n "Creating symlink: "
-		ln -sv "$DOTFILES/$CANON_FILE" "$HOME/.$file"
+		# Prefix with correct number of "../"'s t to get the proper relative
+		# directory.
+		prefix="";
+		prevdirs="$(dirname $file)"
+		while [ "$prevdirs" != "." ] ; do
+			prefix="$prefix../"
+			prevdirs="$(dirname $prevdirs)"
+		done
+
+		$DEBUG ln -sv "$prefix$DOTFILES/$CANON_FILE" "$HOME/.$file"
 	fi
 done
 
 # Create default Xresouces current-scheme file.
-if [ ! -e ~/.Xresources.d/current-scheme ]; then
+if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
 	echo "#define SOLARIZED_LIGHT" > ~/.Xresources.d/current-scheme
 fi
 
 # Create default tmux current-scheme file.
-if [ ! -e ~/.tmux.d/current-scheme ]; then
+if [ ! -e ~/.tmux.d/current-scheme ] && [ -z $DEBUG ]; then
 	echo "source-file ~/.tmux.d/solarized-light" > ~/.tmux.d/current-scheme
 fi
 
 # Update to color pallette.
 if [ -n "$DISPLAY" ]; then
 	# Only run xrdb if in X.
-	xrdb ~/.Xresources
+	$DEBUG xrdb ~/.Xresources
 fi
 
 echo "Setup complete."
