@@ -15,7 +15,7 @@ BACKUPDIR=$HOME/${DOTFILES}-$datetag     # backup directory for dotfiles
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
        tmux.conf tmux.d Xresources.d Xresources ctags \
-       terminfo gitignore_global"
+       terminfo gitignore_global fonts/Inconsolata-powerline"
 
 # create dotfiles backup directory
 if [ ! -d "$BACKUPDIR" ]; then
