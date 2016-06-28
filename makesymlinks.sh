@@ -92,4 +92,12 @@ if [ -n "$DISPLAY" ]; then
 	$DEBUG xrdb ~/.Xresources
 fi
 
+# Check if backup directory is empty.
+ls -1qA "$BACKUPDIR" | grep -q .
+if [ $? -eq 1 ]; then
+	echo -n "Backup directory empty, deleting it..."
+	rm -rf "$BACKUPDIR"
+	echo " done."
+fi
+
 echo "Setup complete."
