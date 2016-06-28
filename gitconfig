@@ -1,0 +1,19 @@
+[user]
+	email = olsonbg@gmail.com
+	name = olsonbg
+	signingkey = CED3CF10
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[difftool "vimdiff"]
+	cmd = /usr/bin/vimdiff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[color "diff"]
+	whitespace = red reverse
+[core]
+	whitespace = blank-at-eol,blank-at-eof,space-before-tab
+	excludesfile = ~/.gitignore_global
+[commit]
+	gpgsign = true
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
