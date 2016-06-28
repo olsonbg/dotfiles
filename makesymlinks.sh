@@ -56,7 +56,7 @@ for file in $files; do
 
 	# If the dotfile exists as a symbolic link, and it doesn't point
 	# to the correct file, then move it to $BACKUPDIR for backup.
-	elif [ -h "$HOME/.$file" ] && [ "$(readlink $HOME/.$file)" != "$DOTFILES/$CANON_FILE" ]; then
+	elif [ -h "$HOME/.$file" ] && [ "$(realpath $HOME/.$file)" != "$(realpath $dir/$file)" ]; then
 		echo "Backing up ~/.$file to ${BACKUPDIR}/$file"
 		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
 	fi
