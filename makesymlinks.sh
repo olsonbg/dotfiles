@@ -5,12 +5,17 @@
 ############################
 
 DOTFILES=dotfiles
-dir=$HOME/$DOTFILES                      # dotfiles directory
+dir=$HOME/$DOTFILES                    # dotfiles directory
 datetag=$(date +%Y%m%d-%H%M%S)         # appended to backup files.
-BACKUPDIR=$HOME/${DOTFILES}-$datetag     # backup directory for dotfiles
+BACKUPDIR=$HOME/${DOTFILES}-$datetag   # backup directory for dotfiles
 
 # Uncomment the DEBUG line for debugging
 #DEBUG=echo
+
+if ! hash realpath 2>/dev/null ; then
+	echo "Required program not found (realpath), exiting."
+	exit
+fi
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
@@ -34,9 +39,6 @@ echo "done."
 # symlinks from the homedir to any files in the ~/dotfiles directory specified
 # in $files
 for file in $files; do
-	# Some of the dotfiles in $files may by symbolic links, therefore need to
-	# get the canonicalized file name for linking to the users home directory.
-	CANON_FILE=$(readlink -f $file | sed -e s:^$dir/::)
 
 	# If the dotfile exists, and it's a regular file, then move it to
 	# $BACKUPDIR for backup.
@@ -63,16 +65,13 @@ for file in $files; do
 
 	if [ ! -e "$HOME/.$file" ]; then
 		echo -n "Creating symlink: "
-		# Prefix with correct number of "../"'s t to get the proper relative
-		# directory.
-		prefix="";
-		prevdirs="$(dirname $file)"
-		while [ "$prevdirs" != "." ] ; do
-			prefix="$prefix../"
-			prevdirs="$(dirname $prevdirs)"
-		done
+		OFILE=$(realpath $file)
+		LFILE=$HOME/$(dirname $file)
 
-		$DEBUG ln -sv "$prefix$DOTFILES/$CANON_FILE" "$HOME/.$file"
+		# Unfortunately, the cleanest way to determine relative paths
+		# is to use perl.
+		relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" "$LFILE")
+		$DEBUG ln -sv "$relpath" "$HOME/.$file"
 	fi
 done
 
@@ -86,7 +85,7 @@ if [ ! -e ~/.tmux.d/current-scheme ] && [ -z $DEBUG ]; then
 	echo "source-file ~/.tmux.d/solarized-light" > ~/.tmux.d/current-scheme
 fi
 
-# Update to color pallette.
+# Update to color palette.
 if [ -n "$DISPLAY" ]; then
 	# Only run xrdb if in X.
 	$DEBUG xrdb ~/.Xresources
