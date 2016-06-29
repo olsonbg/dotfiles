@@ -21,7 +21,8 @@ fi
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
        tmux.conf tmux.d Xresources.d Xresources ctags \
        terminfo gitignore_global gitconfig \
-       fonts/Inconsolata-powerline"
+       fonts/Inconsolata-powerline \
+       config/openbox/lxde-rc.xml"
 
 # create dotfiles backup directory
 if [ ! -d "$BACKUPDIR" ]; then
@@ -44,6 +45,7 @@ for file in $files; do
 	# $BACKUPDIR for backup.
 	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
 		echo "Moving existing ~/.$file to $BACKUPDIR"
+		$DEBUG mkdir -p "$BACKUPDIR/$(dirname "$file")"
 		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
 
 	# If the destination is a directory, and not a symbolic link, then move it
