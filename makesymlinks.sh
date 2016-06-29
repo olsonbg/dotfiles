@@ -1,8 +1,8 @@
 #!/bin/bash
-############################
-# .make.sh This script creates symlinks from the home directory to any desired
-# dotfiles in ~/dotfiles
-############################
+#
+# This script creates symlinks from the home directory to any desired
+# dotfiles in $HOME/dotfiles
+#
 
 DOTFILES=dotfiles
 dir=$HOME/$DOTFILES                    # dotfiles directory
@@ -41,6 +41,26 @@ echo "done."
 # in $files
 for file in $files; do
 
+	dotDIR="$(dirname "$file")"
+	dotBASE="$(basename "$file")"
+
+	if [ "$dotDIR" == "." ]; then
+		DESTDIR="$HOME"
+		DESTBASE=".$dotBASE"
+		DESTPATH="$HOME/$DESTBASE"
+	else
+		DESTDIR="$HOME/.$dotDIR"
+		DESTBASE="$dotBASE"
+		DESTPATH="$HOME/.$dotDIR/$DESTBASE"
+	fi
+
+#	echo "DESTDIR  = $DESTDIR"
+#	echo "DESTITEM = $DESTITEM"
+#	echo "DESTPATH = $DESTPATH"
+
+	# Create any missing directories.
+	[[ ! -d "$DESTDIR" ]] && $DEBUG mkdir -p "$DESTDIR"
+
 	# If the dotfile exists, and it's a regular file, then move it to
 	# $BACKUPDIR for backup.
 	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
@@ -50,22 +70,22 @@ for file in $files; do
 
 	# If the destination is a directory, and not a symbolic link, then move it
 	# to $BACKU{DIR for backup.
-	elif [ -d "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
+	elif [ -d "$DESTPATH" ] && [ ! -h "$DESTPATH" ]; then
 		#$DEBUG rsync --remove-source-files -av $HOME/.fonts/Inconsolata-powerline $BACKUPDIR/fonts
 		#$DEBUG rm -rf $HOME/.fonts/Inconsolata-powerline
-		echo "Backing up ~/.$file to $BACKUPDIR"
+		echo "Backing up $DESTPATH to $BACKUPDIR"
 		$DEBUG mkdir -p $BACKUPDIR/$file
-		$DEBUG rsync --remove-source-files -a $HOME/.$file/ $BACKUPDIR/$file/
-		$DEBUG rm -rf $HOME/.$file
+		$DEBUG rsync --remove-source-files -a "$DESTPATH/" $BACKUPDIR/$file/
+		$DEBUG rm -rf $DESTPATH
 
 	# If the dotfile exists as a symbolic link, and it doesn't point
 	# to the correct file, then move it to $BACKUPDIR for backup.
-	elif [ -h "$HOME/.$file" ] && [ "$(realpath $HOME/.$file)" != "$(realpath $dir/$file)" ]; then
-		echo "Backing up ~/.$file to ${BACKUPDIR}/$file"
-		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
+	elif [ -h "$DESTPATH" ] && [ "$(realpath $DESTPATH)" != "$(realpath $dir/$file)" ]; then
+		echo "Backing up $DESTPATH to ${BACKUPDIR}/$file"
+		$DEBUG mv "$DESTPATH" "$BACKUPDIR/$file"
 	fi
 
-	if [ ! -e "$HOME/.$file" ]; then
+	if [ ! -e "$DESTPATH" ]; then
 		echo -n "Creating symlink: "
 		OFILE=$(realpath $file)
 		LFILE=$HOME/$(dirname $file)
