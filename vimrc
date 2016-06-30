@@ -204,10 +204,6 @@ endfunction
 "
 function! CtabSetup ()
 	let g:ctab_filetype_maps=1
-
-	let g:solarized_visibility="low"
-	colorscheme solarized
-
 	let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 	let g:SuperTabDefaultCompletionType = 'context'
 endfunction
@@ -280,7 +276,16 @@ function! EasyMotionSetup ()
 	map <Leader>k <Plug>(easymotion-k)
 endfunction
 
-" exit 
+"
+" solarized scheme
+"
+function! SolarizedSetup ()
+	colorscheme solarized
+	let g:solarized_visibility="low"
+endfunction
+
+
+call SolarizedSetup()
 call UnicodeShortCutsSetup()
 call NERDCommenterSetup()
 call CtabSetup()
