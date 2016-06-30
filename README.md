@@ -163,7 +163,7 @@ Git repositories included as submodules.
     * [NERD Tree](https://github.com/scrooloose/nerdtree.git)
     * [Tagbar](https://github.com/majutsushi/tagbar)
     * [VimOutliner](https://github.com/noelhenson/vimoutliner)
-    * [Solarized COlorscheme for Vim](https://github.com/altercation/vim-colors-solarized.git)
+    * [Solarized Colorscheme for Vim](https://github.com/altercation/vim-colors-solarized.git)
     * [vim-airline](https://github.com/bling/vim-airline.git)
     * [fugitive](https://github.com/tpope/vim-fugitive.git)
     * [Supertab](https://github.com/ervandew/supertab.git)
