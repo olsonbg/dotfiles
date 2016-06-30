@@ -57,8 +57,8 @@ endfun
 autocmd BufWritePre * call LastModified()
 
 "
-" We must be able to show the 80 column limit with F9...
-" Hitting F9 again will toggle back to normal.
+" We must be able to show the 80 column limit with F8.
+" Hitting F8 again will toggle back to normal.
 "
 function! Column80 ()
 	if exists('+colorcolumn')
@@ -77,18 +77,10 @@ endfunction
 " set # to toggle line numbers on and off:
 map # :set invnumber<CR>
 
-" maps NERDTree to F10 (normal, visual and operator-pending modes)
-noremap <silent> <F10> :NERDTreeToggle<CR>:vert resize 25<CR>
-" (also in insert and command-line modes)
-noremap! <silent> <F10> <ESC>:NERDTreeToggle<CR>:vert resize 25<CR>
 
-" maps Tagbar to F11
-noremap <silent> <F11> :TagbarToggle<CR>
-noremap! <silent> <F11> <ESC>:TagbarToggle<CR>
-
-" maps highlighting column 80 to <F9>
-noremap  <silent> <F9> :call Column80()<CR>
-noremap! <silent> <F9> <ESC> :call Column80()<CR>
+" maps highlighting column 80 to <F8>
+noremap  <silent> <F8> :call Column80()<CR>
+noremap! <silent> <F8> <ESC> :call Column80()<CR>
 
 " Go to next misspelled word
 map <F2> ]s
@@ -200,6 +192,25 @@ function! NERDCommenterSetup ()
 endfunction
 
 "
+" NERD Tree
+"
+function! NERDTreeSetup ()
+	" maps NERDTree to F9 (normal, visual and operator-pending modes)
+	noremap <silent> <F9> :NERDTreeToggle<CR>:vert resize 25<CR>
+
+	" (also in insert and command-line modes)
+	noremap! <silent> <F9> <ESC>:NERDTreeToggle<CR>:vert resize 25<CR>
+endfunction
+
+"
+" Tagbar
+"
+function! TagbarSetup ()
+	" maps Tagbar to F10
+	noremap <silent> <F10> :TagbarToggle<CR>
+	noremap! <silent> <F10> <ESC>:TagbarToggle<CR>
+endfunction
+"
 " For plugin/ctab.vim
 "
 function! CtabSetup ()
@@ -288,6 +299,8 @@ endfunction
 call SolarizedSetup()
 call UnicodeShortCutsSetup()
 call NERDCommenterSetup()
+call NERDTreeSetup()
+call TagbarSetup()
 call CtabSetup()
 call AirlineSetup()
 call EasyMotionSetup()
