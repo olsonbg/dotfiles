@@ -5,14 +5,15 @@ dotfiles
 * [Installation](#installation)
 * [Upgrading](#upgrading)
 * [Usage](#usage)
- * [Using solarized color scheme](#solarized-scheme)
- * [Host specific settings](#host-specific-settings)
- * [Font (Inconsolata with Powerline symbols)](#font)
- * [rxvt-unicode terminal](#rxvt-unicode)
+    * [Using solarized color scheme](#solarized-scheme)
+    * [Host specific settings](#host-specific-settings)
+    * [Font (Inconsolata with Powerline symbols)](#font)
+    * [rxvt-unicode terminal](#rxvt-unicode)
 * [Caveats](#caveats)
- * [Tmux](#tmux)
- * [Multiple Terminals Open](#multiple-terminals-open)
- * [KDE](#kde)
+    * [Tmux](#tmux)
+    * [Multiple Terminals Open](#multiple-terminals-open)
+    * [KDE](#kde)
+* [Submodules](#submodules)
 
 # Installation
 
@@ -21,17 +22,33 @@ dotfiles
 $ git clone git://github.com/olsonbg/dotfiles.git ~/dotfiles
 ```
 
-## Get the submodules
+## Get and update the submodules
+
+The submodules will have to be updated when this repository is first cloned,
+and whenever it is updated.
+
+Initialize the submodules list in .gitmodules by recording them in .git/config.
 
 ```bash
-$ cd ~/dotfiles
 $ git submodule init
+```
+
+Update the registered submodules to match what the dotfiles project expects
+
+```bash
 $ git submodule update
+```
+
+The previous two commands can be combined into one by
+
+```bash
+$ git submodule update --init
 ```
 
 ## Create symlinks
 Current dotfiles are backed up to the `~/dotfiles-<datetime>` directory,
 where `<datetime>` is the current date and time.
+
 ```bash
 $ ~/dotfiles/makesymlinks.sh
 ```
@@ -44,15 +61,11 @@ of the following commands may work
 . ~/.bashrc
 ```
 
-# Upgrading
+## Get most recent version of each bundled submodule
 
-## Get the latest version
-```bash
-$ cd ~/dotfiles
-$ git pull
-```
-
-## Upgrade each bundled plugin
+Update all registered submodules to their most recent commit. **Note**: This
+may bring the submodules to newer versions than may be expected by the
+dotfiles repository.
 
 ```bash
 $ git submodule foreach git pull origin master
@@ -138,3 +151,24 @@ xrdb ~/.Xresources
 This script is needed for KDE because it does not process an Xresources file
 containing #include directives properly (relative paths don't work). As far
 as I know, KDE is the only desktop that needs this _fix_.
+
+# Submodules
+
+Git repositories included as submodules.
+
+* Submodules for Vim
+    * [Pathogen](https://github.com/tpope/vim-pathogen)
+    * [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
+    * [Tabular](https://github.com/godlygeek/tabular)
+    * [NERD Tree](https://github.com/scrooloose/nerdtree.git)
+    * [Tagbar](https://github.com/majutsushi/tagbar)
+    * [VimOutliner](https://github.com/noelhenson/vimoutliner)
+    * [Solarized COlorscheme for Vim](https://github.com/altercation/vim-colors-solarized.git)
+    * [vim-airline](https://github.com/bling/vim-airline.git)
+    * [fugitive](https://github.com/tpope/vim-fugitive.git)
+    * [Supertab](https://github.com/ervandew/supertab.git)
+    * [surround](https://github.com/tpope/vim-surround.git)
+    * [EasyMotion](https://github.com/easymotion/vim-easymotion)
+    * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
+    * [Atelier Schemes](https://github.com/atelierbram/vim-colors_atelier-schemes.git)
+    * [AnsiEsc](https://github.com/powerman/vim-plugin-AnsiEsc.git)
