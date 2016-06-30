@@ -23,10 +23,6 @@
 	url = https://github.com/noelhenson/vimoutliner
 	branch = tables
 	ignore = all
-[submodule "vim/bundle/atelier-schemes"]
-	path = vim/bundle/atelier-schemes
-	url = https://github.com/atelierbram/vim-colors_atelier-schemes.git
-	ignore = all
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git

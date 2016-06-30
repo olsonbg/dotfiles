@@ -170,5 +170,3 @@ Git repositories included as submodules.
     * [surround](https://github.com/tpope/vim-surround.git)
     * [EasyMotion](https://github.com/easymotion/vim-easymotion)
     * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
-    * [Atelier Schemes](https://github.com/atelierbram/vim-colors_atelier-schemes.git)
-    * [AnsiEsc](https://github.com/powerman/vim-plugin-AnsiEsc.git)
