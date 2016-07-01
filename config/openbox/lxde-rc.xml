@@ -292,14 +292,6 @@
         <command>lxpanelctl run</command>
       </action>
     </keybind>
-    <keybind key="C-Escape">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
-    <keybind key="F11">
-      <action name="ToggleFullscreen"/>
-    </keybind>
     <!-- Launch Task Manager with Ctrl+Alt+Del -->
     <keybind key="A-C-Delete">
       <action name="Execute">
@@ -307,6 +299,24 @@
       </action>
     </keybind>
     <!-- BGO Start -->
+    <keybind key="Print">
+      <action name="Execute">
+        <command>/usr/bin/scrot --select --exec '/usr/bin/gimp $f'</command>
+      </action>
+    </keybind>
+    <keybind key="S-Print">
+      <action name="Execute">
+        <command>/usr/bin/scrot --multidisp --exec '/usr/bin/gimp $f'</command>
+      </action>
+    </keybind>
+    <keybind key="W-space">
+      <action name="Execute">
+        <command>lxpanelctl menu</command>
+      </action>
+    </keybind>
+    <keybind key="C-F11">
+      <action name="ToggleFullscreen"/>
+    </keybind>
     <keybind key="W-Return">
       <action name="Execute">
         <command>/home/bgo/bin/urxvtc-d</command>
