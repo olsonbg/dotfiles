@@ -4,9 +4,24 @@
 # Existing dotfiles are moved to the $HOME/dotfiles-<datetime> directory.
 #
 
+# Get the canonicalized path
+canonpath() {
+	readlink -f "$0"
+}
+
+# Get the canonicalized directory name
+canondir() {
+	dirname "$(canonpath "$0")"
+}
+
+# Check if canonicalized paths are the same
+canonpatheq() {
+	[[ "$(canonpath "$0")" == "$(canonpath "$1")" ]]
+}
+
 # The directory where this script is located and all the dotfiles
 # should be linked to.
-dotdir=$(dirname "$(readlink -f "$0")")
+dotdir=$(canondir "$0")
 
 datetag=$(date +%Y%m%d-%H%M%S)      # appended to backup files.
 BACKUPDIR=$HOME/dotfiles-$datetag   # backup directory for dotfiles
@@ -14,13 +29,6 @@ BACKUPDIR=$HOME/dotfiles-$datetag   # backup directory for dotfiles
 
 # Uncomment the DEBUG line for debugging
 #DEBUG=echo
-
-if ! hash realpath 2>/dev/null ; then
-	echo "Required program not found (realpath), exiting."
-	exit
-fi
-
-echo "Dotfiles are stored in $dotdir."
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
@@ -30,11 +38,13 @@ files="bashrc bash.d vimrc vim screenrc screenrc-ide \
        config/openbox/lxde-rc.xml"
 
 # create dotfiles backup directory
-if [ ! -d "$BACKUPDIR" ]; then
+if [ ! -d "$BACKUPDIR" ] && [ -z $DEBUG ]; then
 	echo -n "Creating $BACKUPDIR for backup... "
 	$DEBUG mkdir -p $BACKUPDIR
 	echo "done."
 fi
+
+echo "Dotfiles are stored in $dotdir."
 
 # change to the dotfiles directory
 echo -n "Changing to the $dotdir directory... "
@@ -58,10 +68,6 @@ for file in $files; do
 		DESTPATH="$HOME/.$dotDIR/$DESTBASE"
 	fi
 
-#	echo "DESTDIR  = $DESTDIR"
-#	echo "DESTITEM = $DESTITEM"
-#	echo "DESTPATH = $DESTPATH"
-
 	# Create any missing directories.
 	[[ ! -d "$DESTDIR" ]] && $DEBUG mkdir -p "$DESTDIR"
 
@@ -73,10 +79,8 @@ for file in $files; do
 		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
 
 	# If the destination is a directory, and not a symbolic link, then move it
-	# to $BACKU{DIR for backup.
+	# to $BACKUPDIR for backup.
 	elif [ -d "$DESTPATH" ] && [ ! -h "$DESTPATH" ]; then
-		#$DEBUG rsync --remove-source-files -av $HOME/.fonts/Inconsolata-powerline $BACKUPDIR/fonts
-		#$DEBUG rm -rf $HOME/.fonts/Inconsolata-powerline
 		echo "Backing up $DESTPATH to $BACKUPDIR"
 		$DEBUG mkdir -p $BACKUPDIR/$file
 		$DEBUG rsync --remove-source-files -a "$DESTPATH/" $BACKUPDIR/$file/
@@ -84,18 +88,18 @@ for file in $files; do
 
 	# If the dotfile exists as a symbolic link, and it doesn't point
 	# to the correct file, then move it to $BACKUPDIR for backup.
-	elif [ -h "$DESTPATH" ] && [ "$(realpath $DESTPATH)" != "$(realpath $dotdir/$file)" ]; then
+	elif [ -h "$DESTPATH" ] &&  ! $(canonpatheq "$DESTPATH" "$dotdir/$file") ; then
 		echo "Backing up $DESTPATH to ${BACKUPDIR}/$file"
 		$DEBUG mv "$DESTPATH" "$BACKUPDIR/$file"
 	fi
 
 	if [ ! -e "$DESTPATH" ]; then
 		echo -n "Creating symlink: "
-		OFILE=$(realpath $file)
-		LFILE=$HOME/$(dirname $file)
+		OFILE=$(canonpath "$file")
+		LFILE=$HOME/$(dirname "$file")
 
-		# Unfortunately, the cleanest way to determine relative paths
-		# is to use perl.
+		# Unfortunately, the cleanest way to determine relative paths is to use
+		# perl. I could use full paths, but I prefer relative here.
 		relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" "$LFILE")
 		$DEBUG ln -sv "$relpath" "$HOME/.$file"
 	fi
@@ -118,11 +122,13 @@ if [ -n "$DISPLAY" ]; then
 fi
 
 # Check if backup directory is empty.
-ls -1qA "$BACKUPDIR" | grep -q .
-if [ $? -eq 1 ]; then
-	echo -n "Backup directory empty, deleting it..."
-	rm -rf "$BACKUPDIR"
-	echo " done."
+if [ -d "$BACKUPDIR" ] ; then
+	ls -1qA "$BACKUPDIR" | grep -q .
+	if [ $? -eq 1 ]; then
+		echo -n "Backup directory empty, deleting it..."
+		rm -rf "$BACKUPDIR"
+		echo " done."
+	fi
 fi
 
 echo "Setup complete."
