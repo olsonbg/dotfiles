@@ -1,13 +1,16 @@
 #!/bin/bash
 #
-# This script creates symlinks from the home directory to any desired
-# dotfiles in $HOME/dotfiles
+# This script creates symlinks from the home directory to the dotfiles.
+# Existing dotfiles are moved to the $HOME/dotfiles-<datetime> directory.
 #
 
-DOTFILES=dotfiles
-dir=$HOME/$DOTFILES                    # dotfiles directory
-datetag=$(date +%Y%m%d-%H%M%S)         # appended to backup files.
-BACKUPDIR=$HOME/${DOTFILES}-$datetag   # backup directory for dotfiles
+# The directory where this script is located and all the dotfiles
+# should be linked to.
+dotdir=$(dirname "$(readlink -f "$0")")
+
+datetag=$(date +%Y%m%d-%H%M%S)      # appended to backup files.
+BACKUPDIR=$HOME/dotfiles-$datetag   # backup directory for dotfiles
+
 
 # Uncomment the DEBUG line for debugging
 #DEBUG=echo
@@ -16,6 +19,8 @@ if ! hash realpath 2>/dev/null ; then
 	echo "Required program not found (realpath), exiting."
 	exit
 fi
+
+echo "Dotfiles are stored in $dotdir."
 
 # list of files/folders to symlink in homedir
 files="bashrc bash.d vimrc vim screenrc screenrc-ide \
@@ -32,13 +37,12 @@ if [ ! -d "$BACKUPDIR" ]; then
 fi
 
 # change to the dotfiles directory
-echo -n "Changing to the $dir directory... "
-cd "$dir"
+echo -n "Changing to the $dotdir directory... "
+cd "$dotdir"
 echo "done."
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create
-# symlinks from the homedir to any files in the ~/dotfiles directory specified
-# in $files
+# move any existing dotfiles in $HOME to $BACKUPDIR, then create symlinks from
+# to any files $dotdir that are specified in $files
 for file in $files; do
 
 	dotDIR="$(dirname "$file")"
@@ -80,7 +84,7 @@ for file in $files; do
 
 	# If the dotfile exists as a symbolic link, and it doesn't point
 	# to the correct file, then move it to $BACKUPDIR for backup.
-	elif [ -h "$DESTPATH" ] && [ "$(realpath $DESTPATH)" != "$(realpath $dir/$file)" ]; then
+	elif [ -h "$DESTPATH" ] && [ "$(realpath $DESTPATH)" != "$(realpath $dotdir/$file)" ]; then
 		echo "Backing up $DESTPATH to ${BACKUPDIR}/$file"
 		$DEBUG mv "$DESTPATH" "$BACKUPDIR/$file"
 	fi
