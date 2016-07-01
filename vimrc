@@ -291,8 +291,8 @@ endfunction
 " solarized scheme
 "
 function! SolarizedSetup ()
-	colorscheme solarized
 	let g:solarized_visibility="low"
+	colorscheme solarized
 endfunction
 
 
