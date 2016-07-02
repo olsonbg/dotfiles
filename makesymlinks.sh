@@ -4,108 +4,123 @@
 # Existing dotfiles are moved to the $HOME/dotfiles-<datetime> directory.
 #
 
+# Uncomment the DEBUG line for debugging
+#DEBUG=echo
+
+# list of files/folders to symlink in homedir
+dfiles="bashrc vimrc screenrc screenrc-ide \
+       tmux.conf Xresources ctags \
+       terminfo gitignore_global gitconfig \
+       config/openbox/lxde-rc.xml"
+
+ddirs="bash.d tmux.d Xresources.d fonts/Inconsolata-powerline vim"
+
 # Get the canonicalized path
 canonpath() {
-	readlink -f "$0"
+	readlink -f "$1"
 }
 
 # Get the canonicalized directory name
 canondir() {
-	dirname "$(canonpath "$0")"
+	dirname "$(canonpath "$1")"
 }
 
 # Check if canonicalized paths are the same
 canonpatheq() {
-	[[ "$(canonpath "$0")" == "$(canonpath "$1")" ]]
+	[[ "$(canonpath "$1")" == "$(canonpath "$2")" ]]
+}
+
+doLinking() {
+	local dfile="$1"
+	local dp="$2"
+	local backup="$3"
+
+	local file
+	local DESTDIR
+	local DESTBASE
+	local DESTPATH
+
+	# move any existing dotfiles in $HOME to $BACKUPDIR, then create symlinks from
+	# to any files $dotdir that are specified in $files
+	for file in $dfile; do
+
+		dotDIR="$(dirname "$file")"
+		dotBASE="$(basename "$file")"
+
+		if [ "$dotDIR" == "." ]; then
+			DESTDIR="$HOME"
+			BKPDIR="$backup"
+			DESTBASE=".$dotBASE"
+			DESTPATH="$HOME/$DESTBASE"
+		else
+			DESTDIR="$HOME/.$dotDIR"
+			BKPDIR="$backup/$dotDIR"
+			DESTBASE="$dotBASE"
+			DESTPATH="$HOME/.$dotDIR/$DESTBASE"
+		fi
+
+		# Create any missing directories.
+		[[ ! -d "$DESTDIR" ]] && $DEBUG mkdir -p "$DESTDIR"
+
+		# If the dotfile exists, and it's a regular file, then move it to
+		# $BACKUPDIR for backup.
+		if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
+			[[ ! -d "$BKPDIR" ]] && $DEBUG mkdir -p "$BKPDIR"
+			$DEBUG mv "$HOME/.$file" "$backup/$file"
+
+		# If the destination is a directory, and not a symbolic link, then move
+		# it to $BACKUPDIR for backup.
+		elif [ -d "$DESTPATH" ] && [ ! -h "$DESTPATH" ]; then
+			[[ ! -d "$BKPDIR" ]] && $DEBUG mkdir -p "$BKPDIR"
+			$DEBUG rsync --remove-source-files -a "$DESTPATH/" $backup/$file/
+			$DEBUG rm -rf $DESTPATH
+
+		# If the dotfile exists as a symbolic link, and it doesn't point
+		# to the correct file, then move it to $BACKUPDIR for backup.
+		elif [ -h "$DESTPATH" ] &&  ! $(canonpatheq "$DESTPATH" "$dotdir/$dp/$file") ; then
+			[[ ! -d "$BKPDIR" ]] && $DEBUG mkdir -p "$BKPDIR"
+			$DEBUG mv "$DESTPATH" "$backup/$file"
+		fi
+
+		# Create the symbolic link
+		if [ ! -e "$DESTPATH" ]; then
+			OFILE=$(canonpath "$dotdir/$dp/$file")
+			LFILE="$HOME/.$file"
+
+			# Unfortunately, the cleanest way to determine relative paths
+			# is to use perl. I could use full paths, but I prefer relative
+			# here.
+			relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" $(dirname "$LFILE"))
+			$DEBUG ln -sv "$relpath" "$LFILE"
+		fi
+
+	done
 }
 
 # The directory where this script is located and all the dotfiles
 # should be linked to.
 dotdir=$(canondir "$0")
 
-datetag=$(date +%Y%m%d-%H%M%S)      # appended to backup files.
-BACKUPDIR=$HOME/dotfiles-$datetag   # backup directory for dotfiles
+# backups directory for existing dotfiles
+BACKUPDIR="$HOME/dotfiles-$(date +%Y%m%d-%H%M%S)"
 
-
-# Uncomment the DEBUG line for debugging
-#DEBUG=echo
-
-# list of files/folders to symlink in homedir
-files="bashrc bash.d vimrc vim screenrc screenrc-ide \
-       tmux.conf tmux.d Xresources.d Xresources ctags \
-       terminfo gitignore_global gitconfig \
-       fonts/Inconsolata-powerline \
-       config/openbox/lxde-rc.xml"
 
 # create dotfiles backup directory
 if [ ! -d "$BACKUPDIR" ] && [ -z $DEBUG ]; then
-	echo -n "Creating $BACKUPDIR for backup... "
 	$DEBUG mkdir -p $BACKUPDIR
-	echo "done."
 fi
 
-echo "Dotfiles are stored in $dotdir."
+echo "Dotfiles directory: $dotdir."
+echo "Backup directory  : $BACKUPDIR."
+echo
 
 # change to the dotfiles directory
-echo -n "Changing to the $dotdir directory... "
 cd "$dotdir"
-echo "done."
 
-# move any existing dotfiles in $HOME to $BACKUPDIR, then create symlinks from
-# to any files $dotdir that are specified in $files
-for file in $files; do
+doLinking "$dfiles" "files" "$BACKUPDIR"
+doLinking "$ddirs"  "dirs"  "$BACKUPDIR"
 
-	dotDIR="$(dirname "$file")"
-	dotBASE="$(basename "$file")"
-
-	if [ "$dotDIR" == "." ]; then
-		DESTDIR="$HOME"
-		DESTBASE=".$dotBASE"
-		DESTPATH="$HOME/$DESTBASE"
-	else
-		DESTDIR="$HOME/.$dotDIR"
-		DESTBASE="$dotBASE"
-		DESTPATH="$HOME/.$dotDIR/$DESTBASE"
-	fi
-
-	# Create any missing directories.
-	[[ ! -d "$DESTDIR" ]] && $DEBUG mkdir -p "$DESTDIR"
-
-	# If the dotfile exists, and it's a regular file, then move it to
-	# $BACKUPDIR for backup.
-	if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
-		echo "Moving existing ~/.$file to $BACKUPDIR"
-		$DEBUG mkdir -p "$BACKUPDIR/$(dirname "$file")"
-		$DEBUG mv "$HOME/.$file" "$BACKUPDIR/$file"
-
-	# If the destination is a directory, and not a symbolic link, then move it
-	# to $BACKUPDIR for backup.
-	elif [ -d "$DESTPATH" ] && [ ! -h "$DESTPATH" ]; then
-		echo "Backing up $DESTPATH to $BACKUPDIR"
-		$DEBUG mkdir -p $BACKUPDIR/$file
-		$DEBUG rsync --remove-source-files -a "$DESTPATH/" $BACKUPDIR/$file/
-		$DEBUG rm -rf $DESTPATH
-
-	# If the dotfile exists as a symbolic link, and it doesn't point
-	# to the correct file, then move it to $BACKUPDIR for backup.
-	elif [ -h "$DESTPATH" ] &&  ! $(canonpatheq "$DESTPATH" "$dotdir/$file") ; then
-		echo "Backing up $DESTPATH to ${BACKUPDIR}/$file"
-		$DEBUG mv "$DESTPATH" "$BACKUPDIR/$file"
-	fi
-
-	if [ ! -e "$DESTPATH" ]; then
-		echo -n "Creating symlink: "
-		OFILE=$(canonpath "$file")
-		LFILE=$HOME/$(dirname "$file")
-
-		# Unfortunately, the cleanest way to determine relative paths is to use
-		# perl. I could use full paths, but I prefer relative here.
-		relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" "$LFILE")
-		$DEBUG ln -sv "$relpath" "$HOME/.$file"
-	fi
-done
-
-# Create default Xresouces current-scheme file.
+# Create default Xresources current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
 	echo "#define SOLARIZED_LIGHT" > ~/.Xresources.d/current-scheme
 fi
@@ -131,4 +146,5 @@ if [ -d "$BACKUPDIR" ] ; then
 	fi
 fi
 
+echo
 echo "Setup complete."
