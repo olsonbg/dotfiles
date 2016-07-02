@@ -10,10 +10,11 @@
 # list of files/folders to symlink in homedir
 dfiles="bashrc vimrc screenrc screenrc-ide \
        tmux.conf Xresources ctags \
-       terminfo gitignore_global gitconfig \
+       gitignore_global gitconfig \
        config/openbox/lxde-rc.xml"
 
-ddirs="bash.d tmux.d Xresources.d fonts/Inconsolata-powerline vim"
+ddirs="bash.d tmux.d Xresources.d vim terminfo \
+       fonts/Inconsolata-powerline"
 
 # Get the canonicalized path
 canonpath() {
