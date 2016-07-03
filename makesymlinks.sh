@@ -1,20 +1,18 @@
 #!/bin/bash
 #
 # This script creates symlinks from the home directory to the dotfiles.
-# Existing dotfiles are moved to the $HOME/dotfiles-<datetime> directory.
+# Existing dotfiles are moved to the $INSTALLDIR/dotfiles-<datetime> directory.
 #
 
 # Uncomment the DEBUG line for debugging
 #DEBUG=echo
 
-# list of files/folders to symlink in homedir
-dfiles="bashrc vimrc screenrc screenrc-ide \
-       tmux.conf Xresources ctags \
-       gitignore_global gitconfig \
-       config/openbox/lxde-rc.xml"
+INSTALLDIR="$HOME"
 
+# list of folders to symlink in homedir
 ddirs="bash.d tmux.d Xresources.d vim terminfo \
        fonts/Inconsolata-powerline"
+
 
 # Get the canonicalized path
 canonpath() {
@@ -34,40 +32,45 @@ canonpatheq() {
 doLinking() {
 	local dfile="$1"
 	local dp="$2"
-	local backup="$3"
+	local d="$3"
+	local backup="$4"
 
 	local file
+	local SRCPATH
 	local DESTDIR
 	local DESTBASE
 	local DESTPATH
 
-	# move any existing dotfiles in $HOME to $BACKUPDIR, then create symlinks from
-	# to any files $dotdir that are specified in $files
+	echo "d=$d"
+
+	# move any existing dotfiles in $INSTALLDIR to $BACKUPDIR, then create symlinks
+	# from to any files $dotdir that are specified in $files
 	for file in $dfile; do
 
 		dotDIR="$(dirname "$file")"
 		dotBASE="$(basename "$file")"
 
+		SRCPATH="$dotdir/$dp/$file"
+
 		if [ "$dotDIR" == "." ]; then
-			DESTDIR="$HOME"
 			BKPDIR="$backup"
-			DESTBASE=".$dotBASE"
-			DESTPATH="$HOME/$DESTBASE"
+			DESTPATH="$INSTALLDIR/$d$dotBASE"
 		else
-			DESTDIR="$HOME/.$dotDIR"
 			BKPDIR="$backup/$dotDIR"
-			DESTBASE="$dotBASE"
-			DESTPATH="$HOME/.$dotDIR/$DESTBASE"
+			DESTPATH="$INSTALLDIR/$d$dotDIR/$dotBASE"
 		fi
+
+		DESTBASE="$(basename "$DESTPATH")"
+		DESTDIR="$(dirname "$DESTPATH")"
 
 		# Create any missing directories.
 		[[ ! -d "$DESTDIR" ]] && $DEBUG mkdir -p "$DESTDIR"
 
 		# If the dotfile exists, and it's a regular file, then move it to
 		# $BACKUPDIR for backup.
-		if [ -f "$HOME/.$file" ] && [ ! -h "$HOME/.$file" ]; then
+		if [ -f "$DESTPATH" ] && [ ! -h "$DESTPATH" ]; then
 			[[ ! -d "$BKPDIR" ]] && $DEBUG mkdir -p "$BKPDIR"
-			$DEBUG mv "$HOME/.$file" "$backup/$file"
+			$DEBUG mv "$DESTPATH" "$backup/$file"
 
 		# If the destination is a directory, and not a symbolic link, then move
 		# it to $BACKUPDIR for backup.
@@ -78,21 +81,20 @@ doLinking() {
 
 		# If the dotfile exists as a symbolic link, and it doesn't point
 		# to the correct file, then move it to $BACKUPDIR for backup.
-		elif [ -h "$DESTPATH" ] &&  ! $(canonpatheq "$DESTPATH" "$dotdir/$dp/$file") ; then
+		elif [ -h "$DESTPATH" ] &&  ! $(canonpatheq "$DESTPATH" "$SRCPATH") ; then
 			[[ ! -d "$BKPDIR" ]] && $DEBUG mkdir -p "$BKPDIR"
 			$DEBUG mv "$DESTPATH" "$backup/$file"
 		fi
 
 		# Create the symbolic link
 		if [ ! -e "$DESTPATH" ]; then
-			OFILE=$(canonpath "$dotdir/$dp/$file")
-			LFILE="$HOME/.$file"
+			OFILE=$(canonpath "$SRCPATH")
 
 			# Unfortunately, the cleanest way to determine relative paths
 			# is to use perl. I could use full paths, but I prefer relative
 			# here.
-			relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" $(dirname "$LFILE"))
-			$DEBUG ln -sv "$relpath" "$LFILE"
+			relpath=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' "$OFILE" "$DESTDIR")
+			$DEBUG ln -sv "$relpath" "$DESTPATH"
 		fi
 
 	done
@@ -102,8 +104,12 @@ doLinking() {
 # should be linked to.
 dotdir=$(canondir "$0")
 
+# Get list of files to symbolically link to.
+dfiles="$(find "$dotdir/files" -type f -printf "%P\n")"
+dbin="$(find "$dotdir/bin" -type f -printf "%P\n")"
+
 # backups directory for existing dotfiles
-BACKUPDIR="$HOME/dotfiles-$(date +%Y%m%d-%H%M%S)"
+BACKUPDIR="$INSTALLDIR/dotfiles-$(date +%Y%m%d-%H%M%S)"
 
 
 # create dotfiles backup directory
@@ -118,8 +124,9 @@ echo
 # change to the dotfiles directory
 cd "$dotdir"
 
-doLinking "$dfiles" "files" "$BACKUPDIR"
-doLinking "$ddirs"  "dirs"  "$BACKUPDIR"
+doLinking "$dfiles" "files" "."   "$BACKUPDIR"
+doLinking "$ddirs"  "dirs"  "."   "$BACKUPDIR"
+doLinking "$dbin"   "bin"   "bin/" "$BACKUPDIR/bin"
 
 # Create default Xresources current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
