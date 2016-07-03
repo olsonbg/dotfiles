@@ -9,11 +9,6 @@
 
 INSTALLDIR="$HOME"
 
-# list of folders to symlink in homedir
-ddirs="bash.d tmux.d Xresources.d vim terminfo \
-       fonts/Inconsolata-powerline"
-
-
 # Get the canonicalized path
 canonpath() {
 	readlink -f "$1"
@@ -105,6 +100,9 @@ dotdir=$(canondir "$0")
 # Get list of files to symbolically link to.
 dfiles="$(find "$dotdir/files" -type f -printf "%P\n")"
 dbin="$(find "$dotdir/bin" -type f -printf "%P\n")"
+ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d -printf "%P\n")"
+dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d -printf "%P\n")"
+
 
 # backups directory for existing dotfiles
 BACKUPDIR="$INSTALLDIR/dotfiles-$(date +%Y%m%d-%H%M%S)"
@@ -122,9 +120,10 @@ echo
 # change to the dotfiles directory
 cd "$dotdir"
 
-doLinking "$dfiles" "files" "."   "$BACKUPDIR"
-doLinking "$ddirs"  "dirs"  "."   "$BACKUPDIR"
-doLinking "$dbin"   "bin"   "bin/" "$BACKUPDIR/bin"
+doLinking "$dfiles" "files" "."       "$BACKUPDIR"
+doLinking "$ddirs"  "dirs"  "."       "$BACKUPDIR"
+doLinking "$dbin"   "bin"   "bin/"    "$BACKUPDIR/bin"
+doLinking "$dfonts" "fonts" ".fonts/" "$BACKUPDIR/fonts"
 
 # Create default Xresources current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
