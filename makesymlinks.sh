@@ -99,14 +99,14 @@ doLinking() {
 dotdir=$(canondir "$0")
 
 # Get list of files to symbolically link to.
-dfiles="$(find "$dotdir/files" -type f -printf "%P\n")"
+dfiles="$(find "$dotdir/files" -type f ! -name "*~" -printf "%P\n")"
 
-dbin="$(find "$dotdir/bin" -type f -printf "%P\n")"
-dbin="$dbin"$'\n'"$(find "$dotdir/bin" -type l -printf "%P\n")"
+dbin="$(find "$dotdir/bin" -type f ! -name "*~" -printf "%P\n")"
+dbin="$dbin"$'\n'"$(find "$dotdir/bin" -type l ! -name "*~" -printf "%P\n")"
 
-ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d -printf "%P\n")"
+ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
-dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d -printf "%P\n")"
+dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
 
 # backups directory for existing dotfiles
