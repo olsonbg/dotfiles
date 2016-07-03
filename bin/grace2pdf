@@ -8,6 +8,16 @@
 # olsonbg: bin/pdf2png @ https://github.com/olsonbg/dotfiles
 #
 
+if ! hash xmgrace 2/dev/null ; then
+	echo "Required program not found (xmgrace), exiting."
+	exit
+fi
+
+if ! hash pdfcrop 2/dev/null ; then
+	echo "Required program not found (pdfcrop), exiting."
+	exit
+fi
+
 P_GRACE=$(which xmgrace)
 P_PDFCROP=$(which pdfcrop)
 

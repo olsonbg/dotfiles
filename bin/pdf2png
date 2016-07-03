@@ -11,6 +11,11 @@
 # olsonbg: bin/pdf2png @ https://github.com/olsonbg/dotfiles
 #
 
+if ! hash convert 2/dev/null ; then
+	echo "Required program not found (convert: from ImageMagick package), exiting."
+	exit
+fi
+
 P_CONVERT="$(which convert)"
 P_FILE="$(which file)"
 
