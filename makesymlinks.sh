@@ -38,7 +38,8 @@ doLinking() {
 
 	# move any existing dotfiles in $INSTALLDIR to $BACKUPDIR, then create
 	# symlinks from to any files $dotdir that are specified in $files
-	for file in $dfile; do
+	while IFS= read -r -d $'\n' file ; do
+		[[ -z "$file" ]] && continue
 
 		dotDIR="$(dirname "$file")"
 		dotBASE="$(basename "$file")"
@@ -90,7 +91,7 @@ doLinking() {
 			$DEBUG ln -sv "$relpath" "$DESTPATH"
 		fi
 
-	done
+	done <<<"$dfile"
 }
 
 # The directory where this script is located and all the dotfiles
@@ -99,9 +100,12 @@ dotdir=$(canondir "$0")
 
 # Get list of files to symbolically link to.
 dfiles="$(find "$dotdir/files" -type f -printf "%P\n")"
+
 dbin="$(find "$dotdir/bin" -type f -printf "%P\n")"
-dbin="$dbin $(find "$dotdir/bin" -type l -printf "%P\n")"
+dbin="$dbin"$'\n'"$(find "$dotdir/bin" -type l -printf "%P\n")"
+
 ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d -printf "%P\n")"
+
 dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d -printf "%P\n")"
 
 
