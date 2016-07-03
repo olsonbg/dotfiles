@@ -1,0 +1,62 @@
+#!/bin/sh
+
+# grace2pdf:
+#
+# Save figure from a grace file (http://plasma-gate.weizmann.ac.il/Grace) as a
+# pdf, with the option to use a transparent background.
+#
+# olsonbg: bin/pdf2png @ https://github.com/olsonbg/dotfiles
+#
+
+P_GRACE=$(which xmgrace)
+P_PDFCROP=$(which pdfcrop)
+
+PEXEC_PDF="DEVICE \"PDF\" OP \"patterns:on\";DEVICE \"PDF\" OP \"PDF1.4\""
+# These options make the first graph (g0) have a transparent, or solid
+# background. If more than one graph on the plot, you'll need to add the
+# appropriate 'pexec' command.
+PEXEC_TRANSPARENT="page background fill off;with g0;legend box fill pattern 0"
+PEXEC_SOLID="page background fill on;with g0;legend box fill pattern 1"
+
+PEXEC="$PEXEC_SOLID"
+
+doConvert() {
+	local file="$1"
+	local pexec="$2"
+
+	local tfile=$(mktemp --suffix=.pdf)
+	local ofile="${file%\.*}.pdf"
+
+	if [ -f "$file" ]; then
+		echo "Processing $file."
+		$P_GRACE "$file" -pexec "$pexec" -pexec "$PEXEC_PDF" -hdevice PDF -printfile "$tfile" -hardcopy
+		$P_PDFCROP --clip "$tfile" "$ofile"
+
+		[[ -f "$tfile" ]] && rm "$tfile"
+	else
+		echo "File not found: $file."
+	fi
+}
+
+showUsage() {
+	USAGE="Usage: $(basename $0) [-t] <grace file>"
+
+	echo $USAGE >&2
+	echo -e "-t\tGenerate pdf with transparent background."
+}
+
+while getopts "th" OPTS; do
+	case "$OPTS" in
+		t) PEXEC="$PEXEC_TRANSPARENT"
+			;;
+		h)  showUsage
+			exit 1
+			;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+while [ $# -gt 0 ]; do
+	doConvert "$1" "$PEXEC"
+	shift
+done

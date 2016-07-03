@@ -1,0 +1,108 @@
+#!/bin/sh
+
+# pdf2png (or, grace2pdf):
+#
+# Convert a pdf file to a png image, with choice of 4 preset sizes (small,
+# medium, large, and xlarge). If this script is called as grace2png, then the
+# grace file (http://plasma-gate.weizmann.ac.il/Grace) is first converted to a
+# pdf using grace2pdf, and then converted to png (I didn't like the quality of
+# the grace png output, expecially with transparency).
+#
+# olsonbg: bin/pdf2png @ https://github.com/olsonbg/dotfiles
+#
+
+P_CONVERT="$(which convert)"
+P_FILE="$(which file)"
+
+USEGRACE=""
+if [ "$(basename $0)" == "grace2png" ]; then
+	USEGRACE=1
+fi
+
+declare -A MAPDENSITY
+declare -A MAPNAME
+MAPDENSITY=(["s"]=72    ["m"]=100    ["l"]=300   ["x"]=600)
+MAPNAME=(   ["s"]=small ["m"]=medium ["l"]=large ["x"]=xlarge)
+
+doConvert() {
+	local density="$1"
+	local density_name="$2"
+	local ifile="$3"
+
+	local ofile="${ifile%\.pdf}-${density_name}.png"
+	local cfile=$(mktemp --suffix=.pdf)
+
+	pdfcrop -clip "$ifile" "$cfile"
+	$P_CONVERT -density $density "$cfile" "$ofile"
+#	$P_CONVERT -density $density -trim "$ifile" -white-threshold 255 -transparent white -trim "$ofile"
+#	$P_CONVERT -density $density -alpha remove -alpha off "$cfile" "png24:$ofile"
+
+	[[ -f "$ofile" ]] && $P_FILE -b "$ofile"
+	[[ -f "$cfile" ]] && rm "$cfile"
+}
+
+
+showUsage() {
+	USAGE="Usage: $(basename $0) [-s] [-m] [-l] [-x] <pdf file>"
+
+	echo $USAGE >&2
+	echo -e "-s\tGenerate small image."
+	echo -e "-m\tGenerate medium image."
+	echo -e "-l\tGenerate large image."
+	echo -e "-x\tGenerate extra-large image."
+	echo -e "-t\tGenerate image with transparent background."
+}
+
+DO_SIZE=""
+DO_TRANSPARENCY=""
+
+while getopts "smlxth" OPTS; do
+	case "$OPTS" in
+		s) DO_SIZE="$DO_SIZE s"
+			;;
+		m) DO_SIZE="$DO_SIZE m"
+			;;
+		l) DO_SIZE="$DO_SIZE l"
+			;;
+		x) DO_SIZE="$DO_SIZE x"
+			;;
+		t) DO_TRANSPARENCY="-t"
+			;;
+		h)  showUsage
+			exit 1
+			;;
+	esac
+done
+
+if [ -z "$DO_SIZE" ]; then
+	showUsage;
+	exit 1
+fi
+
+shift $(($OPTIND - 1))
+while [ $# -gt 0 ]; do
+	file="$1"
+
+	if [ -n "$USEGRACE" ]  && [ -f "$file" ]; then
+		grace2pdf "$DO_TRANSPARENCY" "$file"
+		file=${file%%agr}pdf
+	fi
+
+	if [ -f "$file" ]; then
+			echo "$file:"
+		for s in $DO_SIZE; do
+			echo -n "> "
+			doConvert ${MAPDENSITY["$s"]} ${MAPNAME["$s"]} $file
+		done
+		echo
+	else
+		echo "File not found: $file."
+	fi
+
+	if [ -n "$USEGRACE" ]  && [ -f "$file" ]; then
+		rm -- "$file"
+	fi
+
+	shift
+done
+

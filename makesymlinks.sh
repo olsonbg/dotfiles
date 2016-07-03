@@ -100,6 +100,7 @@ dotdir=$(canondir "$0")
 # Get list of files to symbolically link to.
 dfiles="$(find "$dotdir/files" -type f -printf "%P\n")"
 dbin="$(find "$dotdir/bin" -type f -printf "%P\n")"
+dbin="$dbin $(find "$dotdir/bin" -type l -printf "%P\n")"
 ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d -printf "%P\n")"
 dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d -printf "%P\n")"
 
