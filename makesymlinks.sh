@@ -30,21 +30,19 @@ canonpatheq() {
 }
 
 doLinking() {
-	local dfile="$1"
-	local dp="$2"
-	local d="$3"
-	local backup="$4"
+	local dfile="$1"  # List of object to link to.
+	local dp="$2"     # location of objects in $dfile, relative to $dotdir.
+	local d="$3"      # Directory to symlink to, relative to $INSTALLDIR.
+	local backup="$4" # Directory for backups.
 
 	local file
-	local SRCPATH
-	local DESTDIR
-	local DESTBASE
-	local DESTPATH
+	local SRCPATH     # Full path of object to link to.
+	local DESTPATH    # Full path of the symbolic link to create.
+	local DESTDIR     # Directory where the symbolic link will be created.
+	local DESTBASE    # Name of symbolic link to create.
 
-	echo "d=$d"
-
-	# move any existing dotfiles in $INSTALLDIR to $BACKUPDIR, then create symlinks
-	# from to any files $dotdir that are specified in $files
+	# move any existing dotfiles in $INSTALLDIR to $BACKUPDIR, then create
+	# symlinks from to any files $dotdir that are specified in $files
 	for file in $dfile; do
 
 		dotDIR="$(dirname "$file")"
