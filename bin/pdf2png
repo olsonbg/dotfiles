@@ -6,7 +6,7 @@
 # medium, large, and xlarge). If this script is called as grace2png, then the
 # grace file (http://plasma-gate.weizmann.ac.il/Grace) is first converted to a
 # pdf using grace2pdf, and then converted to png (I didn't like the quality of
-# the grace png output, expecially with transparency).
+# the grace png output, especially with transparency).
 #
 # olsonbg: bin/pdf2png @ https://github.com/olsonbg/dotfiles
 #
