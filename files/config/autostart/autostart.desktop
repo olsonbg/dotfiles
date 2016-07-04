@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Custom Autostart Programs
+Exec=myautostart
+StartupNotify=false
+Type=Application

@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# Programs to launch on X11 startup.
+# Called from ~/.config/autostart/autostart.desktop
+
+LOGFILE="$HOME/.cache/myautostart.log"
+
+startups="conky parcellite"
+
+case $XDG_CURRENT_DESKTOP in
+	LXDE          ) extras="stalonetray xcompmgr nm-applet";;
+	enlightenment ) extras="stalonetray nm-applet";;
+esac
+
+startups="$startups $extras"
+
+startit()
+{
+	local prog=$1
+
+	# If program is already running, skip.
+	echo "$0: Checking..."
+	[[ $(pgrep -u $USER $prog) ]] && return
+	echo "$$0: prog running"
+
+	[[ $(which $prog) ]] && exec $prog &
+
+}
+
+killandstart()
+{
+	local prog=$1
+
+	echo "$0: $prog:"
+	pids="$(pgrep -u $USER $prog)"
+	if [ -n "$pids" ]; then
+		echo "$0: Killing $prog running processes [$pids]."
+		kill -15 $pids
+		sleep 2s
+	fi
+
+	[[ $(which $prog) ]] && exec $prog &
+
+}
+
+sleep 1s
+
+[[ -f "$LOGFILE" ]] && rm "$LOGFILE";
+
+touch ~/.cache/myautostart.log
+
+for p in $startups; do
+	killandstart $p
+	sleep 1s
+done > "$LOGFILE" 2>&1
+
+# Make sure Xresources get processed
+[[ -f ~/.Xresources ]] && xrdb ~/.Xresources
+
+# Make the caps lock key behave has a control key
+setxkbmap -option ctrl:nocaps
+
+echo "$0: done." >> "$LOGFILE"
