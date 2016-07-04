@@ -29,7 +29,7 @@ doLinking() {
 	local dp="$2"     # location of objects in $dfile, relative to $dotdir.
 	local I="$3"      # Directory to install symbolic links
 	local d="$4"      # Prefix for each $dfile object (e.g., '.')
-	local backup="$4" # Directory for backups.
+	local backup="$5" # Directory for backups.
 
 	local file
 	local SRCPATH     # Full path of object to link to.
