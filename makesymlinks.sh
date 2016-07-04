@@ -27,7 +27,8 @@ canonpatheq() {
 doLinking() {
 	local dfile="$1"  # List of object to link to.
 	local dp="$2"     # location of objects in $dfile, relative to $dotdir.
-	local d="$3"      # Directory to symlink to.
+	local I="$3"      # Directory to install symbolic links
+	local d="$4"      # Prefix for each $dfile object (e.g., '.')
 	local backup="$4" # Directory for backups.
 
 	local file
@@ -48,10 +49,10 @@ doLinking() {
 
 		if [ "$dotDIR" == "." ]; then
 			BKPDIR="$backup"
-			DESTPATH="$d$dotBASE"
+			DESTPATH="$I/$d$dotBASE"
 		else
 			BKPDIR="$backup/$dotDIR"
-			DESTPATH="$d$dotDIR/$dotBASE"
+			DESTPATH="$I/$d$dotDIR/$dotBASE"
 		fi
 
 		DESTBASE="$(basename "$DESTPATH")"
@@ -125,10 +126,10 @@ echo
 # change to the dotfiles directory
 cd "$dotdir"
 
-doLinking "$dfiles" "files" "$INSTALLDIR/."       "$BACKUPDIR"
-doLinking "$ddirs"  "dirs"  "$INSTALLDIR/."       "$BACKUPDIR"
-doLinking "$dbin"   "bin"   "$INSTALLDIR/bin/"    "$BACKUPDIR/bin"
-doLinking "$dfonts" "fonts" "$INSTALLDIR/.fonts/" "$BACKUPDIR/fonts"
+doLinking "$dfiles" "files" "$INSTALLDIR"        "." "$BACKUPDIR"
+doLinking "$ddirs"  "dirs"  "$INSTALLDIR"        "." "$BACKUPDIR"
+doLinking "$dbin"   "bin"   "$INSTALLDIR/bin"    ""  "$BACKUPDIR/bin"
+doLinking "$dfonts" "fonts" "$INSTALLDIR/.fonts" ""  "$BACKUPDIR/fonts"
 
 # Create default Xresources current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
