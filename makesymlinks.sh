@@ -109,13 +109,14 @@ ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
 dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
+dconfig="$(find "$dotdir/config" -type f ! -name "*~" -printf "%P\n")"
 
 # backups directory for existing dotfiles
 BACKUPDIR="$INSTALLDIR/dotfiles-$(date +%Y%m%d-%H%M%S)"
 
 
 # create dotfiles backup directory
-if [ ! -d "$BACKUPDIR" ] && [ -z $DEBUG ]; then
+if [ ! -d "$BACKUPDIR" ] && [ -z "$DEBUG" ]; then
 	$DEBUG mkdir -p $BACKUPDIR
 fi
 
@@ -131,13 +132,22 @@ doLinking "$ddirs"  "dirs"  "$INSTALLDIR"        "." "$BACKUPDIR"
 doLinking "$dbin"   "bin"   "$INSTALLDIR/bin"    ""  "$BACKUPDIR/bin"
 doLinking "$dfonts" "fonts" "$INSTALLDIR/.fonts" ""  "$BACKUPDIR/fonts"
 
+# For config files, if $XDG_CONFIG_HOME is not defined, or $INSTALLDIR is not
+# equal to $HOME (for testing purposes mostly), install in $INSTALLDIR/.config.
+# Otherwise, install in $XDG_CONFIG_HOME.
+if [ -z "$XDG_CONFIG_HOME" ] || [ "$INSTALLDIR" != "$HOME" ]; then
+	doLinking "$dconfig" "config" "$INSTALLDIR/.config" "" "$BACKUPDIR/config"
+else
+	doLinking "$dconfig" "config" "$XDG_CONFIG_HOME"    "" "$BACKUPDIR/config"
+fi
+
 # Create default Xresources current-scheme file.
-if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
+if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z "$DEBUG" ]; then
 	echo "#define SOLARIZED_LIGHT" > ~/.Xresources.d/current-scheme
 fi
 
 # Create default tmux current-scheme file.
-if [ ! -e ~/.tmux.d/current-scheme ] && [ -z $DEBUG ]; then
+if [ ! -e ~/.tmux.d/current-scheme ] && [ -z "$DEBUG" ]; then
 	echo "source-file ~/.tmux.d/solarized-light" > ~/.tmux.d/current-scheme
 fi
 
