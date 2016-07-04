@@ -27,7 +27,7 @@ canonpatheq() {
 doLinking() {
 	local dfile="$1"  # List of object to link to.
 	local dp="$2"     # location of objects in $dfile, relative to $dotdir.
-	local d="$3"      # Directory to symlink to, relative to $INSTALLDIR.
+	local d="$3"      # Directory to symlink to.
 	local backup="$4" # Directory for backups.
 
 	local file
@@ -48,10 +48,10 @@ doLinking() {
 
 		if [ "$dotDIR" == "." ]; then
 			BKPDIR="$backup"
-			DESTPATH="$INSTALLDIR/$d$dotBASE"
+			DESTPATH="$d$dotBASE"
 		else
 			BKPDIR="$backup/$dotDIR"
-			DESTPATH="$INSTALLDIR/$d$dotDIR/$dotBASE"
+			DESTPATH="$d$dotDIR/$dotBASE"
 		fi
 
 		DESTBASE="$(basename "$DESTPATH")"
@@ -125,10 +125,10 @@ echo
 # change to the dotfiles directory
 cd "$dotdir"
 
-doLinking "$dfiles" "files" "."       "$BACKUPDIR"
-doLinking "$ddirs"  "dirs"  "."       "$BACKUPDIR"
-doLinking "$dbin"   "bin"   "bin/"    "$BACKUPDIR/bin"
-doLinking "$dfonts" "fonts" ".fonts/" "$BACKUPDIR/fonts"
+doLinking "$dfiles" "files" "$INSTALLDIR/."       "$BACKUPDIR"
+doLinking "$ddirs"  "dirs"  "$INSTALLDIR/."       "$BACKUPDIR"
+doLinking "$dbin"   "bin"   "$INSTALLDIR/bin/"    "$BACKUPDIR/bin"
+doLinking "$dfonts" "fonts" "$INSTALLDIR/.fonts/" "$BACKUPDIR/fonts"
 
 # Create default Xresources current-scheme file.
 if [ ! -e ~/.Xresources.d/current-scheme ] && [ -z $DEBUG ]; then
