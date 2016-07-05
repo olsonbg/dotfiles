@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# Launch program inside a VirtualBox virtual machine.
+#
+# Author: Brian G. Olson (https://www.github.com/olsonbg)
+#
+# Current version:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/vmprog
+#
+# Uses configuration files in $CFGDIR, one per program to launch. Running this
+# program with no options will show the value of $CFGDIR as 'Modules
+# directory.'
+#
+# Requires 'MyPersonalConfigs' script from:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/MyPersonalConfigs
+#
+# Example config files (without the preceding hash marks, of course). Note the
+# use of single quotes around the VMPROG_PROG setting!:
+#
+# File: $CFGDIR/chrome
+#
+# VMPROG_VM=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# VMPROG_USERNAME=myusername
+# VMPROG_PASS=mypassword
+# VMPROG_PROG='C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+# VMPROG_OPTS=""
+# VMPROG_NAME="Chrome"
+#
+# File: $CFGDIR/harmonyremote
+#
+# VMPROG_VM=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
+# VMPROG_USERNAME=myusername
+# VMPROG_PASS=mypassword
+# VMPROG_NAME="HarmonyRemote"
+# VMPROG_PROG='C:\Program Files (x86)\Logitech\Logitech Harmony Remote Software 7\HarmonyRemote.exe'
+# VMPROG_OPTS="HarmonyRemote.exe /launchbrowser"
+#
+CFGDIR="$(MyPersonalConfigs -d vmprog)" || exit 1
+
+if [ -z "$1" ] || [ ! -e "$CFGDIR/$1" ] ; then
+	echo "USAGE: $(basename $0) <module>"
+	echo
+	echo "Modules directory: $CFGDIR"
+	echo
+	echo "Available modules:"
+	ls -1 "$CFGDIR"
+	exit 1
+fi
+
+# Get module settings.
+. "$CFGDIR/$1"
+
+AlreadyRunning=$(VBoxManage showvminfo $VMPROG_VM|grep "^State:"|grep -c running)
+if [ $AlreadyRunning -eq 0 ]; then
+	echo "Starting virtual machine..."
+	VBoxManage startvm $VMPROG_VM
+	# 15s should be plenty time to wait. This can be lower/increase if you have
+	# a fast/slow machine.
+	sleep 15s
+else
+	echo "Virtual machine already running."
+fi
+
+
+echo "Starting $VMPROG_NAME inside virtual machine."
+
+# VirtualBox < 5.0.10
+# VBoxManage --nologo guestcontrol "$VMPROG_VM" execute \
+#            --image "$VMPROG_PROG" \
+#            --username "$VMPROG_USERNAME" \
+#            --password "$VMPROG_PASS" \
+#            -- $VMPROG_OPTS
+
+# VirtualBox >= 5.0.10
+VBoxManage --nologo guestcontrol "$VMPROG_VM" run \
+           --exe "$VMPROG_PROG" \
+           --username "$VMPROG_USERNAME" \
+           --password "$VMPROG_PASS" \
+           -- $VMPROG_OPTS
+
