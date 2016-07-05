@@ -1,0 +1,94 @@
+#!/bin/sh
+#
+# Get a directory name to store configuration files for my own scripts. This
+# is called from any script which needs a configuration file.
+#
+# The default directory will be '$XDG_CONFIG_HOME/MyPersonalConfigs,' or
+# '$HOME/.config/MyPersonalConfigs' if $XDG_CONFIG_HOME is not defined.
+#
+# The 'MyPersonalConfigs' subdirectory is used to isolate configs from my own
+# scripts from those of programs installed by the package manager.
+#
+# Author: Brian G. Olson (https://www.github.com/olsonbg)
+#
+# Current version:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/MyPersonalConfigs
+#
+# Released under GPLv3 (http://www.gnu.org/licenses/gpl.html)
+#
+
+CFGDIR="${XDG_CONFIG_HOME:-$HOME/.config}/MyPersonalConfigs"
+
+checkdir() {
+	local theDIR="$1"
+	if [ -f "$theDIR" ]; then
+		echo "Error: $theDIR is a file, should be a directory." >&2
+		return 1
+	fi
+
+	[[ ! -e "${theDIR}" ]] && mkdir -p "$theDIR"
+
+	echo "$theDIR"
+}
+
+checkfile() {
+	local theFILE="$1"
+	local TOUCH="$2"
+
+	if [ -d "$theFILE" ]; then
+		echo "Error: $theFILE is a directory, should be a file." >&2
+		return 1
+	fi
+
+	[[ ! -e "${theFILE}" ]] && [[ -n "$TOUCH" ]] && touch "$theFILE"
+
+	echo "$theFILE"
+}
+
+USAGE="Usage: $(basename "$0") [-f <name>] [-c] [-d <subdirectory name>]"
+
+showhelp() {
+	echo $USAGE >&2
+	echo -e "\nReturns name of the configuration directory, or full path to the"
+	echo -e "configuration file if -f option is used.\n"
+	echo -e "-f <name> \tName of configuration file, it will not be created"
+	echo -e "          \tunless the -c option is used.\n"
+	echo -e "-c        \tIf -f is used, then touch the file if it does not"
+	echo -e "          \talready exist.\n"
+	echo -e "-d <name> \tSubdirectory of the configuration directory to use for"
+	echo -e "          \tstoring configuration files. The subdirectory will be"
+	echo -e "          \tcreated if it does not exist."
+}
+
+CFGFILE=""
+CREATE=""
+SUBDIR=""
+
+while getopts "d:f:ch" OPTS; do
+	case "$OPTS" in
+		f)  CFGFILE="$OPTARG"
+			;;
+		d)  SUBDIR="$OPTARG"
+			;;
+		c)  CREATE="1"
+			;;
+		h)  showhelp
+			exit 0
+			;;
+		*)  showhelp
+			exit 1
+			;;
+	esac
+done
+
+R=$(checkdir "$CFGDIR") || exit 1
+
+if [ -n "$SUBDIR" ]; then
+	R=$(checkdir "$R/$SUBDIR") || exit 1
+fi
+
+if [ -n "$CFGFILE" ]; then
+	R=$(checkfile "$R/$CFGFILE" "$CREATE") || exit 1
+fi
+
+echo $R
