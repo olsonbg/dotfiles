@@ -5,14 +5,12 @@
 
 LOGFILE="$HOME/.cache/myautostart.log"
 
-startups="conky parcellite"
+startups=( "conky" "parcellite" )
 
 case $XDG_CURRENT_DESKTOP in
-	LXDE          ) extras="stalonetray xcompmgr nm-applet";;
-	enlightenment ) extras="stalonetray nm-applet";;
+	LXDE          ) extras=( "stalonetray" "compton -b" "nm-applet" );;
+	enlightenment ) extras=( "stalonetray" "nm-applet" );;
 esac
-
-startups="$startups $extras"
 
 startit()
 {
@@ -30,8 +28,10 @@ startit()
 killandstart()
 {
 	local prog=$1
+	local opts="${@:2}"
 
-	echo "$0: $prog:"
+	echo "$0: :$prog: :$opts:"
+
 	pids="$(pgrep -u $USER $prog)"
 	if [ -n "$pids" ]; then
 		echo "$0: Killing $prog running processes [$pids]."
@@ -39,7 +39,7 @@ killandstart()
 		sleep 2s
 	fi
 
-	[[ $(which $prog) ]] && exec $prog &
+	[[ $(which $prog) ]] && exec $prog $opts &
 
 }
 
@@ -49,7 +49,7 @@ sleep 1s
 
 touch ~/.cache/myautostart.log
 
-for p in $startups; do
+for p in "${startups[@]}" "${extras[@]}"; do
 	killandstart $p
 	sleep 1s
 done > "$LOGFILE" 2>&1
