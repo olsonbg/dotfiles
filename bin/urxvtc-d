@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# From manpage of urxvtc. If urxvt can not connect to the daemon, start it then
+# try again
+#
+urxvtc "$@"
+if [ $? -eq 2 ]; then
+   urxvtd -q -o -f
+   urxvtc "$@"
+fi
