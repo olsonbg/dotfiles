@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Check if the shell has the location for a program or programs. Basically, if
+# the program is installed and in the users $PATH.
+#
+# Exits with a code of:
+#
+#  - 1, if any program specified on the command line is not found.
+#  - 0, if all programs specified on the command line are found.
+#
+# Usage:
+#  MyRequiredProgs <program 1> <program 2> .. <program N>
+#
+# Example: check if 'echo' and 'ls' are found, if not, exit with code 1
+#
+# $ MyRequiredProgs echo ls || exit 1
+#
+# Author: Brian G. Olson (https://www.github.com/olsonbg)
+#
+# Current version:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/MyRequiredProgs
+#
+# Released under GPLv3 (http://www.gnu.org/licenses/gpl.html)
+#
+
+FAILED=0
+while [ $# -gt 0 ] ; do
+	if ! hash "$1" 2>/dev/null ; then
+		echo "Required program not found: $1!"
+		FAILED=1
+	fi
+
+	shift
+done
+
+[[ $FAILED -eq 1 ]] && exit 1
+
+exit 0
