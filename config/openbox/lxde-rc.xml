@@ -111,6 +111,8 @@
     <names>
       <name>Term</name>
       <name>Internet</name>
+      <name>Email &amp; Calendar</name>
+      <name>Misc</name>
     </names>
     <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
@@ -318,20 +320,39 @@
       <action name="ToggleFullscreen"/>
     </keybind>
     <keybind key="W-Return">
+      <action name="GoToDesktop"><to>1</to></action>
       <action name="Execute">
         <command>/home/bgo/bin/urxvtc-d</command>
       </action>
     </keybind>
     <keybind key="W-t">
+      <action name="GoToDesktop"><to>1</to></action>
       <action name="Execute">
         <command>/home/bgo/bin/urxvtc-d</command>
       </action>
     </keybind>
+    <!-- Start: Nested keybinding for chromium browser, gmail, calendar -->
     <keybind key="W-c">
-      <action name="Execute">
-        <command>chromium-browser</command>
-      </action>
+      <keybind key="b">
+        <action name="GoToDesktop"><to>2</to></action>
+        <action name="Execute">
+          <command>chromium-browser</command>
+        </action>
+      </keybind>
+      <keybind key="e">
+        <action name="GoToDesktop"><to>3</to></action>
+        <action name="Execute">
+          <command>sh -c 'WW=$(xdotool search --classname "mail.google.com__mail"); echo $WW > /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://mail.google.com/mail"; else xdotool windowactivate $WW; fi'</command>
+        </action>
+      </keybind>
+      <keybind key="c">
+        <action name="GoToDesktop"><to>3</to></action>
+        <action name="Execute">
+          <command>sh -c 'WW=$(xdotool search --classname "www.google.com__calendar"); echo $WW > /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://www.google.com/calendar"; else xdotool windowactivate $WW; fi'</command>
+        </action>
+      </keybind>
     </keybind>
+    <!-- End: Nested keybinding for chromium browser, gmail, calendar -->
     <keybind key="W-r">
       <action name="Resize"/>
     </keybind>
@@ -768,5 +789,7 @@
     <application name="stalonetray">
       <desktop>all</desktop>
     </application>
+    <application class="VirtualBox">
+	</application>
   </applications>
 </openbox_config>
