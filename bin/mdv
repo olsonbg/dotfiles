@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# Generate an html file from a markdown file using pandoc, and view it using
+# the chromium browser. I have this script mapped to F4 when editing a markdown
+# file in vim.
+#
+# Usage:
+# mdv <input markdown file> <output html file>
+#
+# Uses 'before.html' and 'after.html' in your personal configuration directory
+# ($ MyPersonalConfigs -d mdv). These two files may be empty if you don't want
+# extra formatting to the html.
+#
+# Based on ideas from https://github.com/JamshedVesuna/vim-markdown-preview,
+# but I wanted something simple that could be run from the command line too.
+#
+# Author: Brian G. Olson (https://www.github.com/olsonbg)
+#
+# Current version:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/mdv
+#
+# Released under GPLv3 (http://www.gnu.org/licenses/gpl.html)
+#
+
+# Check for required programs.
+MyRequiredProgs pandoc xdotool || exit 1
+
+# Get location of 'before.html' and 'after.html' files.
+BEFORE=$(MyPersonalConfigs -d mdv -c -f before.html) || exit 1
+AFTER=$(MyPersonalConfigs  -d mdv -c -f after.html)  || exit 1
+
+if [ $# -ne 2 ]; then
+	echo "Usage: $(basename "$0") <input markdown file> <output html file>"
+	exit 1
+fi
+
+# Generate the html. For LaTeX equations, use mathjax.
+pandoc -B "$BEFORE" -A "$AFTER" --mathjax -o "$2" "$1"
+
+# Name of tab in chromium browser.
+TAB="$(basename "$2").* - Chromium"
+
+# Is a tab of this file currently active?
+WINDOWID=$(xdotool search --name "$TAB" 2>/dev/null)
+
+if [ $? != 0 ]; then
+	chromium-browser "$2" 2>/dev/null >/dev/null &
+	# Wait for the window to show, then activate it.
+	xdotool search --sync --name "$TAB" windowactivate 2>/dev/null
+else
+	# Reload browser tab if current tab is <output html file>
+	xdotool windowactivate "$WINDOWID" key --clearmodifiers ctrl+r
+fi
+
