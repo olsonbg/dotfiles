@@ -19,8 +19,17 @@ solarized-setScheme() {
 	echo "#define SOLARIZED_${1^^}" > $currentScheme
 }
 
+# Convert solarized color names (S_baseXX) to hex value.
 solarized-getColor() {
 	sed -e "/^#define $2 /!d" -e "s/^#define $2 *//" $1
+}
+
+# Convert solarized color names (S_baseXX, red,...) to color number in X server
+# resource database, as defined in ~/.Xresources.d/solarized-scheme.
+solarized-StoN() {
+	local solarizedScheme=~/.Xresources.d/solarized-scheme
+
+	sed -e "/^\*color.* *$1$/!d" -e "s/^\*color\(.*\): *$1$/\1/" $solarizedScheme
 }
 
 # Set dircolors
@@ -44,6 +53,29 @@ solarized-misc() {
 	if tmux info &>/dev/null; then
 		tmux source-file ~/.tmux.conf >/dev/null
 	fi
+
+	case "$1" in
+		dark)
+			Start bold mode
+			export LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base2))
+			# Start and end standout
+			export LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base1))$(tput setab $(solarized-StoN S_base02))
+			export LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base0))$(tput setab $(solarized-StoN S_base03))
+			;;
+		light)
+			# Start bold mode
+			export LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base02))
+			# Start and end standout
+			export LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base01))$(tput setab $(solarized-StoN S_base2))
+			export LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base00))$(tput setab $(solarized-StoN S_base3))
+			;;
+		*)
+			echo "[solarized(), called from less.sh] Unknown color scheme."
+			;;
+	esac
+	# The LESS_TERMCAP_se definitions above work, except inside tmux. Therefore
+	# I use the following
+	export LESS_TERMCAP_se=$(tput sgr0) # To work inside tmux!
 }
 
 solarized-switch() {
