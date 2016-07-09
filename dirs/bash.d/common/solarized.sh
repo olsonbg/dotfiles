@@ -54,20 +54,25 @@ solarized-misc() {
 		tmux source-file ~/.tmux.conf >/dev/null
 	fi
 
+	LESS_TERMCAP_mb=$(tput setaf $(solarized-StoN S_red)) # blinking
+	LESS_TERMCAP_me=$(tput sgr0) # Normal
+	LESS_TERMCAP_us=$(tput smul) # Start underline
+	LESS_TERMCAP_ue=$(tput rmul) # End underline
+
 	case "$1" in
 		dark)
 			Start bold mode
-			export LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base2))
+			LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base2))
 			# Start and end standout
-			export LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base1))$(tput setab $(solarized-StoN S_base02))
-			export LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base0))$(tput setab $(solarized-StoN S_base03))
+			LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base1))$(tput setab $(solarized-StoN S_base02))
+			LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base0))$(tput setab $(solarized-StoN S_base03))
 			;;
 		light)
 			# Start bold mode
-			export LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base02))
+			LESS_TERMCAP_md=$(tput setaf $(solarized-StoN S_base02))
 			# Start and end standout
-			export LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base01))$(tput setab $(solarized-StoN S_base2))
-			export LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base00))$(tput setab $(solarized-StoN S_base3))
+			LESS_TERMCAP_so=$(tput setaf $(solarized-StoN S_base01))$(tput setab $(solarized-StoN S_base2))
+			LESS_TERMCAP_se=$(tput setaf $(solarized-StoN S_base00))$(tput setab $(solarized-StoN S_base3))
 			;;
 		*)
 			echo "[solarized(), called from less.sh] Unknown color scheme."
