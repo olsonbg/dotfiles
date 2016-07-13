@@ -180,13 +180,13 @@
     <keybind key="W-Left">
       <action name="DesktopLeft">
         <dialog>no</dialog>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="W-Right">
       <action name="DesktopRight">
         <dialog>no</dialog>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="C-A-Up">
