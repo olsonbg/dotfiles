@@ -322,13 +322,13 @@
     <keybind key="W-Return">
       <action name="GoToDesktop"><to>1</to></action>
       <action name="Execute">
-        <command>/home/bgo/bin/urxvtc-d</command>
+        <command>~/bin/urxvtc-d</command>
       </action>
     </keybind>
     <keybind key="W-t">
       <action name="GoToDesktop"><to>1</to></action>
       <action name="Execute">
-        <command>/home/bgo/bin/urxvtc-d</command>
+        <command>~/bin/urxvtc-d</command>
       </action>
     </keybind>
     <!-- Start: Nested keybinding for chromium browser, gmail, calendar -->
