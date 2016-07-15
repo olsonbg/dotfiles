@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Programs to launch on X11 startup.
 # Called from ~/.config/autostart/autostart.desktop
