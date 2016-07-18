@@ -144,4 +144,5 @@ solarized() {
 }
 
 # Update the programs that use solarized scheme.
-solarized-misc $(solarized-getScheme)
+# Make sure TERM is not dumb.
+[[ "$TERM" != "dumb" ]] && solarized-misc $(solarized-getScheme)
