@@ -5,6 +5,6 @@
 #
 urxvtc "$@"
 if [ $? -eq 2 ]; then
-   urxctd --quiet --opendisplay --fork
+   urxvtd --quiet --opendisplay --fork
    urxvtc "$@"
 fi
