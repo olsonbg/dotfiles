@@ -109,7 +109,7 @@ ddirs="$(find "$dotdir/dirs" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
 dfonts="$(find "$dotdir/fonts" -maxdepth 1 -type d ! -name "*~" -printf "%P\n")"
 
-dconfig="$(find "$dotdir/config" -type f ! -name "*~" -printf "%P\n")"
+dconfig="$(find "$dotdir/config" ! -type d ! -name "*~" -printf "%P\n")"
 
 # backups directory for existing dotfiles
 BACKUPDIR="$INSTALLDIR/dotfiles-$(date +%Y%m%d-%H%M%S)"
