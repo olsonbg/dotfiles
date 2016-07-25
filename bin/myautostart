@@ -9,6 +9,7 @@ startups=( "conky" "parcellite" )
 
 case $XDG_CURRENT_DESKTOP in
 	LXDE          ) extras=( "stalonetray" "compton -b" "nm-applet" );;
+	LXQt          ) extras=( "stalonetray" "compton -b" );;
 	enlightenment ) extras=( "stalonetray" "nm-applet" );;
 esac
 

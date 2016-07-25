@@ -18,6 +18,7 @@ case $session in
     jwm               ) exec jwm;;
     kde               ) exec startkde;;
     lxde              ) exec startlxde;;
+    lxqt              ) exec startlxqt;;
     mate              ) exec mate-session;;
     monster|monsterwm ) exec monsterwm;;
     notion            ) exec notion;;
