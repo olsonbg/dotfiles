@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Use feh_browser with a set window size, defaults to 800x450. The size can be
+# changed by setting FEH_GEOMETRY in the file returned from:
+# MyPersonalConfigs -f feh_browser_window
+
+# Get personal settings.
+. "$(MyPersonalConfigs -c -f feh_browser_window)"
+
+feh_browser "$@" -g ${FEH_GEOMETRY:-800x450}

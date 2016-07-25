@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Use feh_browser in fullscreen mode
+
+feh_browser "$@" -F -Z
