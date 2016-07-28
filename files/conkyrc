@@ -1,0 +1,148 @@
+alignment top_right
+background yes
+border_width 1
+cpu_avg_samples 2
+double_buffer yes
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades no
+gap_x 3
+gap_y 3
+maximum_width 180
+max_port_monitor_connections 64
+max_specials 512
+max_user_text 16384
+minimum_size 330 10
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+own_window yes
+own_window_class Conky
+own_window_title conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_type desktop
+#own_window_type desktop
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_value  180
+#own_window_argb_value 0
+stippled_borders 1
+update_interval 2
+uppercase no
+use_spacer left
+use_xft yes
+xftalpha 0.8
+#xftfont  Bitstream Vera Sans Mono:size=9
+xftfont  Inconsolata:size=10
+top_name_width 12
+if_up_strictness link
+# Solarized Light color scheme.
+#color0 586e75
+#color1 839496
+#color2 93a1a1
+#color3 eee8d5
+#default_color 657b83
+#own_window_colour fdf6e3
+# Solarized Dark color scheme.
+color0 93a1a1
+color1 657b83
+color2 586e75
+color3 073642
+default_color 839496
+own_window_colour 002b36
+#
+#default_color 7A7771
+default_outline_color 839496
+default_shade_color 839496
+#template0 $color1$alignc${\1 \2 25,175 104E8B 0077ff -t}
+# Single, wide graph
+template0 $color3$alignc${\1 \2 25,175 -t}
+# Two graphs
+template1 $color3${\1 25,87 -t -l}${alignr}$color3${\2 25,87 -t -l}
+# Two graphs that need options
+template2 $color3${\1 \3 25,87 -l -t}${alignr}$color3${\2 \3 25,87 0 -l -t}
+# Label for Two graphs
+template3 ${color0}\4:${color}${\1 \3}${alignr}${color0}\5:${color}${\2 \3}
+template4 ${color0}\3:${color}${\1}${alignr}${color0}\4:${color}${\2}
+# Short bar
+template5 $color3${\1 7,50 \2}
+#
+template6 ${color0}\1:${alignr}${color}${\2}
+template9 ${template6 \1 \2}${template5 \3}
+
+TEXT
+${alignc}${color0}$sysname $kernel
+${alignc}${color}${time %a %b %d %R %Z %Y}
+${alignc}$color$nodename
+
+${color0}Uptime:$alignr$color$uptime
+${color0}Load:$alignr$color$loadavg
+${template0 loadgraph ""}
+#
+# CPUs
+#
+#
+${color0}CPU 0:$color ${freq cpu1} MHz ${alignr}${exec sensors | grep 'Core 0' | cut -c 15-22}
+${template0 cpugraph cpu1}
+${color0}CPU 1:$color ${freq cpu2} MHz
+${template0 cpugraph cpu2}
+${color0}CPU 2:$color ${freq cpu3} MHz ${alignr}${exec sensors | grep 'Core 2' | cut -c 15-22}
+${template0 cpugraph cpu3}
+${color0}CPU 3:$color ${freq cpu4} MHz
+${template0 cpugraph cpu4}
+#
+# Disk
+#
+#${alignc}${color0}Disk I/O: $color${diskio}
+#${color0}D (R/W): $color${diskio_read}/${alignr}${diskio_write}
+${template3 diskio_read diskio_write sda sda-R W}
+#${alignc}${diskiograph 32,175 $color1 $color1 -l -t}
+${template1 diskiograph_read diskiograph_write}
+#
+# RAM
+#
+${template9 RAM mem membar}
+${template9 Swap swap swapbar}
+${template9 Entropy entropy_avail entropy_bar}
+#
+# Wifi
+#
+${if_empty ${wireless_essid wlp2s0}}$alignc${color0}No WiFi${else}$color$hr 2
+${color0}ESSID:$alignr$color${wireless_essid wlp2s0}
+${color0}Signal:$alignr$color${wireless_link_qual wlp2s0}${template5 wireless_link_bar wlp2s0}
+${template3 downspeed upspeed wlp2s0 wlp-D U}
+${template2 downspeedgraph upspeedgraph wlp2s0}
+#
+# Wired Internet
+#
+${endif}${if_up enp3s0}${template3 downspeed upspeed enp3s0 enp-D U}
+${template2 downspeedgraph upspeedgraph enp3s0}
+${endif}${if_up vboxnet0}${template3 downspeed upspeed vboxnet0 vbox-D U}
+${template2 downspeedgraph upspeedgraph vboxnet0}
+${endif}$color$hr 1
+#
+# Number of Processes
+#
+${color0}Procs:${color}${processes}${alignr}${color0}Running:${color}${running_processes}${color0}
+#
+# Top (by CPU)
+#
+${color0}Name            PID   CPU%
+$color${top name 1} ${top pid 1} ${top cpu 1}
+$color${top name 2} ${top pid 2} ${top cpu 2}
+$color${top name 3} ${top pid 3} ${top cpu 3}
+#
+# Top (by Memory)
+#
+${color0}Name            PID   MEM%
+$color${top_mem name 1} ${top_mem pid 1} ${top_mem mem 1}
+$color${top_mem name 2} ${top_mem pid 2} ${top_mem mem 2}
+$color${top_mem name 3} ${top_mem pid 3} ${top_mem mem 3}
+#
+# Battery
+#
+$hr
+${if_empty ${battery}}$alignc${color0}No Battery${else}${template9 Battery battery_short battery_bar}
+${alignc}${color}${battery_time}$endif
+#
