@@ -5,6 +5,7 @@ bind C-a send-prefix
 # Fix reverse-video/italic mode in urxvt
 # https://wiki.archlinux.org/index.php/Tmux#Fix_reverse-video.2Fitalic_mode_in_urxvt
 set -g default-terminal "tmux-256color"
+set -g default-command  "bash"
 
 set-option -g status-utf8 on
 set-option -g utf8 on
@@ -28,6 +29,6 @@ set-option -g status-left-length 10
 set-option -g status-left-style default
 set-option -g status-position bottom
 set-option -ga status-right " "#{=22:pane_title}" %H:%M %d-%b-%y"
-set-option -ga status-right-length 40
-set-option -ga status-right-style default
-set-option -ga status-style fg=yellow,bg=white
+set-option -g status-right-length 40
+set-option -g status-right-style default
+set-option -g status-style fg=yellow,bg=white
