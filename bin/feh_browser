@@ -24,6 +24,7 @@ cd -- "$dir"
 
 for i in *; do
 	[[ -f $i ]] || continue
+	$(file "$i"|grep -qv "image") && continue
 	arr+=("$i")
 	[[ $i == $file ]] && c=$((${#arr[@]} - 1))
 done
