@@ -9,6 +9,7 @@ dotfiles
     * [Host specific settings](#host-specific-settings)
     * [Font (Inconsolata with Powerline symbols)](#font)
     * [rxvt-unicode terminal](#rxvt-unicode)
+* [Recommended Software](#recommended-software)
 * [Caveats](#caveats)
     * [Tmux](#tmux)
     * [Multiple Terminals Open](#multiple-terminals-open)
@@ -124,6 +125,64 @@ currently open terminal can be changed with one of the following:
 | Control-8    | 9         |
 | Control-9    | 10        |
 | Control-0    | 11        |
+
+# Recommended Software
+
+## LXDE
+[LXDE](http://lxde.org/) is a lightweight desktop for X11.
+
+## OpenBox
+
+[OpenBox](http://openbox.org/wiki/Main_Page) is a Lightweight window
+manager. My custom key bindings are in
+[lxde-rc.xml](config/openbox/lxde-rc.xml), and are:
+
+| Key Sequence  | Action                                                                                                                      |
+| :------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| Print         | Screen shot of a window clicked, then open it in Gimp.                                                                      |
+| Shift-Print   | Screen shot of entire desktop, then open it in Gimp.                                                                        |
+| Win-Space     | Activate LXpanel menu                                                                                                       |
+| Win-Return    | Open a new urxvt terminal using [bin/urxvtc-d](bin/urxvtc-d) on Desktop 1, and go there.                                    |
+| Win-r         | Resize current window                                                                                                       |
+| Win-m         | Move current window                                                                                                         |
+| Win-c b       | Open a new chromium browser on Desktop 2, and go there.                                                                     |
+| Win-c e       | Open gmail (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.             |
+| Win-c c       | Open google calendar (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.   |
+
+## Conky
+
+[Conky](https://github.com/brndnmtthws/conky) is a lightweight system
+monitor for X, settings are in [conkyrc](files/conkyrc).  There are color
+setting for desktops with dark or light backgrounds in the config file.
+Uncomment the one suitable for your desktop, and comment out the others.
+
+## Scrot
+
+[Scrot](https://www.wikipedia.org/wiki/Scrot) is a Screen capture program.
+The key bindings, set in [lxde-rc.xml](config/openbox/lxde-rc.xml) and
+tabulated in
+[OpenBox](#openbox).
+
+## stalonetray
+
+[stalonetray](http://stalonetray.sourceforge.net) is a Stand alone system
+tray. The setting are in [stalonetrayrc](files/stalonetrayrc), and will
+place the tray in the upper left hand side of screen.
+
+## parcellite
+
+[parcellite](http://parcellite.sourceforge.net/) is a small clipboard
+manager.
+
+## Compton
+
+[compton](https://github.com/chjj/compton) is a lightweight, standalone, compositing manager. The setting are in
+[compton.config](config/compton.config)
+
+## xdotool
+
+[xdotool](http://www.semicomplete.com/projects/xdotool/) does fake
+keyboard/mouse input, window management, and more.
 
 # Caveats
 
