@@ -145,6 +145,7 @@ manager. My custom key bindings are in
 | Win-Return    | Open a new urxvt terminal using [bin/urxvtc-d](bin/urxvtc-d) on Desktop 1, and go there.                                    |
 | Win-r         | Resize current window                                                                                                       |
 | Win-m         | Move current window                                                                                                         |
+| Win-a         | Launch pavucontrol                                                                                                          |
 | Win-c b       | Open a new chromium browser on Desktop 2, and go there.                                                                     |
 | Win-c e       | Open gmail (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.             |
 | Win-c c       | Open google calendar (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.   |

@@ -331,6 +331,11 @@
         <command>~/bin/urxvtc-d</command>
       </action>
     </keybind>
+    <keybind key="W-a">
+      <action name="Execute">
+        <command>pavucontrol</command>
+      </action>
+    </keybind>
     <!-- Start: Nested keybinding for chromium browser, gmail, calendar -->
     <keybind key="W-c">
       <keybind key="b">
