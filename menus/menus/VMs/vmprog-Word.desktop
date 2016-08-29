@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Comment=Word 2013
+Exec=vmprog word
+TryExec=vmprog
+GenericName=Wordprocessor
+Icon=vmprog-winword
+Name=Word 2013
+NoDisplay=false

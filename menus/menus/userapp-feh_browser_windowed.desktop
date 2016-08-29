@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Feh Browser (windowed)
+Comment=Fast Imlib2-based Image Browser (windowed mode)
+Exec=feh_browser_window %f
+TryExec=feh_browser_window
+Terminal=false
+Type=Application
+Icon=feh
+Categories=Graphics;2DGraphics;Viewer;
+MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/pjpeg;image/png;image/tiff;image/x-bmp;image/x-pcx;image/x-png;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-tga;image/x-xbitmap;image/svg+xml;image/svg+xml-compressed
+StartupNotify=false
+NoDisplay=true
+Name[en_US]=feh browser (windowed)

@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Pandora Internet Radio
+Type=Application
+Exec=chromium-browser "--app=http://www.pandora.com/#/"
+TryExec=chromium-browser
+Icon=pandora-icon
+Categories=Network;WebBrowser;
+StartupWMClass=www.pandora.com

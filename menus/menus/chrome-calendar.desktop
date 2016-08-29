@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Google Calendar
+Type=Application
+Exec=chromium-browser "--app=https://www.google.com/calendar"
+TryExec=chromium-browser
+Icon=google-calendar
+Categories=Network;WebBrowser;
+StartupWMClass=www.google.com__calendar_render

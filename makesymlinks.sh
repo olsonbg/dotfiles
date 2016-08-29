@@ -168,4 +168,6 @@ if [ -d "$BACKUPDIR" ] ; then
 fi
 
 echo
+menus/install.sh
+echo
 echo "Setup complete."

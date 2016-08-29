@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<link rel="stylesheet" href="file:///home/bgo/tips/markdown/github-markdown.css">
+<style>
+    .markdown-body {
+        min-width: 200px;
+        max-width: 790px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+</style>
+<article class="markdown-body">
+<h1 id="how-to-install">How to install</h1>
+<h2 id="install-submenu-and-menu-items">Install submenu and menu items</h2>
+<p>All in one line (the most efficient way):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-desktop-menu</span> install ./My-Apps.directory ./chrome-calendar.desktop ./chrome-drive.desktop ./chrome-gmail.desktop ./chrome-pandora.desktop</code></pre></div>
+<p>Or, in a slightly less efficient manner:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-desktop-menu</span> install --noupdate ./My-Apps.directory ./chrome-calendar.desktop
+<span class="kw">xdg-desktop-menu</span> install --noupdate ./My-Apps.directory ./chrome-drive.desktop
+<span class="kw">xdg-desktop-menu</span> install --noupdate ./My-Apps.directory ./chrome-gmail.desktop
+<span class="kw">xdg-desktop-menu</span> install --noupdate ./My-Apps.directory ./chrome-pandora.desktop
+<span class="kw">xdg-desktop-menu</span> forceupdate</code></pre></div>
+<h2 id="now-install-the-icons">Now install the icons</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-icon-resource</span> install --size 16 ./chrome-calendar.png
+<span class="kw">xdg-icon-resource</span> install --size 16 ./chrome-drive.png
+<span class="kw">xdg-icon-resource</span> install --size 16 ./chrome-gmail.png
+<span class="kw">xdg-icon-resource</span> install --size 16 ./chrome-pandora.png</code></pre></div>
+<h2 id="for-using-my-custom-feh-scripts-with-images">For using my custom feh scripts with images</h2>
+<p>First need to install a .desktop file describing the program to use and lists mime types</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-desktop-menu</span> install ./userapp-feh_browser_fullscreen.desktop
+<span class="kw">xdg-desktop-menu</span> install ./userapp-feh_browser_windowed.desktop</code></pre></div>
+<p>Now associate the desktop file to each image type that it supports. Here we use userapp-feh_browser_windowed.desktop:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-mime</span> default userapp-feh_browser_windowed.desktop image/bmp image/gif image/jpeg image/jpg image/pjpeg image/png image/tiff image/x-bmp image/x-pcx image/x-png image/x-portable-anymap image/x-portable-bitmap image/x-portable-graymap image/x-portable-pixmap image/x-tga image/x-xbitmap image/svg+xml image/svg+xml-compressed</code></pre></div>
+<h3 id="verify-the-mime-association">Verify the mime association</h3>
+<p>This will list the desktop file associated with jpg images</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xdg-mime</span> query default image/jpg</code></pre></div>
+</article>
+</body>
+</html>

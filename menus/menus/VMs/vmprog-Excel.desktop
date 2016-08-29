@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Comment=Easily discover, visualize, and share insights from your data.
+Exec=vmprog excel
+TryExec=vmprog
+GenericName=Spreadsheet
+Icon=vmprog-excel
+Name=Excel 2013
+NoDisplay=false

@@ -1,1 +1,13 @@
 dirs/Xresources.d/current-scheme
+
+# I'm fairly certain that these images can not be freely distributed. I
+# extracted them from their respective programs, to use as icons for menus
+# items which launch the programs inside a virtual machine.
+menus/icons/**/vmprog-MatStudio.png
+menus/icons/**/vmprog-excel.png
+menus/icons/**/vmprog-powerpoint.png
+menus/icons/**/vmprog-winword.png
+menus/icons/**/harmony-software.png
+
+# This one is not launched inside a vm, but still not freely distributable.
+menus/icons/**/pandora-icon.png

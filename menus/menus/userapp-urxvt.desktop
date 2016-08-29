@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=urxvt (launch through daemon)
+Type=Application
+Comment=rxvt clone with xft and unicode support
+Exec=urxvtc-d
+TryExec=urxvtc-d
+Icon=terminal
+Categories=System;TerminalEmulator;

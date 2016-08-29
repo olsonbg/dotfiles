@@ -1,0 +1,12 @@
+[Desktop Entry]
+Comment=
+Exec=chromium-browser "--app=https://drive.google.com"
+TryExec=chromium-browser
+GenericName=My Drive
+Icon=google-drive
+Name=Google Drive
+NoDisplay=false
+StartupNotify=true
+StartupWMClass=drive.google.com
+Type=Application
+Categories=Network;Office

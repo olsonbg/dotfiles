@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Comment=
+Exec=vmprog harmonyremote
+TryExec=vmprog
+GenericName=Program Remote Control
+Icon=harmony-software
+Name=Harmony Remote
+NoDisplay=false

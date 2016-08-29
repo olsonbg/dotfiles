@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Comment=
+Exec=vmprog powerpoint
+TryExec=vmprog
+GenericName=Presentation
+Icon=vmprog-powerpoint
+Name=PowerPoint 2013
+NoDisplay=false

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Comment=
+Exec=vmprog matstudio
+TryExec=vmprog
+GenericName=Simulation Software
+Icon=vmprog-MatStudio
+Name=Materials Studio 7.0
+NoDisplay=false

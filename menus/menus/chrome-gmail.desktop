@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Gmail
+Type=Application
+Exec=chromium-browser "--app=https://mail.google.com/mail"
+TryExec=chromium-browser
+Icon=google-gmail
+Categories=Network;WebBrowser;
+StartupWMClass=mail.google.com
