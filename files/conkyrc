@@ -11,7 +11,7 @@ gap_x 3
 gap_y 3
 maximum_width 180
 max_port_monitor_connections 64
-max_specials 512
+#max_specials 512
 max_user_text 16384
 minimum_size 330 10
 net_avg_samples 2
@@ -21,7 +21,7 @@ own_window yes
 own_window_class Conky
 own_window_title conky
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-own_window_type desktop
+#own_window_type normal
 #own_window_type desktop
 own_window_transparent yes
 own_window_argb_visual yes
@@ -37,6 +37,7 @@ xftalpha 0.8
 xftfont  Inconsolata:size=10
 top_name_width 12
 if_up_strictness link
+show_graph_scale no
 # Solarized Light color scheme.
 #color0 586e75
 #color1 839496
@@ -52,23 +53,31 @@ color3 073642
 default_color 839496
 own_window_colour 002b36
 #
+#                  Dark    Light    Solarized suggensted usage                  Conky
+# default_color    base0   base00   body text/default code/primary content      default font
+# own_window_color base03  base3    background                                  window background
+# color0           base1   base01   optional emphasized content
+# color1           base00  base0
+# color2           base01  base1    comments/secondary content                  graph color/bar color
+# color3           base02  base2    background highlights
+#
 #default_color 7A7771
 default_outline_color 839496
 default_shade_color 839496
-#template0 $color1$alignc${\1 \2 25,175 104E8B 0077ff -t}
 # Single, wide graph
-template0 $color3$alignc${\1 \2 25,175 -t}
+template0 $color2$alignc${\1 \2 25,175 \3 -t -l}
 # Two graphs
-template1 $color3${\1 25,87 -t -l}${alignr}$color3${\2 25,87 -t -l}
+template1 $color2${\1 25,87 -t -l}${alignr}$color2${\2 25,87 -t -l}
 # Two graphs that need options
-template2 $color3${\1 \3 25,87 -l -t}${alignr}$color3${\2 \3 25,87 0 -l -t}
+template2 $color2${\1 \3 25,87 -l -t}${alignr}$color2${\2 \3 25,87 0 -l -t}
 # Label for Two graphs
 template3 ${color0}\4:${color}${\1 \3}${alignr}${color0}\5:${color}${\2 \3}
 template4 ${color0}\3:${color}${\1}${alignr}${color0}\4:${color}${\2}
 # Short bar
-template5 $color3${\1 7,50 \2}
+template5 $color2${\1 7,50 \2}
 #
 template6 ${color0}\1:${alignr}${color}${\2}
+template8 ${template6 \1 \2}${template5 \3 \4}
 template9 ${template6 \1 \2}${template5 \3}
 
 TEXT
@@ -78,26 +87,25 @@ ${alignc}$color$nodename
 
 ${color0}Uptime:$alignr$color$uptime
 ${color0}Load:$alignr$color$loadavg
-${template0 loadgraph ""}
+${template0 loadgraph "" 8}
 #
 # CPUs
 #
 #
 ${color0}CPU 0:$color ${freq cpu1} MHz ${alignr}${exec sensors | grep 'Core 0' | cut -c 15-22}
-${template0 cpugraph cpu1}
+${template0 cpugraph cpu1 ""}
 ${color0}CPU 1:$color ${freq cpu2} MHz
-${template0 cpugraph cpu2}
+${template0 cpugraph cpu2 ""}
 ${color0}CPU 2:$color ${freq cpu3} MHz ${alignr}${exec sensors | grep 'Core 2' | cut -c 15-22}
-${template0 cpugraph cpu3}
+${template0 cpugraph cpu3 ""}
 ${color0}CPU 3:$color ${freq cpu4} MHz
-${template0 cpugraph cpu4}
+${template0 cpugraph cpu4 ""}
 #
 # Disk
 #
 #${alignc}${color0}Disk I/O: $color${diskio}
 #${color0}D (R/W): $color${diskio_read}/${alignr}${diskio_write}
 ${template3 diskio_read diskio_write sda sda-R W}
-#${alignc}${diskiograph 32,175 $color1 $color1 -l -t}
 ${template1 diskiograph_read diskiograph_write}
 #
 # RAM
@@ -143,6 +151,6 @@ $color${top_mem name 3} ${top_mem pid 3} ${top_mem mem 3}
 # Battery
 #
 $hr
-${if_empty ${battery}}$alignc${color0}No Battery${else}${template9 Battery battery_short battery_bar}
-${alignc}${color}${battery_time}$endif
+${if_empty ${battery}}$alignc${color0}No Battery${else}${template8 Battery battery_short battery_bar BAT0}
+${alignc}${color}${battery_time BAT0}$endif
 #
