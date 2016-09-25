@@ -170,4 +170,6 @@ fi
 echo
 menus/install.sh
 echo
+MyProfileUpdate
+echo
 echo "Setup complete."
