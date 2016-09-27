@@ -1,13 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Get a directory name to store configuration files for my own scripts. This
-# is called from any script which needs a configuration file.
+# Get a directory name to store configuration files for my own scripts.
 #
 # The default directory will be '$XDG_CONFIG_HOME/MyPersonalConfigs,' or
 # '$HOME/.config/MyPersonalConfigs' if $XDG_CONFIG_HOME is not defined.
 #
 # The 'MyPersonalConfigs' subdirectory is used to isolate configs from my own
 # scripts from those of programs installed by the package manager.
+#
+#
+# For examples on how this is used, see:
+#
+#  - https://github.com/olsonbg/dotfiles/blob/master/bin/feh_browser_window
+#  - https://github.com/olsonbg/dotfiles/blob/master/bin/mdv
+#  - https://github.com/olsonbg/dotfiles/blob/master/bin/vmprog
 #
 # Author: Brian G. Olson (https://www.github.com/olsonbg)
 #
