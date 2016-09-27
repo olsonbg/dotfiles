@@ -7,6 +7,8 @@ fi
 
 ulimit -c 5000
 
-CUSTOMENV=$(MyProfileUpdate -sq) || exit 1
+# ~/bin has not been added to PATH yet, so need to specify full path to
+# MyPersonalUpdate
+CUSTOMENV=$(~/bin/MyProfileUpdate -sq)
 
 [[ -f "$CUSTOMENV" ]] && source "$CUSTOMENV"

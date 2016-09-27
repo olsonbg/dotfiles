@@ -6,7 +6,9 @@
 # Run this script for any changes in ~/.bash.d to be included,
 # followed by a source of profile.env, or open a new shell.
 
-CUSTOMENV=$(MyPersonalConfigs -c -f profile.env) || exit 1
+# When run from ~/.bashrc, ~/bin has not been added to PATH yet, so need to
+# specify full path to MyPersonalConfigs
+CUSTOMENV=$(~/bin/MyPersonalConfigs -c -f profile.env) || exit 1
 
 QUIET=
 SHOWCONFIG=
