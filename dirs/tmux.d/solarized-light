@@ -31,3 +31,4 @@ set-option -g display-panes-colour brightred #orange
 # clock
 set-window-option -g clock-mode-colour green #green
 
+# vim:ft=tmux

@@ -32,3 +32,5 @@ set-option -ga status-right " "#{=22:pane_title}" %H:%M %d-%b-%y"
 set-option -g status-right-length 40
 set-option -g status-right-style default
 set-option -g status-style fg=yellow,bg=white
+
+# vim:ft=tmux
