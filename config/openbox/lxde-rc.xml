@@ -37,7 +37,7 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>Clearlooks-Phenix</name>
+    <name>Clearlooks</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -320,13 +320,17 @@
       <action name="ToggleFullscreen"/>
     </keybind>
     <keybind key="W-Return">
-      <action name="GoToDesktop"><to>1</to></action>
+      <action name="GoToDesktop">
+        <to>1</to>
+      </action>
       <action name="Execute">
         <command>~/bin/urxvtc-d</command>
       </action>
     </keybind>
     <keybind key="W-t">
-      <action name="GoToDesktop"><to>1</to></action>
+      <action name="GoToDesktop">
+        <to>1</to>
+      </action>
       <action name="Execute">
         <command>~/bin/urxvtc-d</command>
       </action>
@@ -339,21 +343,27 @@
     <!-- Start: Nested keybinding for chromium browser, gmail, calendar -->
     <keybind key="W-c">
       <keybind key="b">
-        <action name="GoToDesktop"><to>2</to></action>
+        <action name="GoToDesktop">
+          <to>2</to>
+        </action>
         <action name="Execute">
           <command>chromium-browser</command>
         </action>
       </keybind>
       <keybind key="e">
-        <action name="GoToDesktop"><to>3</to></action>
+        <action name="GoToDesktop">
+          <to>3</to>
+        </action>
         <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --classname "mail.google.com__mail"); echo $WW > /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://mail.google.com/mail"; else xdotool windowactivate $WW; fi'</command>
+          <command>sh -c 'WW=$(xdotool search --classname "mail.google.com__mail"); echo $WW &gt; /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://mail.google.com/mail"; else xdotool windowactivate $WW; fi'</command>
         </action>
       </keybind>
       <keybind key="c">
-        <action name="GoToDesktop"><to>3</to></action>
+        <action name="GoToDesktop">
+          <to>3</to>
+        </action>
         <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --classname "www.google.com__calendar"); echo $WW > /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://www.google.com/calendar"; else xdotool windowactivate $WW; fi'</command>
+          <command>sh -c 'WW=$(xdotool search --classname "www.google.com__calendar"); echo $WW &gt; /dev/shm/ww.txt; if [ -z "$WW" ];  then chromium-browser "--app=https://www.google.com/calendar"; else xdotool windowactivate $WW; fi'</command>
         </action>
       </keybind>
     </keybind>
