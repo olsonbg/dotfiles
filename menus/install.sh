@@ -6,6 +6,18 @@ MENUDIR="$(dirname $0)/menus"
 METHOD=install
 #METHOD=uninstall
 
+
+../bin/MyRequiredProgs xdg-{icon-resource,desktop-menu,mime}
+
+# Skip if any of the xdg-* programs are missing.
+if [ $?  -eq 1 ]; then
+	echo
+	echo "Skipping menu and mimetype install."
+	exit 1
+fi
+
+# All required xdg-* programs are found.
+
 echo "${METHOD}ing icons..."
 
 for i in "$ICONDIR"/*; do
