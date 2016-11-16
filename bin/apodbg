@@ -1,0 +1,119 @@
+#!/bin/sh
+#
+# Download Astronomy Picture Of the Day, from apod.nasa.gov, and merge it
+# onto an image. Can be placed in a cron job to grab the new days image.
+#
+# Typically used to add APOD images to desktop background. Each desktop may
+# have a different background image, with their own APOD image. The most
+# recent APOD image will be on Desktop 1, with older images on each
+# consecutive Desktop.
+#
+# The APOD will be placed in the NorthWest portion of the background image. A
+# second image, if specified, will be placed in the SouthWest portion of the
+# background image. The size and position of all images are specified in user
+# configurable variables (see CONFIGURATION SECTION, below).
+#
+# For Desktop # i, the relevant files are:
+#
+#  Initial Background Image: ${APOD_BG}-0i.png                  (User supplied)
+#  SouthWest Image:          $APOD_SW                           (User supplied)
+#  APOD:                     $APOD_SAVEDIR/NW-i.png             (Downloaded)
+#  Final processed BG image: $APOD_SAVEDIR/MyBackground-i.png   (Generated)
+
+MyRequiredProgs curl convert MyPersonalConfigs || exit 1
+
+# Get user settings, if any.
+. "$(MyPersonalConfigs -c -f apodbg)"
+#
+# CONFIGURATION SECTION
+#
+# These may be defined in the file given by: MyPersonalConfigs -f apodbg
+#
+APOD_DESKTOPS=${APOD_DESKTOPS:-4}              # Number of desktops
+APOD_SAVEDIR=${APOD_SAVEDIR:-$HOME/Pictures/}  # Where to save APOD images
+APOD_BG=${APOD_BG:-BackgroundImageFile}        # BG Images (-##.png is appended)
+APOD_BGSIZE=${APOD_BGSIZE:-1366x768}           # BG image size
+APOD_SWSIZE=${APOD_SWSIZE:-325x329}            # SouthWest image size
+APOD_NWSIZE=${APOD_NWSIZE:-500x330}            # APOD (NorthWest) image size
+APOD_NWGEOM=${APOD_NWGEOM:-+40+20}             # Geometry of APOD
+APOD_NWSHADOW=${APOD_NWSHADOW:-60x4+5+5}       # APOD image shadow geometry
+#
+# End CONFIGURATION SECTION
+#
+GETALL=0
+
+USAGE="Usage: $(basename "$0") [-a]"
+
+getpiclink() {
+	local DAYSAGO="$1"
+
+	local DATE=$(date --date=-${DAYSAGO}days "+%g%m%d")
+
+	curl -s "http://apod.nasa.gov/apod/ap${DATE}.html" |\
+		sed -ne 's/^<IMG SRC="\(.*\)".*$/http:\/\/apod.nasa.gov\/apod\/\1/p'
+}
+
+getpic() {
+	local DAYSAGO="$1"
+	local OFILE="$2"
+
+	curl -s "$(getpiclink $DAYSAGO)" |\
+		convert - -geometry $APOD_NWSIZE -bordercolor black -border 4 "$OFILE"
+}
+
+showhelp() {
+	echo $USAGE >&2
+	echo -e "\nInclude Astronomy Picture Of the Day (apod.nasa.gov) on the desktop background.\n"
+	echo -e "One APOD image for each desktop is downloaded. By default, the newest image"
+	echo -e "is downloaded and the previous images are simply rotated to the next desktop."
+	echo -e "All images can be downloaded again with the -a option.\n"
+	echo -e "-a \tRedownload APOD images for all desktops.\n"
+}
+while getopts "ah" OPTS; do
+	case "$OPTS" in
+		a)
+			GETALL=1
+			;;
+		h)
+			showhelp
+			exit 0
+			;;
+		*)
+			showhelp
+			exit 1
+			;;
+	esac
+done
+
+# rotate currently downloaded NW-*.png images, or download all images if
+# requested on command line.
+i=$((APOD_DESKTOPS-1))
+while [ $i -gt 0 ]; do
+	if [ $GETALL -eq 1 ]; then
+		getpic $i "$APOD_SAVEDIR/NW-$((i+1)).png"
+	elif [ -f "$APOD_SAVEDIR/NW-$i.png" ]; then
+		mv "$APOD_SAVEDIR/NW-$i.png" "$APOD_SAVEDIR/NW-$((i+1)).png"
+	fi
+
+	i=$((i-1))
+done
+
+[[ ! -f "$APOD_SAVEDIR/NW-$((i+1)).png" ]] && getpic $i "$APOD_SAVEDIR/NW-$((i+1)).png"
+
+# Combine all images into the final desktop picture
+i=1
+while [ $i -le $APOD_DESKTOPS ]; do
+	if [ -f "$APOD_SAVEDIR/NW-$i.png" ]; then
+		convert "$APOD_BG-0$i.png" -resize $APOD_BGSIZE \
+		        \( "$APOD_SAVEDIR/NW-$i.png" -shadow $APOD_NWSHADOW \) -geometry $APOD_NWGEOM -composite \
+		        "$APOD_SAVEDIR/NW-$i.png" -geometry $APOD_NWGEOM -composite \
+		        \( "$APOD_SW" -resize $APOD_SWSIZE \) -gravity SouthWest -composite \
+		        "$APOD_SAVEDIR/MyBackground-$i.png"
+	else
+		convert "$APOD_BG-0$i.png" -resize $APOD_BGSIZE \
+		        \( "$APOD_SW" -resize $APOD_SWSIZE \) -gravity SouthWest -composite \
+		        "$APOD_SAVEDIR/MyBackground-$i.png"
+	fi
+
+	i=$((i+1))
+done
