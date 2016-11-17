@@ -20,6 +20,7 @@
 #include ".Xresources.d/xterm"
 #include ".Xresources.d/rxvt"
 #include ".Xresources.d/grace"
+#include ".Xresources.d/xscreensaver"
 
 #ifdef SOLARIZED_LIGHT
 #include ".Xresources.d/solarized-light"
