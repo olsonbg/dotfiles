@@ -149,6 +149,7 @@ manager. My custom key bindings are in
 | Win-c b       | Open a new chromium browser on Desktop 2, and go there.                                                                     |
 | Win-c e       | Open gmail (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.             |
 | Win-c c       | Open google calendar (inside chromium) on Desktop 3, and go there. This will not open a new window if one already exists.   |
+| Win-t         | Open Thunderbird on Desktop 3, and go there. This will not open a new window if one already exists.   |
 
 ## Conky
 

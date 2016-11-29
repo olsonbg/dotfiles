@@ -332,14 +332,6 @@
         <command>xscreensaver-command -lock</command>
       </action>
     </keybind>
-    <keybind key="W-t">
-      <action name="GoToDesktop">
-        <to>1</to>
-      </action>
-      <action name="Execute">
-        <command>~/bin/urxvtc-d</command>
-      </action>
-    </keybind>
     <keybind key="W-a">
       <action name="Execute">
         <command>pavucontrol</command>
@@ -373,6 +365,14 @@
       </keybind>
     </keybind>
     <!-- End: Nested keybinding for chromium browser, gmail, calendar -->
+    <keybind key="W-t">
+      <action name="GoToDesktop">
+        <to>3></to>
+      </action>
+      <action name="Execute">
+          <command>sh -c 'WW=$(xdotool search --class "Thunderbird" search --name "Mozilla Thunderbird"); if [ -z "$WW" ];  then thunderbird; else xdotool windowactivate $WW; fi'</command>
+      </action>
+    </keybind>
     <keybind key="W-r">
       <action name="Resize"/>
     </keybind>
