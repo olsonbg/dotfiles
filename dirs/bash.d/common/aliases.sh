@@ -24,7 +24,7 @@ alias psdouble_aps='pstops "2:0L@0.8(8.6in,-0.5in)+1L@0.8(8.6in,4.75in)"'
 # System Info and stuff
 #
 alias pstree="/usr/bin/pstree -aph"
-alias ls="/bin/ls --color=auto"
+alias ls="/bin/ls --color=auto --quoting-style=literal"
 # For looking at LaTeX directories
 alias tls='/bin/ls --color=auto -B -I "*.aux" -I "*.bbl" -I "*.toc" -I "*.lof" -I "*.log" -I "*.lot" -I "*.blg" -I "*.cls" -I "*.bst"'
 #
