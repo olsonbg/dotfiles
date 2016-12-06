@@ -47,3 +47,5 @@ if [ -f ~/bin/pos_fit.sh ]; then
 #  alias setup2='source ~/bin/pos_fit.sh 2'
 fi
 
+unset TPATH
+unset CPATH
