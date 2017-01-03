@@ -38,6 +38,9 @@ xftfont  Inconsolata:size=10
 top_name_width 12
 if_up_strictness link
 show_graph_scale no
+default_bar_height 7
+default_bar_width 50
+default_bar_size 50 7
 # Solarized Light color scheme.
 #color0 586e75
 #color1 839496
@@ -77,6 +80,7 @@ template4 ${color0}\3:${color}${\1}${alignr}${color0}\4:${color}${\2}
 template5 $color2${\1 7,50 \2}
 #
 template6 ${color0}\1:${alignr}${color}${\2}
+template7 ${color0}\1:${alignr}${color}${\2 \3}
 template8 ${template6 \1 \2}${template5 \3 \4}
 template9 ${template6 \1 \2}${template5 \3}
 
@@ -111,7 +115,9 @@ ${template1 diskiograph_read diskiograph_write}
 # RAM
 #
 ${template9 RAM mem membar}
-${template9 Swap swap swapbar}
+${color0}ZRAM:${alignr}${color}${exec /sbin/swapon --show|awk '/zram0/ {used = $4} END {print used"iB"}'}${color2}${execbar cat /proc/swaps|awk '/zram0/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}'}
+${color0}Swap:${alignr}${color}${exec /sbin/swapon --show|awk '/sda2/ {used = $4} END {print used"iB"}'}${color2}${execbar cat /proc/swaps|awk '/sda2/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}'}
+#${template9 Swap swap swapbar}
 ${template9 Entropy entropy_avail entropy_bar}
 #
 # Wifi
