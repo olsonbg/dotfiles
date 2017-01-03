@@ -8,9 +8,9 @@ LOGFILE="$HOME/.cache/myautostart.log"
 startups=( "conky" "parcellite" )
 
 case $XDG_CURRENT_DESKTOP in
-	LXDE          ) extras=( "stalonetray" "compton -b" "nm-applet" );;
-	LXQt          ) extras=( "stalonetray" "compton -b" );;
-	enlightenment ) extras=( "stalonetray" "nm-applet" );;
+	LXDE          ) extras=( "compton -b" "nm-applet"  "stalonetray"  );;
+	LXQt          ) extras=( "compton -b" "stalonetray" );;
+	enlightenment ) extras=( "nm-applet"  "stalonetray" );;
 esac
 
 startit()
