@@ -7,8 +7,9 @@ bind C-a send-prefix
 set -g default-terminal "tmux-256color"
 set -g default-command  "bash"
 
-set-option -g status-utf8 on
-set-option -g utf8 on
+# These two options for utf8 are not supported for tmux > 2.1
+#set-option -g status-utf8 on
+#set-option -g utf8 on
 
 # Tmux title = command
 set-option -ga terminal-override ',xterm*:XT'
