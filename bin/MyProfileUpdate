@@ -37,8 +37,8 @@ cat >"$CUSTOMENV" <<_EOF_
 
 _EOF_
 
-if [ -d ~/.bash.d/hosts/$(hostname) ]; then
-	find -L ~/.bash.d/hosts/$(hostname) -type f -print0 |\
+if [ -d ~/.bash.d/hosts/$(hostname -s) ]; then
+	find -L ~/.bash.d/hosts/$(hostname -s) -type f -print0 |\
 		sort -z |\
 		while read -d $'\0' file
 	do
@@ -46,7 +46,7 @@ if [ -d ~/.bash.d/hosts/$(hostname) ]; then
 		cat "$file"
 	done >> "$CUSTOMENV"
 elif [ -d ~/.bash.d/hosts/generic ]; then
-	# Use ~/.bash.d/hosts/generic if $(hostname) directory doesn't exist.
+	# Use ~/.bash.d/hosts/generic if $(hostname -s) directory doesn't exist.
 	find -L ~/.bash.d/hosts/generic -type f -print0 |\
 		sort -z |\
 		while read -d $'\0' file
