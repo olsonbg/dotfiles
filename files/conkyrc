@@ -122,7 +122,8 @@ ${template9 Entropy entropy_avail entropy_bar}
 #
 # Wifi
 #
-${if_empty ${wireless_essid wlp2s0}}$alignc${color0}No WiFi${else}$color$hr 2
+#${if_empty ${wireless_essid wlp2s0}}$alignc${color0}No WiFi${else}$color$hr 2
+${if_match "${wireless_essid wlp2s0}" != "off/any"}$color$hr 2
 ${color0}ESSID:$alignr$color${wireless_essid wlp2s0}
 ${color0}Signal:$alignr$color${wireless_link_qual wlp2s0}${template5 wireless_link_bar wlp2s0}
 ${template3 downspeed upspeed wlp2s0 wlp-D U}
