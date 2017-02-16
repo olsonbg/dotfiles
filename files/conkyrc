@@ -88,7 +88,6 @@ TEXT
 ${alignc}${color0}$sysname $kernel
 ${alignc}${color}${time %a %b %d %R %Z %Y}
 ${alignc}$color$nodename
-
 ${color0}Uptime:$alignr$color$uptime
 ${color0}Load:$alignr$color$loadavg
 ${template0 loadgraph "" 8}
@@ -110,8 +109,10 @@ ${template0 cpugraph cpu4 ""}
 #${alignc}${color0}Disk I/O: $color${diskio}
 #${color0}D (R/W): $color${diskio_read}/${alignr}${diskio_write}
 ${template3 diskio_read diskio_write sda sda-R W}
-${template1 diskiograph_read diskiograph_write}
+${template2 diskiograph_read diskiograph_write sda}
 #
+${template3 diskio_read diskio_write sdb sdb-R W}
+${template2 diskiograph_read diskiograph_write sdb}
 # RAM
 #
 ${template9 RAM mem membar}
