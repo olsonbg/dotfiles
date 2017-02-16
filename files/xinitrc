@@ -1,31 +1,34 @@
 # lxde is default
 session=${1:-lxde}
 
+# To create ConsoleKit session.
+consolekit="ck-launch-session dbus-launch --sh-syntax --exit-with-session"
+
 case $session in
-    awesome           ) exec awesome;;
-    bspwm             ) exec bspwm;;
-    catwm             ) exec catwm;;
-    cinnamon          ) exec cinnamon-session;;
-    dwm               ) exec dwm;;
-    enlightenment     ) exec dbus-launch --exit-with-session enlightenment_start;;
-    ede               ) exec startede;;
-    evilwm            ) exec evilwm;;
-    fluxbox           ) exec startfluxbox;;
-    gnome             ) exec gnome-session;;
-    gnome-classic     ) exec gnome-session --session=gnome-classic;;
-    i3|i3wm           ) exec i3;;
-    icewm             ) exec icewm-session;;
-    jwm               ) exec jwm;;
-    kde               ) exec startkde;;
-    lxde              ) exec startlxde;;
-    lxqt              ) exec startlxqt;;
-    mate              ) exec mate-session;;
-    monster|monsterwm ) exec monsterwm;;
-    notion            ) exec notion;;
-    openbox           ) exec openbox-session;;
-    unity             ) exec unity;;
-    xfce|xfce4        ) exec startxfce4;;
-    xmonad            ) exec xmonad;;
+    awesome           ) exec $consolekit awesome;;
+    bspwm             ) exec $consolekit bspwm;;
+    catwm             ) exec $consolekit catwm;;
+    cinnamon          ) exec $consolekit cinnamon-session;;
+    dwm               ) exec $consolekit dwm;;
+    enlightenment     ) exec $consolekit enlightenment_start;;
+    ede               ) exec $consolekit startede;;
+    evilwm            ) exec $consolekit evilwm;;
+    fluxbox           ) exec $consolekit startfluxbox;;
+    gnome             ) exec $consolekit gnome-session;;
+    gnome-classic     ) exec $consolekit gnome-session --session=gnome-classic;;
+    i3|i3wm           ) exec $consolekit i3;;
+    icewm             ) exec $consolekit icewm-session;;
+    jwm               ) exec $consolekit jwm;;
+    kde               ) exec $consolekit startkde;;
+    lxde              ) exec $consolekit startlxde;;
+    lxqt              ) exec $consolekit startlxqt;;
+    mate              ) exec $consolekit mate-session;;
+    monster|monsterwm ) exec $consolekit monsterwm;;
+    notion            ) exec $consolekit notion;;
+    openbox           ) exec $consolekit openbox-session;;
+    unity             ) exec $consolekit unity;;
+    xfce|xfce4        ) exec $consolekit startxfce4;;
+    xmonad            ) exec $consolekit xmonad;;
     # No known session, try to run it as command
-    *) exec $1;;
+    *) exec $consolekit $1;;
 esac
