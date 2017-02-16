@@ -3,7 +3,8 @@
 # Programs to launch on X11 startup.
 # Called from ~/.config/autostart/autostart.desktop
 
-LOGFILE="$HOME/.cache/myautostart.log"
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-/home/${USER}/.cache}
+LOGFILE="${XDG_CACHE_HOME}/myautostart.log"
 
 startups=( "conky" "parcellite" )
 
@@ -44,15 +45,12 @@ killandstart()
 
 }
 
-sleep 1s
-
 [[ -f "$LOGFILE" ]] && rm "$LOGFILE";
 
-touch ~/.cache/myautostart.log
+touch "${LOGFILE}"
 
 for p in "${startups[@]}" "${extras[@]}"; do
 	killandstart $p
-	sleep 1s
 done > "$LOGFILE" 2>&1
 
 # Make sure Xresources get processed
