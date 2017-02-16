@@ -82,6 +82,9 @@ map # :set invnumber<CR>
 noremap  <silent> <F8> :call Column80()<CR>
 noremap! <silent> <F8> <ESC> :call Column80()<CR>
 
+" Add spelling to completion: CTRL-N will include spelling completion when
+" spell is active. Use CTRL-N and CTRL-P to navigate list.
+set complete+=kspell
 " Go to next misspelled word
 map <F2> ]s
 " Suggestions for misspelled word
