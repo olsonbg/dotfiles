@@ -31,7 +31,8 @@ starttmux() {
 	[[ -n "$user" ]] && user="$user@"
 
 	local window="ssh-multi $user${hosts[0]}"
-
+	window=${window//./-} # tmux uses dots internally to delimit windows and panes
+	
 	if [ -z "$TMUX" ]; then # if not in a tmux session create one
 		if [ "$useLOCALHOST" = 1 ] ; then
 			tmux -u new-session -d -s "${session}" -n "${window}"
