@@ -295,6 +295,10 @@ endfunction
 "
 function! SolarizedSetup ()
 	let g:solarized_visibility="low"
+	" This looks good in solarized-dark color scheme.
+	let g:airline_solarized_dark_inactive_border=1
+	" This looks good in solarized-light color scheme.
+	let g:airline_solarized_dark_inactive_border=0
 	colorscheme solarized
 endfunction
 
