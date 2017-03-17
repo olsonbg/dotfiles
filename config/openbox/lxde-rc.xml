@@ -337,7 +337,14 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
-    <!-- Start: Nested keybinding for chromium browser, gmail, calendar -->
+    <!-- Start: Nested keybinding for:
+
+          chromium browser (open on desktop 2, will always open new browser)
+          gmail            (open on desktop 3, only 1 instance)
+          google calendar  (open on desktop 3, only 1 instance)
+          google drive     (open on desktop 2, only 1 instance)
+
+    -->
     <keybind key="W-c">
       <keybind key="b">
         <action name="GoToDesktop">
@@ -363,8 +370,23 @@
           <command>sh -c 'WW=$(xdotool search --classname "www.google.com__calendar"); if [ -z "$WW" ];  then chromium-browser "--app=https://www.google.com/calendar"; else xdotool windowactivate $WW; fi'</command>
         </action>
       </keybind>
+      <keybind key="d">
+        <action name="GoToDesktop">
+          <to>2</to>
+        </action>
+        <action name="Execute">
+          <command>sh -c 'WW=$(xdotool search --classname "drive.google.com"); if [ -z "$WW" ];  then chromium-browser "--app=https://drive.google.com"; else xdotool windowactivate $WW; fi'</command>
+        </action>
+      </keybind>
     </keybind>
-    <!-- End: Nested keybinding for chromium browser, gmail, calendar -->
+    <!-- End: Nested keybinding for:
+
+          chromium browser (open on desktop 2, will always open new browser)
+          gmail            (open on desktop 3, only 1 instance)
+          google calendar  (open on desktop 3, only 1 instance)
+          google drive     (open on desktop 2, only 1 instance)
+
+    -->
     <keybind key="W-t">
       <action name="GoToDesktop">
         <to>3></to>
