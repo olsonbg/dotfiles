@@ -34,4 +34,8 @@ set-option -g status-right-length 40
 set-option -g status-right-style default
 set-option -g status-style fg=yellow,bg=white
 
+# Start windows and panes at 1, not 0
+set  -g base-index 1
+setw -g pane-base-index 1
+
 # vim:ft=tmux
