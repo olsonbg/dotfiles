@@ -37,14 +37,14 @@ fi
 # Generate the html. For LaTeX equations, use mathjax.
 pandoc -B "$BEFORE" -A "$AFTER" --mathjax -o "$2" "$1"
 
-# Name of tab in chromium browser.
-TAB="$(basename "$2").* - Chromium"
+# Name of tab in Google Chrome.
+TAB="$(basename "$2").* - Google Chrome"
 
 # Is a tab of this file currently active?
 WINDOWID=$(xdotool search --name "$TAB" 2>/dev/null)
 
 if [ $? != 0 ]; then
-	chromium-browser "$2" 2>/dev/null >/dev/null &
+	google-chrome-stable "$2" 2>/dev/null >/dev/null &
 	# Wait for the window to show, then activate it.
 	xdotool search --sync --name "$TAB" windowactivate 2>/dev/null
 else
