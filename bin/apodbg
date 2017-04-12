@@ -56,8 +56,8 @@ getpiclink() {
 
 	local DATE=$(date --date=-${DAYSAGO}days "+%g%m%d")
 
-	curl -s "http://apod.nasa.gov/apod/ap${DATE}.html" |\
-		sed -ne 's/^<IMG SRC="\(.*\)".*$/http:\/\/apod.nasa.gov\/apod\/\1/p'
+	curl -s "https://apod.nasa.gov/apod/ap${DATE}.html" |\
+		sed -ne 's/^<IMG SRC="\(.*\)".*$/https:\/\/apod.nasa.gov\/apod\/\1/p'
 }
 
 getpic() {
