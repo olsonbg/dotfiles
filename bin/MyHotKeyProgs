@@ -1,0 +1,160 @@
+#!/bin/bash
+#
+# Launch applications. Typically called from a hotkey assignment.
+#
+# Usage:
+#  MyHotKeyProgs [-nh] <application>"
+#
+# This is used to simplify hotkey assignments which would otherwise require
+# multiple commands or scripts, and to also consolidate them all into one
+# location for easy modification and additions.
+#
+# Two basic operations:
+#   1) Always launch application.
+#   2) If application is already launched, activate it, otherwise launch it.
+#
+# For operation (2), xdotool is used to check if the application is already
+# loaded, and if so, activate it, otherwise launch it. Two functions are
+# included, one to search for application by 'name', and the other to search by
+# application 'classname.'
+#
+# The applications supported are listed in the 'case' statement at the end of
+# this script, add additional case patterns for each application required.
+#
+# Author: Brian G. Olson (https://www.github.com/olsonbg)
+#
+# Current version:
+#     https://github.com/olsonbg/dotfiles/blob/master/bin/MyHotKeyProgs
+#
+# Released under GPLv3 (http://www.gnu.org/licenses/gpl.html)
+#
+USAGE="Usage: $(basename "$0") [-nh] <application>"
+
+SHOW_NOTIFICATION=0
+
+showNotification()
+{
+	local BODY="$1"
+	local SUMMARY="MyHotKeyProgs"
+
+	if [ $SHOW_NOTIFICATION -ne 0 ]; then
+		notify-send -u low -t 1000 "$SUMMARY" "$BODY"
+	fi
+}
+
+doActivate()
+{
+	local XWINID="$1"
+	local PROG="$2"
+	local PROGOPTS="$3"
+
+	# Check for required programs.
+	MyRequiredProgs $PROG
+
+	if [ $? -eq 1 ]; then
+		notify-send -u critical "Missing Program:" "$PROG"
+		exit 1;
+	fi
+
+	if [ -z "$XWINID" ]; then
+		[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
+		$PROG $PROGOPTS &
+	else
+		xdotool windowactivate $XWINID
+	fi
+}
+
+doLaunch()
+{
+	local PROG="$1"
+	local PROGOPTS="$2"
+
+	[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
+
+	$PROG $PROGOPTS &
+}
+
+doByClassName()
+{
+	local CLASSNAME="$1"
+	local PROG="$2"
+	local PROGOPTS="$3"
+
+	doActivate "$(xdotool search --classname "$CLASSNAME" )" "$PROG" "$PROGOPTS"
+}
+
+doByName()
+{
+	local NAME="$1"
+	local PROG="$2"
+	local PROGOPTS="$3"
+
+	doActivate "$(xdotool search --name "$NAME" )" "$PROG" "$PROGOPTS"
+}
+
+showhelp() {
+	echo $USAGE >&2
+	echo -e "\nLaunch programs/scripts. Typically used from hotkeys.\n"
+	echo -e "-n \tShow a notification.\n"
+	echo -e "List of applications:\n"
+	echo -e "   \t(A) thunderbird"
+	echo -e "   \t(A) gmail"
+	echo -e "   \t(A) calendar"
+	echo -e "   \t(A) drive"
+	echo -e "   \t(N) web-browser"
+	echo -e "\n A: If application is already launched, activate it, otherwise"
+	echo -e "    launch a new instance."
+	echo -e " N: Always launch a new instance.\n"
+}
+
+if [ $# -eq 0 ]; then
+	showhelp
+	exit 1
+fi
+
+while getopts "nh" OPTS; do
+	case "$OPTS" in
+		n)
+			SHOW_NOTIFICATION=1
+			;;
+		h)
+			showhelp
+			exit 0
+			;;
+		*)
+			showhelp
+			exit 1
+			;;
+	esac
+done
+
+if [ $OPTIND -gt $# ]; then
+	echo "Error: Missing argument."
+	showhelp
+	exit 1
+fi
+
+shift $(($OPTIND - 1))
+
+case "$1" in
+	"thunderbird")
+		doByName ".* - Earlybird" "thunderbird"
+		;;
+	"gmail")
+		doByClassName "mail.google.com__mail" "google-chrome-stable" "--app=https://mail.google.com/mail"
+		;;
+	"calendar")
+		doByClassName "www.google.com__calendar" "google-chrome-stable" "--app=https://www.google.com/calendar"
+		;;
+	"drive")
+		doByClassName "drive.google.com" "google-chrome-stable" "--app=https://drive.google.com"
+		;;
+	"web-browser")
+		doLaunch "google-chrome-stable"
+		;;
+	*)
+		showhelp
+		exit 1
+		;;
+esac
+

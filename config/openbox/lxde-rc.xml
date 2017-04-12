@@ -351,7 +351,7 @@
           <to>2</to>
         </action>
         <action name="Execute">
-          <command>chromium-browser</command>
+          <command>MyHotKeyProgs web-browser</command>
         </action>
       </keybind>
       <keybind key="e">
@@ -359,7 +359,7 @@
           <to>3</to>
         </action>
         <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --classname "mail.google.com__mail"); if [ -z "$WW" ];  then chromium-browser "--app=https://mail.google.com/mail"; else xdotool windowactivate $WW; fi'</command>
+          <command>MyHotKeyProgs gmail</command>
         </action>
       </keybind>
       <keybind key="c">
@@ -367,7 +367,7 @@
           <to>3</to>
         </action>
         <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --classname "www.google.com__calendar"); if [ -z "$WW" ];  then chromium-browser "--app=https://www.google.com/calendar"; else xdotool windowactivate $WW; fi'</command>
+          <command>MyHotKeyProgs calendar</command>
         </action>
       </keybind>
       <keybind key="d">
@@ -375,7 +375,7 @@
           <to>2</to>
         </action>
         <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --classname "drive.google.com"); if [ -z "$WW" ];  then chromium-browser "--app=https://drive.google.com"; else xdotool windowactivate $WW; fi'</command>
+          <command>MyHotKeyProgs drive</command>
         </action>
       </keybind>
     </keybind>
@@ -389,10 +389,10 @@
     -->
     <keybind key="W-t">
       <action name="GoToDesktop">
-        <to>3></to>
+        <to>3&gt;</to>
       </action>
       <action name="Execute">
-          <command>sh -c 'WW=$(xdotool search --class "Thunderbird" search --name "Mozilla Thunderbird"); if [ -z "$WW" ];  then thunderbird; else xdotool windowactivate $WW; fi'</command>
+        <command>MyHotKeyProgs -n thunderbird</command>
       </action>
     </keybind>
     <keybind key="W-r">
@@ -826,6 +826,9 @@
   # end of the example
 -->
     <application class="chromium-browser-chromium" role="browser">
+      <decor>no</decor>
+    </application>
+    <application class="google-chrome" role="browser">
       <decor>no</decor>
     </application>
     <application name="stalonetray">
