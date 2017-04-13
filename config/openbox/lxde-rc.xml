@@ -395,6 +395,11 @@
         <command>MyHotKeyProgs -n thunderbird</command>
       </action>
     </keybind>
+    <keybind key="W-b">
+      <action name="Execute">
+        <command>MyHotKeyProgs calculator</command>
+      </action>
+    </keybind>
     <keybind key="W-r">
       <action name="Resize"/>
     </keybind>

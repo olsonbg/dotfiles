@@ -152,6 +152,9 @@ case "$1" in
 	"web-browser")
 		doLaunch "google-chrome-stable"
 		;;
+	"calculator")
+		doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
+		;;
 	*)
 		showhelp
 		exit 1
