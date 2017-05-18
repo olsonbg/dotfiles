@@ -74,6 +74,13 @@ endfunction
 "
 " Custom keymaps
 "
+" Switch between splits with Ctrl-h, Ctrl-j, Ctrl-k, and Ctrl-l
+"  Normal and Visual+Select modes
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 " set # to toggle line numbers on and off:
 map # :set invnumber<CR>
 
