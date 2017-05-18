@@ -312,6 +312,21 @@ function! SolarizedSetup ()
 	colorscheme solarized
 endfunction
 
+"
+" Syntastic
+"
+function! SyntasticSetup ()
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 0
+	let g:syntastic_check_on_wq = 0
+	let g:tsuquyomi_disable_quickfix = 1
+	let g:syntastic_typescript_checkers = ['tsuquyomi']
+endfunction
 
 call SolarizedSetup()
 call UnicodeShortCutsSetup()
@@ -321,5 +336,6 @@ call TagbarSetup()
 call CtabSetup()
 call AirlineSetup()
 call EasyMotionSetup()
+call SyntasticSetup()
 
 " vim:tw=76:ts=4:sw=4
