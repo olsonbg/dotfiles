@@ -45,3 +45,15 @@
 [submodule "vim/bundle/vim-airline-themes"]
 	path = dirs/vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "dirs/vim/bundle/typescript-vim"]
+	path = dirs/vim/bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim
+[submodule "dirs/vim/bundle/vim-javascript"]
+	path = dirs/vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule "dirs/vim/bundle/syntastic"]
+	path = dirs/vim/bundle/syntastic
+	url = https://github.com/vim-syntastic/syntastic
+[submodule "dirs/vim/bundle/tsuquyomi"]
+	path = dirs/vim/bundle/tsuquyomi
+	url = https://github.com/Quramy/tsuquyomi
