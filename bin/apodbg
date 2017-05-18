@@ -27,6 +27,7 @@
 #  APOD:                     $APOD_SAVEDIR/NW-i.png             (Downloaded)
 #  Final processed BG image: $APOD_SAVEDIR/MyBackground-i.png   (Generated)
 
+PATH=$PATH:$HOME/bin
 MyRequiredProgs curl convert MyPersonalConfigs || exit 1
 
 # Get user settings, if any.
@@ -105,7 +106,7 @@ while [ $i -gt 0 ]; do
 	i=$((i-1))
 done
 
-[[ ! -f "$APOD_SAVEDIR/NW-$((i+1)).png" ]] && getpic $i "$APOD_SAVEDIR/NW-$((i+1)).png"
+getpic $i "$APOD_SAVEDIR/NW-$((i+1)).png"
 
 # Combine all images into the final desktop picture
 i=1
