@@ -338,4 +338,9 @@ call AirlineSetup()
 call EasyMotionSetup()
 call SyntasticSetup()
 
+" Set where to save swap files. The default is the same directory as the
+" file being edited.
+set directory=$XDG_CACHE_HOME/vim-swap//
+if !isdirectory(&directory) | call mkdir(&directory, 'p', 0700) | endif
+
 " vim:tw=76:ts=4:sw=4
