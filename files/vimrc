@@ -3,6 +3,8 @@
 "Use pathogen to load plugins in '~/.vim/bundles'
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+filetype plugin indent on
+syntax enable
 
 set incsearch
 set laststatus=2
@@ -25,7 +27,8 @@ set list
 set t_ZH=[3m
 set t_ZR=[23m
 
-filetype plugin indent on
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 let mapleader       = ',' " Use , as leader.
 
@@ -33,14 +36,14 @@ let mapleader       = ',' " Use , as leader.
 " Convert each <TAB> in a selection to 4 <SPACE>s.
 map ,ts :s/\t/    /g<CR>:noh<CR>
 
-function ComputeVer(verstring)
+function! ComputeVer(verstring)
 	"  exe "let g:" . a:verstring . " = ". v:version/ 100
 	let g:verstring = v:version/100
 	let g:verstring = g:verstring.".".(v:version - g:verstring*100)
 endfunction
 
 
-command DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
+command! DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
 
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 " " 'Last modified: Tue May 26, 2009  06:44PM
