@@ -18,13 +18,6 @@ function __prompt_command()
 
 	SUS=`ps T |grep -v "grep"|grep -c " su"|grep -v "^0"`
 
-
-	if [ $EXIT -eq 0 ]; then 
-		PS1+="$GREEN[\!]$NONE";
-	else
-		PS1+="$RED[\!]$NONE";
-	fi
-
 	PS1+="$CYAN\h$CYAN($YEL\u$CYAN)$NONE"
 	PS1+="$YEL$SUS$NONE"
 	PS1+="$CYAN:\W$NONE"
@@ -74,7 +67,17 @@ function __prompt_command()
 	fi
 
 	# PS1+='$(__git_ps1 " [%s]")'
-	PS1+="\$ "
+
+	if [ $EXIT -eq 0 ]; then
+		# Green Unicode Digbats Heavy check mark
+		PS1+=$GREEN$' \xE2\x9C\x94'$NONE;
+	else
+		# Red Unicode Digbats Heavy ballot X
+		# Also turn the '$' red.
+		PS1+=$RED$' \xE2\x9C\x98';
+	fi
+
+	PS1+="\$ $NONE"
 
 	# if [ $TERM = "linux"  -o $TERM = "xterm" -o $TERM = "xterm-256color" -o $TERM = "rxvt-unicode-256color" -o $TERM = "screen-256color" ] ; then
 	#     export PS1="[\!]$GREEN\h$CYAN($YEL\u$CYAN)[$RED\$?$CYAN]$YEL$SUS$CYAN:\w$YEL"'$(__git_ps1 " [%s]")'"$NONE\$ "
