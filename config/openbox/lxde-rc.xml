@@ -400,6 +400,16 @@
         <command>MyHotKeyProgs calculator</command>
       </action>
     </keybind>
+    <keybind key="XF86Calculator">
+      <action name="Execute">
+        <command>MyHotKeyProgs calculator</command>
+      </action>
+    </keybind>
+    <keybind key="XF86ScreenSaver">
+      <action name="Execute">
+        <command>lxde-logout</command>
+      </action>
+    </keybind>
     <keybind key="W-r">
       <action name="Resize"/>
     </keybind>
