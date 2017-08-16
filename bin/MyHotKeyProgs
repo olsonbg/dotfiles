@@ -92,6 +92,51 @@ doByName()
 	doActivate "$(xdotool search --name "$NAME" )" "$PROG" "$PROGOPTS"
 }
 
+backlight()
+{
+	local OPT="$1"
+
+	case "$OPT" in
+		"up")
+			xbacklight +5
+			;;
+		"down")
+			xbacklight -5
+			;;
+		*)
+			showhelp
+			exit 1
+			;;
+	esac
+}
+
+pulseaudioVolume()
+{
+	local OPT="$1"
+	local SINK=0
+	local VOLSTEP="5%"
+
+	case "$OPT" in
+		"audioLowerVolume")
+			pactl set-sink-volume $SINK -$VOLSTEP
+			;;
+		"audioRaiseVolume")
+			pactl set-sink-volume $SINK +$VOLSTEP
+			;;
+		"audioMute")
+			pactl set-sink-mute $SINK toggle
+			;;
+		*)
+			showhelp
+			exit 1
+			;;
+	esac
+}
+
+suspendToRAM() {
+	sudo /usr/sbin/pm-suspend
+}
+
 showhelp() {
 	echo $USAGE >&2
 	echo -e "\nLaunch programs/scripts. Typically used from hotkeys.\n"
@@ -154,6 +199,24 @@ case "$1" in
 		;;
 	"calculator")
 		doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
+		;;
+	"monBrightnessUp")
+		backlight "up"
+		;;
+	"monBrightnessDown")
+		backlight "down"
+		;;
+	"audioRaiseVolume")
+		pulseaudioVolume "audioRaiseVolume"
+		;;
+	"audioLowerVolume")
+		pulseaudioVolume "audioLowerVolume"
+		;;
+	"audioMute")
+		pulseaudioVolume "audioMute"
+		;;
+	"sleep")
+		suspendToRAM
 		;;
 	*)
 		showhelp
