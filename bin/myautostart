@@ -38,7 +38,7 @@ killandstart()
 	if [ -n "$pids" ]; then
 		echo "$0: Killing $prog running processes [$pids]."
 		kill -15 $pids
-		sleep 2s
+		sleep 0.5s
 	fi
 
 	[[ $(which $prog) ]] && exec $prog $opts &
