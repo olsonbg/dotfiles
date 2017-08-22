@@ -104,12 +104,17 @@ map <F3> z=
 " Resize current window to 80 width
 noremap  <silent> w80 :vertical resize 80
 
+execute "set <M-H>=\eH"
+execute "set <M-J>=\eJ"
+execute "set <M-K>=\eK"
+execute "set <M-L>=\eL"
+
 " Increase/Decrease horizontally split window
-" noremap _ :resize +1<CR>
-" noremap - :resize -1<CR>
+map <M-K>  <C-W>+
+map <M-J>  <C-W>-
 " Increase/Decrease vertically split window
-" noremap _ :vertical resize +1<CR>
-"noremap - :vertical resize -1<CR>
+map <M-H>  <C-W><
+map <M-L> <C-W>>
 
 "
 " Manpage for word under cursor via 'K' in command mode
