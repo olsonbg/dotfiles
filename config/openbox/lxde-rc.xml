@@ -340,6 +340,26 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>~/bin/MyHotKeyProgs audioRaiseVolume</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>~/bin/MyHotKeyProgs audioLowerVolume</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>~/bin/MyHotKeyProgs audioMute</command>
+      </action>
+    </keybind>
+    <keybind key="XF86Sleep">
+      <action name="Execute">
+        <command>~/bin/MyHotKeyProgs sleep</command>
+      </action>
+    </keybind>
     <!-- Start: Nested keybinding for:
 
           chromium browser (open on desktop 2, will always open new browser)
