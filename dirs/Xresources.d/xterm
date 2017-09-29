@@ -1,11 +1,12 @@
 !
 ! Truetype fonts defined in ~/.Xresources.d/xft.
 !
-xterm*faceName:       MyNFont=11
-xterm*boldName:       MyBFont=11
-xterm*italicFont:     MyIFont=11
-xterm*bolditalicFont: MyBIFont=11
+xterm*faceName:       MyNFont=14
+xterm*boldName:       MyBFont=14
+xterm*italicFont:     MyIFont=14
+xterm*bolditalicFont: MyBIFont=14
 !
 xterm*boldMode: false
+xterm*locale: true
 
 ! vim:ft=xdefaults

@@ -1,32 +1,31 @@
 !
 ! Truetype fonts defined in ~/.Xresources.d/xft
 !
-URxvt*font:           MyNFont=10.5
-URxvt*boldFont:       MyBFont=10.5
-URxvt*italicFont:     MyIFont=10.5
-URxvt*bolditalicFont: MyBIFont=10.5
+URxvt*font:           MyNFont=13.5
+URxvt*boldFont:       MyBFont=13.5
+URxvt*italicFont:     MyIFont=13.5
+URxvt*bolditalicFont: MyBIFont=13.5
 
 URxvt.allow_bold: false
-URxvt.geometry: 80x30
+URxvt.geometry: 80x40
 !
 ! Change font on the fly.
-!   9.5 10 10.5 11
 !
-!  Font size 11.
+!  Font size 14.25pt (19px).
 !
-URxvt.keysym.C-minus: command:\033]710;MyNFont=11\007\033]711;MyBFont=11\007\033]712;MyIFont=11\007\033]713;MyBIFont=11\007
+URxvt.keysym.C-minus: command:\033]710;MyNFont=14.25\007\033]711;MyBFont=14.25\007\033]712;MyIFont=14.25\007\033]713;MyBIFont=14.25\007
 !
-!  Font size 10.5.
+!  Font size 13.5 (18px).
 !
-URxvt.keysym.C-0: command:\033]710;MyNFont=10.5\007\033]711;MyBFont=10.5\007\033]712;MyIFont=10.5\007\033]713;MyBIFont=10.5\007
+URxvt.keysym.C-0: command:\033]710;MyNFont=13.5\007\033]711;MyBFont=13.5\007\033]712;MyIFont=13.5\007\033]713;MyBIFont=13.5\007
 !
-!  Font size 10.
+!  Font size 12pt (16px).
 !
-URxvt.keysym.C-9: command:\033]710;MyNFont=10\007\033]711;MyBFont=10\007\033]712;MyIFont=10\007\033]713;MyBIFont=10\007
+URxvt.keysym.C-9: command:\033]710;MyNFont=12\007\033]711;MyBFont=12\007\033]712;MyIFont=12\007\033]713;MyBIFont=12\007
 !
-!  Font size 9.5.
+!  Font size 10.5 (14px).
 !
-URxvt.keysym.C-8: command:\033]710;MyNFont=9.5\007\033]711;MyBFont=9.5\007\033]712;MyIFont=9.5\007\033]713;MyBIFont=9.5\007
+URxvt.keysym.C-8: command:\033]710;MyNFont=10.5\007\033]711;MyBFont=10.5\007\033]712;MyIFont=10.5\007\033]713;MyBIFont=10.5\007
 !
 ! Resize the window.
 !
