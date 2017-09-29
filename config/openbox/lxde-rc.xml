@@ -374,7 +374,7 @@
           <to>2</to>
         </action>
         <action name="Execute">
-          <command>MyHotKeyProgs web-browser</command>
+            <command>~/bin/MyHotKeyProgs web-browser</command>
         </action>
       </keybind>
       <keybind key="e">
@@ -382,7 +382,7 @@
           <to>3</to>
         </action>
         <action name="Execute">
-          <command>MyHotKeyProgs gmail</command>
+            <command>~/bin/MyHotKeyProgs gmail</command>
         </action>
       </keybind>
       <keybind key="c">
@@ -390,7 +390,7 @@
           <to>3</to>
         </action>
         <action name="Execute">
-          <command>MyHotKeyProgs calendar</command>
+            <command>~/bin/MyHotKeyProgs calendar</command>
         </action>
       </keybind>
       <keybind key="d">
@@ -398,7 +398,7 @@
           <to>2</to>
         </action>
         <action name="Execute">
-          <command>MyHotKeyProgs drive</command>
+            <command>~/bin/MyHotKeyProgs drive</command>
         </action>
       </keybind>
     </keybind>
@@ -415,17 +415,17 @@
         <to>3&gt;</to>
       </action>
       <action name="Execute">
-        <command>MyHotKeyProgs -n thunderbird</command>
+          <command>~/bin/MyHotKeyProgs -n thunderbird</command>
       </action>
     </keybind>
     <keybind key="W-b">
       <action name="Execute">
-        <command>MyHotKeyProgs calculator</command>
+          <command>~/bin/MyHotKeyProgs calculator</command>
       </action>
     </keybind>
     <keybind key="XF86Calculator">
       <action name="Execute">
-        <command>MyHotKeyProgs calculator</command>
+          <command>~/bin/MyHotKeyProgs calculator</command>
       </action>
     </keybind>
     <keybind key="XF86ScreenSaver">
@@ -873,6 +873,6 @@
       <desktop>all</desktop>
     </application>
     <application class="VirtualBox">
-	</application>
+    </application>
   </applications>
 </openbox_config>
