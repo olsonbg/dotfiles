@@ -199,6 +199,7 @@ function! UnicodeShortCutsSetup ()
 	map! <C-v>0  °
 	map! <C-v>ce ¢
 	map! <C-v>*  •
+	map! <C-v>ck ✔
 endfunction
 
 "
