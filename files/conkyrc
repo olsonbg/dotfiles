@@ -97,6 +97,7 @@ ${template0 loadgraph "" 8}
 # CPUs
 #
 #
+$hr
 ${color0}CPU 0:$color ${freq cpu1} MHz ${alignr}${exec sensors | grep 'Core 0' | cut -c 15-22}
 ${template0 cpugraph cpu1 ""}
 ${color0}CPU 1:$color ${freq cpu2} MHz ${alignr}${exec sensors | grep 'Core 1' | cut -c 15-22}
@@ -108,15 +109,19 @@ ${template0 cpugraph cpu4 ""}
 #
 # Disk
 #
-#${alignc}${color0}Disk I/O: $color${diskio}
-#${color0}D (R/W): $color${diskio_read}/${alignr}${diskio_write}
+$hr
+${template4 diskio_read diskio_write All-R W}
+${template1 diskiograph_read diskiograph_write}
+#
 ${template3 diskio_read diskio_write sda sda-R W}
 ${template2 diskiograph_read diskiograph_write sda}
 #
 ${template3 diskio_read diskio_write nvme0n1 nvme-R W}
 ${template2 diskiograph_read diskiograph_write nvme0n1}
+#
 # RAM
 #
+$hr
 ${template9 RAM mem membar}
 #${color0}ZRAM:${alignr}${color}${exec /sbin/swapon --show|awk '/zram0/ {used = $4} END {print used"iB"}'}${color2}${execbar cat /proc/swaps|awk '/zram0/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}'}
 ${color0}Swap:${alignr}${color}${exec /sbin/swapon --show|awk '/nvme0n1p3/ {used = $4} END {print used"iB"}'}${color2}${execbar cat /proc/swaps|awk '/nvme0n1p3/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}'}
