@@ -57,6 +57,7 @@ starttmux() {
 	for i in "${hosts[@]}"
 	do
 			tmux split-window -t "${session}:${window}" -h "ssh $user$i"
+			tmux select-layout -t "${session}:${window}" tiled
 	done
 
 	tmux select-layout -t "${session}:${window}" tiled
