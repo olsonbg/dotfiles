@@ -45,6 +45,9 @@ starttmux() {
 	else # Get session name of current tmux session.
 		session="$(tmux display-message -p '#S')"
 
+		# Use a shorter window name when already in a tmux session
+		window=${window##ssh-multi }
+
 		if [ "$useLOCALHOST" = 1 ] ; then
 			tmux new-window -t "${session}" -n "${window}"
 		else
@@ -54,15 +57,18 @@ starttmux() {
 		launchedtmux=0
 	fi
 
+	# Since the name is not guaranteed to be unique, use the window_id.
+	local windowid=$(tmux display-message -p '#{window_id}')
+
 	for i in "${hosts[@]}"
 	do
-			tmux split-window -t "${session}:${window}" -h "ssh $user$i"
-			tmux select-layout -t "${session}:${window}" tiled
+			tmux split-window -t "${session}:${windowid}" -h "ssh $user$i"
+			tmux select-layout -t "${session}:${windowid}" tiled
 	done
 
-	tmux select-layout -t "${session}:${window}" tiled
-	tmux select-pane -t "${session}:${window}"
-	tmux set-window-option -t "${session}:${window}"  synchronize-panes on
+	tmux select-layout -t "${session}:${windowid}" tiled
+	tmux select-pane -t "${session}:${windowid}"
+	tmux set-window-option -t "${session}:${windowid}"  synchronize-panes on
 
 	# Setup complete. If we were already inside a tmux session, then we should
 	# be on the newly created window with synchronized panes, otherwise, we
