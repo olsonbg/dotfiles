@@ -13,11 +13,12 @@ session="sshmulti"
 
 usage() {
 	[[ -n "$1" ]] && echo -e "$1\n"
-	echo "$(basename $0) -d hosts [-l] [-u username]"
+	echo "$(basename $0) -d hosts [-s session_name] [-l] [-u username]"
 	echo
 	echo '   -d "serv0 serv1 ... servN"  : list servers to connect to.'
 	echo '   -l                          : include localhost.'
 	echo '   -u user                     : user for ssh connection.'
+	echo "   -s name                     : session name (default: $session)."
 	echo
 	echo '  Tips:'
 	echo '   -d "$(echo serv{0..2})"'
@@ -88,7 +89,7 @@ checkopt() {
 
 useLOCALHOST=0
 
-while getopts "u:d:lh" opts; do
+while getopts "u:d:s:lh" opts; do
 	case "${opts}" in
 		h)
 			usage
@@ -99,6 +100,9 @@ while getopts "u:d:lh" opts; do
 			;;
 		d)
 			HOSTS=${OPTARG}
+			;;
+		s)
+			session=${OPTARG}
 			;;
 		l)
 			useLOCALHOST=1
