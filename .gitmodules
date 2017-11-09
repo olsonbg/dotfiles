@@ -57,3 +57,9 @@
 [submodule "dirs/vim/bundle/tsuquyomi"]
 	path = dirs/vim/bundle/tsuquyomi
 	url = https://github.com/Quramy/tsuquyomi
+[submodule "dirs/bash.d/github.com/fzf"]
+	path = dirs/bash.d/github.com/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "dirs/vim/bundle/fzf.vim"]
+	path = dirs/vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

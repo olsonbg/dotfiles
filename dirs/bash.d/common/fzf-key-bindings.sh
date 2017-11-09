@@ -1,0 +1,1 @@
+../github.com/fzf/shell/key-bindings.bash
