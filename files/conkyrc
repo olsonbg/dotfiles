@@ -147,6 +147,9 @@ ${template2 downspeedgraph upspeedgraph enp2s0f1}${endif}
 ${if_up enp0s20f0u4u1}${template3 downspeed upspeed enp0s20f0u4u1 enp-D U}
 ${template2 downspeedgraph upspeedgraph enp0s20f0u4u1}${endif}
 #
+${if_up enp0s20f0u1u1}${template3 downspeed upspeed enp0s20f0u1u1 enp-D U}
+${template2 downspeedgraph upspeedgraph enp0s20f0u1u1}${endif}
+#
 ${if_up vboxnet0}${template3 downspeed upspeed vboxnet0 vbox-D U}
 ${template2 downspeedgraph upspeedgraph vboxnet0}${endif}$color$hr 1
 #
