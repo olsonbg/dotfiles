@@ -16,7 +16,7 @@ TPATH=""
 CPATH=/usr/local/positron/man
 
 if [ `echo $MANPATH |grep -c $CPATH` = "0" ]; then
-	TPATH=$MANPATH:$CPATH
+	TPATH=$MANPATH:$CPATH:
 fi
 
 if [ "$TPATH" != "" ]; then
