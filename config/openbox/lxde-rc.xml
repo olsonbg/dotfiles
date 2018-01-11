@@ -304,6 +304,11 @@
       </action>
     </keybind>
     <!-- BGO Start -->
+    <keybind key="C-A-A">
+        <action name="Execute">
+            <command>keepass --auto-type</command>
+        </action>
+    </keybind>
     <keybind key="Print">
       <action name="Execute">
         <command>/usr/bin/scrot --select --exec '/usr/bin/gimp $f'</command>
