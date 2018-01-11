@@ -1,15 +1,21 @@
 #!/bin/bash
 #
-# Generate an html file from a markdown file using pandoc, and view it using
-# the chromium browser. I have this script mapped to F4 when editing a markdown
-# file in vim.
+# Generate an html or pdf file from a markdown file using pandoc, and view it
+# using the chrome browser. I have this script mapped to F4 when editing a
+# markdown file in vim.
 #
 # Usage:
 # mdv <input markdown file> <output html file>
 #
+# For html:
 # Uses 'before.html' and 'after.html' in your personal configuration directory
 # ($ MyPersonalConfigs -d mdv). These two files may be empty if you don't want
 # extra formatting to the html.
+#
+# For pdf:
+# Uses 'header.tex' in your personal configuration directory ($
+# MyPersonalConfigs -d mdv). This file may be empty if you don't want extra
+# formatting to the pdf.
 #
 # Based on ideas from https://github.com/JamshedVesuna/vim-markdown-preview,
 # but I wanted something simple that could be run from the command line too.
@@ -25,17 +31,30 @@
 # Check for required programs.
 MyRequiredProgs pandoc xdotool || exit 1
 
-# Get location of 'before.html' and 'after.html' files.
-BEFORE=$(MyPersonalConfigs -d mdv -c -f before.html) || exit 1
-AFTER=$(MyPersonalConfigs  -d mdv -c -f after.html)  || exit 1
+if [[ $2 = *.html ]]; then
+	# Get location of 'before.html' and 'after.html' files.
+	BEFORE=$(MyPersonalConfigs -d mdv -c -f before.html) || exit 1
+	AFTER=$(MyPersonalConfigs  -d mdv -c -f after.html)  || exit 1
+elif [[ $2 = *.pdf ]]; then
+	# Get location of 'header.tex' file.
+	HEADER=$(MyPersonalConfigs  -d mdv -c -f header.tex)  || exit 1
+fi
 
 if [ $# -ne 2 ]; then
-	echo "Usage: $(basename "$0") <input markdown file> <output html file>"
+	echo "Usage: $(basename "$0") <input markdown file> <output html or pdf file>"
 	exit 1
 fi
 
-# Generate the html. For LaTeX equations, use mathjax.
-pandoc -B "$BEFORE" -A "$AFTER" --mathjax -o "$2" "$1"
+if [[ $2 = *.html ]]; then
+	# Generate the html. For LaTeX equations, use mathjax.
+	pandoc -B "$BEFORE" -A "$AFTER" --mathjax -o "$2" "$1"
+elif [[ $2 = *.pdf ]]; then
+	# Generate the pdf.
+	pandoc --listings -H "$HEADER" -V geometry:margin=1in -o "$2" "$1"
+else
+	# If not html or pdf, just try anyway.
+	pandoc -o "$2" "$1"
+fi
 
 # Name of tab in Google Chrome.
 TAB="$(basename "$2").* - Google Chrome"
