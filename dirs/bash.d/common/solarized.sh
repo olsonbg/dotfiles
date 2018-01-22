@@ -8,7 +8,7 @@ solarized-getScheme() {
 	fi
 
 	# Get the current color scheme
-	sed -e "s:^#define SOLARIZED_::" "$currentScheme"|tr [:upper:] [:lower:]
+	sed -e "s:^#define SOLARIZED_::" "$currentScheme"|tr '[:upper:]' '[:lower:]'
 }
 
 # Set the current color scheme
