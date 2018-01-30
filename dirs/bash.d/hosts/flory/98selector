@@ -1,4 +1,0 @@
-source /home/bgo/shared/bin/selector-compiler -g -q
-source /home/bgo/shared/bin/selector-mpi -fqi gnu-openmpi
-
-# vim:ft=sh

@@ -1,8 +1,0 @@
-#
-# Webcam on my ASUS laptop is upside down, so need v4l2convert.so
-# to fix that.
-
-#alias vlc='LD_PRELOAD="/usr/lib/libv4l/v4l2convert.so" /usr/bin/vlc'
-alias mplayer='LD_PRELOAD="/usr/lib/libv4l/v4l2convert.so" /usr/bin/mplayer'
-alias webcam='mplayer -tv driver=v4l2:device=/dev/video0:outfmt=rgb24 -vf-add screenshot tv://'
-

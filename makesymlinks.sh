@@ -169,7 +169,9 @@ fi
 
 echo
 menus/install.sh
-echo
-bin/MyProfileUpdate
+echo -e "\nTo setup a default (generic) bash configuration, run:"
+echo 'ln -Ls -t "$('"$INSTALLDIR"'/bin/MyPersonalConfigs -d bash)" '"$INSTALLDIR"'/.bash.d/generic/*'
+echo -e "\nAfter changes to bash configuration, run:"
+echo "$INSTALLDIR/bin/MyProfileUpdate"
 echo
 echo "Setup complete."
