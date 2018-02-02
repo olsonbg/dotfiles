@@ -332,6 +332,7 @@ function! SyntasticSetup ()
 	let g:syntastic_check_on_wq = 0
 	let g:tsuquyomi_disable_quickfix = 1
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
+	let g:syntastic_go_checkers = ['gofmt']
 endfunction
 
 call SolarizedSetup()
