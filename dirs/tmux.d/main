@@ -21,8 +21,8 @@ set-option -ga terminal-override ',rxvt*:XT'
 # set -g status-fg white
 
 setw -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
 
 # Status line settings
 set-option -g status-left "[#S] "
