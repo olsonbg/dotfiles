@@ -1,6 +1,6 @@
 [global]
     font = "Monospace 8"
-    allow_markup = yes
+    markup = yes
     format = "<b>[%a] %s %p</b>\n%b"
     sort = yes
     indicate_hidden = true
@@ -21,11 +21,10 @@
     icon_folders = /usr/share/icons/Adwaita/scalable/actions/:/usr/share/icons/Adwaita/scalable/apps/:/usr/share/icons/Adwaita/scalable/categories/:/usr/share/icons/Adwaita/scalable/devices/:/usr/share/icons/Adwaita/scalable/emblems/:/usr/share/icons/Adwaita/scalable/emotes/:/usr/share/icons/Adwaita/scalable/mimetypes/:/usr/share/icons/Adwaita/scalable/places/:/usr/share/icons/Adwaita/scalable/status/:/usr/share/icons/Adwaita/48x48/actions/:/usr/share/icons/Adwaita/48x48/apps/:/usr/share/icons/Adwaita/48x48/categories/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/emblems/:/usr/share/icons/Adwaita/48x48/emotes/:/usr/share/icons/Adwaita/48x48/mimetypes/:/usr/share/icons/Adwaita/48x48/places/:/usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/HighContrast/scalable/status-extra/:/usr/share/icons/hicolor/22x22/apps/
     dmenu = /usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000
     browser = google-chrome-stable --new-tab
+    frame_width = 3
+    frame_color = "#000000"
+    max_icon_size = 32
 
-
-[frame]
-    width = 3
-    color = "#000000"
 
 [shortcuts]
     close = ctrl+space
