@@ -30,6 +30,8 @@ set t_ZR=[23m
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 let mapleader       = ',' " Use , as leader.
 
 
@@ -333,6 +335,7 @@ function! SyntasticSetup ()
 	let g:tsuquyomi_disable_quickfix = 1
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
 	let g:syntastic_go_checkers = ['gofmt']
+	" let g:syntastic_cpp_compiler=system('mpicxx --showme:compiler')
 endfunction
 
 call SolarizedSetup()
