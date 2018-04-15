@@ -1,10 +1,10 @@
 !
 ! Truetype fonts defined in ~/.Xresources.d/xft
 !
-URxvt*font:           MyNFont=13.5
-URxvt*boldFont:       MyBFont=13.5
-URxvt*italicFont:     MyIFont=13.5
-URxvt*bolditalicFont: MyBIFont=13.5
+URxvt*font:           MyNFont=13.5,MyNFallbackFont
+URxvt*boldFont:       MyBFont=13.5,MyBFallbackFont
+URxvt*italicFont:     MyIFont=13.5,MyIFallbackFont
+URxvt*bolditalicFont: MyBIFont=13.5,MyBIFallbackFont
 
 URxvt.allow_bold: false
 URxvt.geometry: 80x40
@@ -43,7 +43,7 @@ URxvt*loginShell: false
 URxvt*saveLines: 1024
 URxvt.intensityStyles: false
 ! Fix font space
-!URxvt*letterSpace: -1
+URxvt*letterSpace: -1
 !URxvt.perl-ext-common: default,tabbed
 !URxvt.tabbed.tabbar-fg: 6
 !URxvt.tabbed.tabbar-bg: 8

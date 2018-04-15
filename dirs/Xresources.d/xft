@@ -17,13 +17,25 @@ Xft*lcdfilter: lcddefault
 !#define MyIFont  xft:Inconsolata for Powerline:italic:antialias=true:size
 !#define MyBIFont xft:Inconsolata for Powerline:italic:antialias=true:size
 
+#define MyNFont  xft:DejaVu Sans Mono:medium:antialias=true:size
+#define MyBFont  xft:DejaVu Sans Mono:medium:antialias=true:size
+#define MyIFont  xft:DejaVu Sans Mono:italic:antialias=true:size
+#define MyBIFont xft:DejaVu Sans Mono:italic:antialias=true:size
+
 !#define MyNFont  xft:Noto Mono:medium:antialias=true:size
 !#define MyBFont  xft:Noto Mono:medium:antialias=true:size
 !#define MyIFont  xft:Noto Mono:italic:antialias=true:size
 !#define MyBIFont xft:Noto Mono:italic:antialias=true:size
 
-#define MyNFont  xft:Noto Mono for Powerline:medium:antialias=true:size
-#define MyBFont  xft:Noto Mono for Powerline:medium:antialias=true:size
-#define MyIFont  xft:Noto Mono for Powerline:italic:antialias=true:size
-#define MyBIFont xft:Noto Mono for Powerline:italic:antialias=true:size
+!#define MyNFont  xft:Noto Mono for Powerline:medium:antialias=true:size
+!#define MyBFont  xft:Noto Mono for Powerline:medium:antialias=true:size
+!#define MyIFont  xft:Noto Mono for Powerline:italic:antialias=true:size
+!#define MyBIFont xft:Noto Mono for Powerline:italic:antialias=true:size
+!
+! Fallback fonts
+!
+#define MyNFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
+#define MyBFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
+#define MyIFallbackFont  xft:Noto Mono for Powerline:italic:antialias=true
+#define MyBIFallbackFont xft:Noto Mono for Powerline:italic:antialias=true
 ! vim:ft=xdefaults
