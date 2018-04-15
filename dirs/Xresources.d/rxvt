@@ -37,7 +37,7 @@ URxvt*scrollBar:  false
 URxvt*scrollColor: #000000
 URxvt*saveLine:   5000
 URxvt*borderless: 1
-URxvt*iconFile:   /usr/share/icons/Tango/scalable/apps/terminal.svg
+URxvt*iconFile:   /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
 URxvt*urlLauncher: chromium-browser
 URxvt*loginShell: false
 URxvt*saveLines: 1024
