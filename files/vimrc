@@ -336,6 +336,9 @@ function! SyntasticSetup ()
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
 	let g:syntastic_go_checkers = ['gofmt']
 	" let g:syntastic_cpp_compiler=system('mpicxx --showme:compiler')
+	let g:syntastic_cpp_check_header = 1
+	let g:syntastic_quiet_messages = {
+				\ "regex": ['\m^fatal error: TraceHBondsConfig.h: No such file or directory$'] }
 endfunction
 
 call SolarizedSetup()
