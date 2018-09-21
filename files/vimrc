@@ -86,6 +86,9 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+noremap [l :lnext<CR>
+noremap ]l :lprev<CR>
+
 " set # to toggle line numbers on and off:
 map # :set invnumber<CR>
 
