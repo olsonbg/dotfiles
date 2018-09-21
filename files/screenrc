@@ -13,3 +13,4 @@ termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
 hardstatus string "screen (%n: %t)"
 caption string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
 caption always
+deflogin off
