@@ -49,7 +49,7 @@ doActivate()
 	local PROGOPTS="$3"
 
 	# Check for required programs.
-	MyRequiredProgs $PROG
+	MyRequiredProgs "$PROG"
 
 	if [ $? -eq 1 ]; then
 		notify-send -u critical "Missing Program:" "$PROG"
@@ -58,9 +58,9 @@ doActivate()
 
 	if [ -z "$XWINID" ]; then
 		[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
-		$PROG $PROGOPTS &
+		"$PROG" $PROGOPTS &
 	else
-		xdotool windowactivate $XWINID
+		xdotool windowactivate "$XWINID"
 	fi
 }
 
@@ -71,7 +71,7 @@ doLaunch()
 
 	[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
 
-	$PROG $PROGOPTS &
+	"$PROG" $PROGOPTS &
 }
 
 doByClassName()
@@ -138,18 +138,18 @@ suspendToRAM() {
 }
 
 showhelp() {
-	echo $USAGE >&2
-	echo -e "\nLaunch programs/scripts. Typically used from hotkeys.\n"
-	echo -e "-n \tShow a notification.\n"
-	echo -e "List of applications:\n"
-	echo -e "   \t(A) thunderbird"
-	echo -e "   \t(A) gmail"
-	echo -e "   \t(A) calendar"
-	echo -e "   \t(A) drive"
-	echo -e "   \t(N) web-browser"
-	echo -e "\n A: If application is already launched, activate it, otherwise"
+	echo "$USAGE" >&2
+	echo -e "\\nLaunch programs/scripts. Typically used from hotkeys.\\n"
+	echo -e "-n \\tShow a notification.\\n"
+	echo -e "List of applications:\\n"
+	echo -e "   \\t(A) thunderbird"
+	echo -e "   \\t(A) gmail"
+	echo -e "   \\t(A) calendar"
+	echo -e "   \\t(A) drive"
+	echo -e "   \\t(N) web-browser"
+	echo -e "\\n A: If application is already launched, activate it, otherwise"
 	echo -e "    launch a new instance."
-	echo -e " N: Always launch a new instance.\n"
+	echo -e " N: Always launch a new instance.\\n"
 }
 
 if [ $# -eq 0 ]; then
@@ -179,7 +179,7 @@ if [ $OPTIND -gt $# ]; then
 	exit 1
 fi
 
-shift $(($OPTIND - 1))
+shift $((OPTIND - 1))
 
 case "$1" in
 	"thunderbird")

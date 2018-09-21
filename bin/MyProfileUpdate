@@ -12,12 +12,14 @@ CUSTOMENV=$(~/bin/MyPersonalConfigs -c -f profile.env) || exit 1
 CUSTOMCFGS=$(~/bin/MyPersonalConfigs -d bash) || exit 1
 
 QUIET=
-SHOWCONFIG=
 while getopts "qs" OPTS; do
 	case "$OPTS" in
 		q)  QUIET=1
 			;;
 		s)  echo "$CUSTOMENV"
+			exit
+			;;
+		*)  echo "Sorry, unrecognized option. Only -q and -s are supported."
 			exit
 			;;
 	esac
@@ -42,9 +44,9 @@ _EOF_
 if [ -d "$CUSTOMCFGS" ]; then
 	find -L "$CUSTOMCFGS" -type f -print0 |\
 		sort -z |\
-		while read -d $'\0' file
+		while read -r -d $'\0' file
 	do
-		echo -ne "\n#\n# FILE: $file\n#\n\n"
+		echo -ne "\\n#\\n# FILE: $file\\n#\\n\\n"
 		cat "$file"
 	done >> "$CUSTOMENV"
 fi

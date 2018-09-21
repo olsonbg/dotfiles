@@ -54,16 +54,16 @@ checkfile() {
 USAGE="Usage: $(basename "$0") [-f <name>] [-c] [-d <subdirectory name>]"
 
 showhelp() {
-	echo $USAGE >&2
-	echo -e "\nReturns name of the configuration directory, or full path to the"
-	echo -e "configuration file if -f option is used.\n"
-	echo -e "-f <name> \tName of configuration file, it will not be created"
-	echo -e "          \tunless the -c option is used.\n"
-	echo -e "-c        \tIf -f is used, then touch the file if it does not"
-	echo -e "          \talready exist.\n"
-	echo -e "-d <name> \tSubdirectory of the configuration directory to use for"
-	echo -e "          \tstoring configuration files. The subdirectory will be"
-	echo -e "          \tcreated if it does not exist."
+	echo "$USAGE" >&2
+	echo -e "\\nReturns name of the configuration directory, or full path to the"
+	echo -e "configuration file if -f option is used.\\n"
+	echo -e "-f <name> \\tName of configuration file, it will not be created"
+	echo -e "          \\tunless the -c option is used.\\n"
+	echo -e "-c        \\tIf -f is used, then touch the file if it does not"
+	echo -e "          \\talready exist.\\n"
+	echo -e "-d <name> \\tSubdirectory of the configuration directory to use for"
+	echo -e "          \\tstoring configuration files. The subdirectory will be"
+	echo -e "          \\tcreated if it does not exist."
 }
 
 CFGFILE=""
@@ -97,4 +97,4 @@ if [ -n "$CFGFILE" ]; then
 	R=$(checkfile "$R/$CFGFILE" "$CREATE") || exit 1
 fi
 
-echo $R
+echo "$R"
