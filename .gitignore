@@ -11,3 +11,5 @@ menus/icons/**/harmony-software.png
 
 # This one is not launched inside a vm, but still not freely distributable.
 menus/icons/**/pandora-icon.png
+
+fonts/**/.uuid
