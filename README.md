@@ -7,7 +7,7 @@ dotfiles
 * [Usage](#usage)
     * [Using solarized color scheme](#solarized-scheme)
     * [Host specific settings](#host-specific-settings)
-    * [Font (Inconsolata with Powerline symbols)](#font)
+    * [Font (Noto Mono with Powerline symbols)](#font)
     * [rxvt-unicode terminal](#rxvt-unicode)
 * [Recommended Software](#recommended-software)
 * [Caveats](#caveats)
@@ -108,23 +108,24 @@ command `hostname`. If there is no matching folder for a host, then the
 settings in `bash.d/hosts/generic` will be used.
 
 ## Font
-The [Inconsolata](https://github.com/powerline/fonts) font pre-patched with
+The [Noto Mono](https://github.com/powerline/fonts) font pre-patched with
 Powerline symbols is used in [xterm](http://invisible-island.net/xterm/),
 and [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The
 font is included with this repository and symbolically linked to from the
 `~/.fonts` directory.
 
 ## rxvt-unicode
-As mentioned [previously](#font), the Inconsolata font is used in
-rxvt-unicode. The default font size is 11, however, the font size of a
-currently open terminal can be changed with one of the following:
+As mentioned [previously](#font), the Noto Mono font is used in
+rxvt-unicode. The default font size is 13.5, however, the font size of a
+currently open terminal can be increased or decreased with one of the
+following:
 
 
-| Key Sequence | Font size |
-| :------------|:---------:|
-| Control-8    | 9         |
-| Control-9    | 10        |
-| Control-0    | 11        |
+| Key Sequence | Font size      |
+| :------------|:--------------:|
+| Control--    | decrease by 1  |
+| Control-=    | increase by 1  |
+| Control-0    | default (13.5) |
 
 # Recommended Software
 
@@ -217,17 +218,24 @@ as I know, KDE is the only desktop that needs this _fix_.
 
 Git repositories included as submodules.
 
-* Submodules for Vim
-    * [Pathogen](https://github.com/tpope/vim-pathogen)
-    * [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
-    * [Tabular](https://github.com/godlygeek/tabular)
-    * [NERD Tree](https://github.com/scrooloose/nerdtree.git)
-    * [Tagbar](https://github.com/majutsushi/tagbar)
-    * [VimOutliner](https://github.com/noelhenson/vimoutliner)
-    * [Solarized Colorscheme for Vim](https://github.com/altercation/vim-colors-solarized.git)
-    * [vim-airline](https://github.com/bling/vim-airline.git)
+* Submodules for Bash
+    * [fzf](https://github.com/junegunn/fzf)
+* Submodules for VIM
     * [fugitive](https://github.com/tpope/vim-fugitive.git)
+    * [fzf](https://github.com/junegunn/fzf.vim)
+    * [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
+    * [NERD Tree](https://github.com/scrooloose/nerdtree.git)
+    * [Pathogen](https://github.com/tpope/vim-pathogen)
     * [Supertab](https://github.com/ervandew/supertab.git)
-    * [surround](https://github.com/tpope/vim-surround.git)
-    * [EasyMotion](https://github.com/easymotion/vim-easymotion)
+    * [Syntastic](https://github.com/vim-syntastic/syntastic)
+    * [Tabular](https://github.com/godlygeek/tabular)
+    * [Tagbar](https://github.com/majutsushi/tagbar)
+    * [Tsuquyomi](https://github.com/Quramy/tsuquyomi)
+    * [Typescrit-vim](https://github.com/leafgarland/typescript-vim)
+    * [vim-airline](https://github.com/bling/vim-airline.git)
     * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
+    * [vim-Colors-Solarized](https://github.com/altercation/vim-colors-solarized.git)
+    * [vim-EasyMotion](https://github.com/easymotion/vim-easymotion)
+    * [vim-Javascript](https://github.com/pangloss/vim-javascript)
+    * [vim-surround](https://github.com/tpope/vim-surround.git)
+    * [VimOutliner](https://github.com/noelhenson/vimoutliner)
