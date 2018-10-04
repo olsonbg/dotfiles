@@ -32,6 +32,91 @@ USAGE="Usage: $(basename "$0") [-nh] <application>"
 
 SHOW_NOTIFICATION=0
 
+hotkey_cmd_calculator() {
+	if [ "$1" == "notification" ]; then
+		echo "bc calculator"
+		return
+	fi
+
+	check_for_program urxvtc-d
+
+	urxvtc-d -geometry 30x10 -e bc -lq
+}
+
+hotkey_cmd_gmail() {
+	if [ "$1" == "classname" ]; then
+		echo "mail.google.com__mail"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Google Mail"
+		return
+	fi
+
+	check_for_program google-chrome-stable
+
+	google-chrome-stable --app=https://mail.google.com/mail;
+}
+
+hotkey_cmd_thunderbird() {
+	if [ "$1" == "name" ]; then
+		echo 'Mozilla Thunderbird'
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "thunderbird"
+		return
+	fi
+
+	check_for_program google-chrome-stable
+
+	thunderbird
+}
+
+hotkey_cmd_calendar() {
+	if [ "$1" == "classname" ]; then
+		echo "www.google.com__calendar"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Google Calendar"
+		return
+	fi
+
+	check_for_program google-chrome-stable
+
+	google-chrome-stable --app=https://www.google.com/calendar;
+}
+
+hotkey_cmd_gdrive() {
+	if [ "$1" == "classname" ]; then
+		echo "drive.google.com"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Google Drive"
+		return
+	fi
+
+	check_for_program google-chrome-stable
+
+	google-chrome-stable --app=https://drive.google.com;
+}
+
+check_for_program() {
+	# Check for required programs.
+	MyRequiredProgs "$1"
+
+	if [ $? -eq 1 ]; then
+		notify-send -u critical "Missing Program:" "$1"
+		exit 1;
+	fi
+}
+
 showNotification()
 {
 	local BODY="$1"
@@ -46,50 +131,43 @@ doActivate()
 {
 	local XWINID="$1"
 	local PROG="$2"
-	local PROGOPTS="$3"
-
-	# Check for required programs.
-	MyRequiredProgs "$PROG"
-
-	if [ $? -eq 1 ]; then
-		notify-send -u critical "Missing Program:" "$PROG"
-		exit 1;
-	fi
+	local NOTIFICATION="$3"
 
 	if [ -z "$XWINID" ]; then
-		[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
-		"$PROG" $PROGOPTS &
+		[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$NOTIFICATION"
+		"$PROG" &
 	else
 		xdotool windowactivate "$XWINID"
 	fi
 }
 
+
 doLaunch()
 {
 	local PROG="$1"
-	local PROGOPTS="$2"
+	local NOTIFICATION="$2"
 
-	[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$PROG $PROGOPTS"
+	[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "$NOTIFICATION"
 
-	"$PROG" $PROGOPTS &
+	"$PROG" &
 }
 
 doByClassName()
 {
 	local CLASSNAME="$1"
 	local PROG="$2"
-	local PROGOPTS="$3"
+	local NOTIFICATION="$3"
 
-	doActivate "$(xdotool search --classname "$CLASSNAME" )" "$PROG" "$PROGOPTS"
+	doActivate "$(xdotool search --classname "$CLASSNAME" )" "$PROG" "$NOTIFICATION"
 }
 
 doByName()
 {
 	local NAME="$1"
 	local PROG="$2"
-	local PROGOPTS="$3"
+	local NOTIFICATION="$3"
 
-	doActivate "$(xdotool search --name "$NAME" )" "$PROG" "$PROGOPTS"
+	doActivate "$(xdotool search --name "$NAME" )" "$PROG" "$NOTIFICATION"
 }
 
 backlight()
@@ -118,12 +196,15 @@ pulseaudioVolume()
 
 	case "$OPT" in
 		"audioLowerVolume")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Lower Volume"
 			pactl set-sink-volume $SINK -$VOLSTEP
 			;;
 		"audioRaiseVolume")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Raise Volume"
 			pactl set-sink-volume $SINK +$VOLSTEP
 			;;
 		"audioMute")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Mute Volume"
 			pactl set-sink-mute $SINK toggle
 			;;
 		*)
@@ -183,22 +264,26 @@ shift $((OPTIND - 1))
 
 case "$1" in
 	"thunderbird")
-		doByName ".* - Earlybird" "thunderbird"
+		# doByName '.* - Earlybird' "thunderbird"
+		doByName "$(hotkey_cmd_thunderbird name)" \
+		         "hotkey_cmd_thunderbird" \
+		         "$(hotkey_cmd_thunderbird notification)"
 		;;
 	"gmail")
-		doByClassName "mail.google.com__mail" "google-chrome-stable" "--app=https://mail.google.com/mail"
+		doByClassName "$(hotkey_cmd_gmail classname)" "hotkey_cmd_gmail" "$(hotkey_cmd_gmail notification)"
 		;;
 	"calendar")
-		doByClassName "www.google.com__calendar" "google-chrome-stable" "--app=https://www.google.com/calendar"
+		doByClassName "$(hotkey_cmd_calendar classname)" "hotkey_cmd_calendar" "$(hotkey_cmd_calendar notification)"
 		;;
 	"drive")
-		doByClassName "drive.google.com" "google-chrome-stable" "--app=https://drive.google.com"
+		doByClassName "$(hotkey_cmd_gdrive classname)" "hotkey_cmd_gdrive" "$(hotkey_cmd_gdrive notification)"
 		;;
 	"web-browser")
-		doLaunch "google-chrome-stable"
+		doLaunch "google-chrome-stable" "Google Chrome Stable"
 		;;
 	"calculator")
-		doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
+		# doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
+		doLaunch "hotkey_cmd_calculator" "$(hotkey_cmd_calculator notification)"
 		;;
 	"monBrightnessUp")
 		backlight "up"
