@@ -102,10 +102,13 @@ This file is loaded first in the .Xresources file, followed by a series of
 * Any program which makes use of xrdb resources (most terminals)
 
 ## Host Specific Settings
-Settings for specific hosts can be placed in `bash.d/hosts/<hostname>`,
-where `<hostname>` is the hostname of the machine as returned from the
-command `hostname`. If there is no matching folder for a host, then the
-settings in `bash.d/hosts/generic` will be used.
+
+Settings for each host (computer) can be placed in the directory returned by
+`MyPersonalConfigs -d bash`, which is usually
+`~/.config/MyPersonalConfigs/bash`. A message is displayed by
+`makesymlinks.sh` which tells the user how to populate the directory with
+default configuration files.
+
 
 ## Font
 The [Noto Mono](https://github.com/powerline/fonts) font pre-patched with
