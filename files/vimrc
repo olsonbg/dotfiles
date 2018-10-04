@@ -338,6 +338,7 @@ function! SyntasticSetup ()
 	let g:tsuquyomi_disable_quickfix = 1
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
 	let g:syntastic_go_checkers = ['gofmt']
+	let g:syntastic_tex_checkers = ['']
 	" let g:syntastic_cpp_compiler=system('mpicxx --showme:compiler')
 	let g:syntastic_cpp_check_header = 1
 	let g:syntastic_quiet_messages = {
@@ -365,5 +366,10 @@ endif
 if !isdirectory(&directory) | call mkdir(&directory, 'p', 0700) | endif
 
 set rtp+=~/.bash.d/github.com/fzf
+
+" vim-latex settings
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+" end: vim-latex settings
 
 " vim:tw=76:ts=4:sw=4
