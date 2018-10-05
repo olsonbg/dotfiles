@@ -25,7 +25,7 @@ function __prompt_command()
 	local git_status="$(git status 2>&1)"
 	local Color_On
 	local branch
-	if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+	if ! [[ "$git_status" =~ [nN]ot\ a\ git\ repo ]]; then
 		if [[ "$git_status" =~ nothing\ to\ commit ]]; then
 			Color_On=$GREEN;
 		elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
