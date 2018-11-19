@@ -17,10 +17,15 @@ Xft*lcdfilter: lcddefault
 !#define MyIFont  xft:Inconsolata for Powerline:italic:antialias=true:size
 !#define MyBIFont xft:Inconsolata for Powerline:italic:antialias=true:size
 
-#define MyNFont  xft:DejaVu Sans Mono:medium:antialias=true:size
-#define MyBFont  xft:DejaVu Sans Mono:medium:antialias=true:size
-#define MyIFont  xft:DejaVu Sans Mono:italic:antialias=true:size
-#define MyBIFont xft:DejaVu Sans Mono:italic:antialias=true:size
+!#define MyNFont  xft:DejaVu Sans Mono:medium:antialias=true:size
+!#define MyBFont  xft:DejaVu Sans Mono:medium:antialias=true:size
+!#define MyIFont  xft:DejaVu Sans Mono:italic:antialias=true:size
+!#define MyBIFont xft:DejaVu Sans Mono:italic:antialias=true:size
+
+#define MyNFont  xft:RobotoMono Nerd Font Mono:style=Regular:antialias=true:size
+#define MyBFont  xft:RobotoMono Nerd Font Mono:style=Regular:antialias=true:size
+#define MyIFont  xft:RobotoMono Nerd Font Mono:style=Italic:antialias=true:size
+#define MyBIFont xft:RobotoMono Nerd Font Mono:style=Italic:antialias=true:size
 
 !#define MyNFont  xft:Noto Mono:medium:antialias=true:size
 !#define MyBFont  xft:Noto Mono:medium:antialias=true:size
@@ -34,8 +39,13 @@ Xft*lcdfilter: lcddefault
 !
 ! Fallback fonts
 !
-#define MyNFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
-#define MyBFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
-#define MyIFallbackFont  xft:Noto Mono for Powerline:italic:antialias=true
-#define MyBIFallbackFont xft:Noto Mono for Powerline:italic:antialias=true
+! #define MyNFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
+! #define MyBFallbackFont  xft:Noto Mono for Powerline:medium:antialias=true
+! #define MyIFallbackFont  xft:Noto Mono for Powerline:italic:antialias=true
+! #define MyBIFallbackFont xft:Noto Mono for Powerline:italic:antialias=true
+
+#define MyNFallbackFont  xft:DejaVu Sans Mono:style=Book:antialias=true
+#define MyBFallbackFont  xft:DejaVu Sans Mono:style=Book:antialias=true
+#define MyIFallbackFont  xft:DejaVu Sans Mono:style=Oblique:antialias=true
+#define MyBIFallbackFont xft:DejaVu Sans Mono:style=Oblique:antialias=true
 ! vim:ft=xdefaults

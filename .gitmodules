@@ -63,3 +63,6 @@
 [submodule "dirs/vim/bundle/fzf.vim"]
 	path = dirs/vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule "dirs/vim/bundle/vim-devicons"]
+	path = dirs/vim/bundle/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons

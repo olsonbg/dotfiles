@@ -7,7 +7,7 @@ dotfiles
 * [Usage](#usage)
     * [Using solarized color scheme](#solarized-scheme)
     * [Host specific settings](#host-specific-settings)
-    * [Font (Noto Mono with Powerline symbols)](#font)
+    * [Font (RobotoMono Nerd Font Mono)](#font)
     * [rxvt-unicode terminal](#rxvt-unicode)
 * [Recommended Software](#recommended-software)
 * [Caveats](#caveats)
@@ -111,11 +111,13 @@ default configuration files.
 
 
 ## Font
-The [Noto Mono](https://github.com/powerline/fonts) font pre-patched with
-Powerline symbols is used in [xterm](http://invisible-island.net/xterm/),
-and [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The
-font is included with this repository and symbolically linked to from the
+The [RobotoMono Nerd Font Mono](https://github.com/ryanoasis/nerd-fonts)
+font is used in [xterm](http://invisible-island.net/xterm/), and
+[rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html). The font
+is included with this repository and symbolically linked to from the
 `~/.fonts` directory.
+
+The fallback font is set to `DejaVu Sans Mono`.
 
 ## rxvt-unicode
 As mentioned [previously](#font), the Noto Mono font is used in
@@ -238,6 +240,8 @@ Git repositories included as submodules.
     * [vim-airline](https://github.com/bling/vim-airline.git)
     * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
     * [vim-Colors-Solarized](https://github.com/altercation/vim-colors-solarized.git)
+    * [vim-devicons](https://github.com/ryanoasis/vim-devicons)
+        * Adds file type glyphs/icons to popular Vim plugins: NERDTree, vim-airline, Powerline, Unite, vim-startify and more
     * [vim-EasyMotion](https://github.com/easymotion/vim-easymotion)
     * [vim-Javascript](https://github.com/pangloss/vim-javascript)
     * [vim-surround](https://github.com/tpope/vim-surround.git)
