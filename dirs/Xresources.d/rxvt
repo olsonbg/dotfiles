@@ -28,6 +28,7 @@ URxvt.font-step.step:  1
 !URxvt.keysym.C-7: command:\033[8;20;80t
 !URxvt.keysym.C-6: command:\033[8;30;80t
 !URxvt.keysym.C-5: command:\033[8;40;80t
+URxvt.keysym.C-3: command:\033[8;45;140t\033[3;140;40t
 URxvt.keysym.C-2: command:\033[8;40;120t
 URxvt.keysym.C-1: command:\033[8;40;80t
 

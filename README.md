@@ -120,17 +120,19 @@ is included with this repository and symbolically linked to from the
 The fallback font is set to `DejaVu Sans Mono`.
 
 ## rxvt-unicode
-As mentioned [previously](#font), the Noto Mono font is used in
-rxvt-unicode. The default font size is 13.5, however, the font size of a
-currently open terminal can be increased or decreased with one of the
-following:
+The default font size for the font mentioned [previously](#font) is 13.5,
+however, the font size of a currently open terminal can be increased or
+decreased with one of the key sequences listed in the following table:
 
 
-| Key Sequence | Font size      |
-| :------------|:--------------:|
-| Control--    | decrease by 1  |
-| Control-=    | increase by 1  |
-| Control-0    | default (13.5) |
+| Key Sequence  | Action                                                     |
+| :------------ | :--------------------------------------------------------- |
+| Control--     | Decrease font by 1.                                        |
+| Control-=     | Increase font by 1.                                        |
+| Control-0     | Default font size (13.5).                                  |
+| Control-1     | Resize window to 80x40 characters.                         |
+| Control-2     | Resize window to 120x40 characters.                        |
+| Control-3     | Resize window to 140x45 characters, and move to 40,140 px. |
 
 # Recommended Software
 
