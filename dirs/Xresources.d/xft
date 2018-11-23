@@ -23,9 +23,9 @@ Xft*lcdfilter: lcddefault
 !#define MyBIFont xft:DejaVu Sans Mono:italic:antialias=true:size
 
 #define MyNFont  xft:RobotoMono Nerd Font Mono:style=Regular:antialias=true:size
-#define MyBFont  xft:RobotoMono Nerd Font Mono:style=Regular:antialias=true:size
+#define MyBFont  xft:RobotoMono Nerd Font Mono:style=Bold:antialias=true:size
 #define MyIFont  xft:RobotoMono Nerd Font Mono:style=Italic:antialias=true:size
-#define MyBIFont xft:RobotoMono Nerd Font Mono:style=Italic:antialias=true:size
+#define MyBIFont xft:RobotoMono Nerd Font Mono:style=Bold Italic:antialias=true:size
 
 !#define MyNFont  xft:Noto Mono:medium:antialias=true:size
 !#define MyBFont  xft:Noto Mono:medium:antialias=true:size
@@ -45,7 +45,7 @@ Xft*lcdfilter: lcddefault
 ! #define MyBIFallbackFont xft:Noto Mono for Powerline:italic:antialias=true
 
 #define MyNFallbackFont  xft:DejaVu Sans Mono:style=Book:antialias=true
-#define MyBFallbackFont  xft:DejaVu Sans Mono:style=Book:antialias=true
+#define MyBFallbackFont  xft:DejaVu Sans Mono:style=Bold:antialias=true
 #define MyIFallbackFont  xft:DejaVu Sans Mono:style=Oblique:antialias=true
-#define MyBIFallbackFont xft:DejaVu Sans Mono:style=Oblique:antialias=true
+#define MyBIFallbackFont xft:DejaVu Sans Mono:style=Bold Oblique:antialias=true
 ! vim:ft=xdefaults

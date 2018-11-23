@@ -28,7 +28,7 @@ URxvt.font-step.step:  1
 !URxvt.keysym.C-7: command:\033[8;20;80t
 !URxvt.keysym.C-6: command:\033[8;30;80t
 !URxvt.keysym.C-5: command:\033[8;40;80t
-URxvt.keysym.C-3: command:\033[8;45;140t\033[3;140;40t
+URxvt.keysym.C-3: command:\033[8;45;140t\033[3;39;27t
 URxvt.keysym.C-2: command:\033[8;40;120t
 URxvt.keysym.C-1: command:\033[8;40;80t
 
@@ -42,9 +42,9 @@ URxvt*iconFile:   /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symb
 URxvt*urlLauncher: chromium-browser
 URxvt*loginShell: false
 URxvt*saveLines: 1024
-URxvt.intensityStyles: false
+URxvt.intensityStyles: true
 ! Fix font space
-URxvt*letterSpace: -1
+URxvt*letterSpace: -0.8
 !URxvt.perl-ext-common: default,tabbed
 !URxvt.tabbed.tabbar-fg: 6
 !URxvt.tabbed.tabbar-bg: 8
