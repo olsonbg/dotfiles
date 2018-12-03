@@ -22,6 +22,12 @@ function __prompt_command()
 	PS1+="$YEL$SUS$NONE"
 	PS1+="$CYAN:\W$NONE"
 
+	# Show python virtual environment if one is active
+	if [ -n "$VIRTUAL_ENV" ];  then
+		local virtualenv=$(basename "$VIRTUAL_ENV")
+		PS1+=" $CYAN($GREEN$virtualenv$CYAN)$NONE"
+	fi
+
 	local git_status="$(git status 2>&1)"
 	local Color_On
 	local branch
