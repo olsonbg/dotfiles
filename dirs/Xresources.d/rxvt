@@ -44,7 +44,7 @@ URxvt*loginShell: false
 URxvt*saveLines: 1024
 URxvt.intensityStyles: true
 ! Fix font space
-URxvt*letterSpace: -0.8
+URxvt*letterSpace: -0.9
 !URxvt.perl-ext-common: default,tabbed
 !URxvt.tabbed.tabbar-fg: 6
 !URxvt.tabbed.tabbar-bg: 8
