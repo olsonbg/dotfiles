@@ -90,7 +90,8 @@ noremap [l :lnext<CR>
 noremap ]l :lprev<CR>
 
 " set # to toggle line numbers on and off:
-map # :set invnumber<CR>
+" map # :set invnumber<CR>
+map # :set number! relativenumber!<CR>
 
 
 " maps highlighting column 80 to <F8>
