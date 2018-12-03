@@ -225,6 +225,9 @@ function! NERDTreeSetup ()
 
 	" (also in insert and command-line modes)
 	noremap! <silent> <F9> <ESC>:NERDTreeToggle<CR>:vert resize 25<CR>
+
+	let g:NERDTreeHighlightCursorline = 0
+	let g:NERDTreeFileExtensionHighlightFullName = 1
 endfunction
 
 "
@@ -372,5 +375,264 @@ set rtp+=~/.bash.d/github.com/fzf
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 " end: vim-latex settings
+
+
+hi Directory ctermfg=6 guifg=Blue
+
+let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+
+" this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor = {}
+
+" configs
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = 'eee8d5'
+let g:NERDTreeExactMatchHighlightColor['LICENSE'] = 'eee8d5'
+
+" this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor = {}
+
+" The NERDTreeExtensionHighlightColor lines below match my LS_COLORS
+" definitions.
+
+" Executables
+let g:NERDTreeExtensionHighlightColor['sh'] = 'cb4b16'
+
+let g:NERDTreeExtensionHighlightColor['txt'] = '859900'
+let g:NERDTreeExtensionHighlightColor['org'] = '859900'
+let g:NERDTreeExtensionHighlightColor['md'] = '859900'
+let g:NERDTreeExtensionHighlightColor['mkd'] = '859900'
+
+
+" ### Text formats
+
+" # Text that we can edit with a regular editor
+let g:NERDTreeExtensionHighlightColor['txt'] = '859900'
+let g:NERDTreeExtensionHighlightColor['org'] = '859900'
+let g:NERDTreeExtensionHighlightColor['md'] = '859900'
+let g:NERDTreeExtensionHighlightColor['mkd'] = '859900'
+
+" # Source text
+let g:NERDTreeExtensionHighlightColor['h'] = '859900'
+let g:NERDTreeExtensionHighlightColor['c'] = '859900'
+let g:NERDTreeExtensionHighlightColor['C'] = '859900'
+let g:NERDTreeExtensionHighlightColor['cc'] = '859900'
+let g:NERDTreeExtensionHighlightColor['cpp'] = '859900'
+let g:NERDTreeExtensionHighlightColor['cxx'] = '859900'
+let g:NERDTreeExtensionHighlightColor['objc'] = '859900'
+let g:NERDTreeExtensionHighlightColor['csh'] = '859900'
+let g:NERDTreeExtensionHighlightColor['zsh'] = '859900'
+let g:NERDTreeExtensionHighlightColor['el'] = '859900'
+let g:NERDTreeExtensionHighlightColor['vim'] = '859900'
+let g:NERDTreeExtensionHighlightColor['java'] = '859900'
+let g:NERDTreeExtensionHighlightColor['pl'] = '859900'
+let g:NERDTreeExtensionHighlightColor['pm'] = '859900'
+let g:NERDTreeExtensionHighlightColor['py'] = '859900'
+let g:NERDTreeExtensionHighlightColor['rb'] = '859900'
+let g:NERDTreeExtensionHighlightColor['hs'] = '859900'
+let g:NERDTreeExtensionHighlightColor['php'] = '859900'
+let g:NERDTreeExtensionHighlightColor['htm'] = '859900'
+let g:NERDTreeExtensionHighlightColor['html'] = '859900'
+let g:NERDTreeExtensionHighlightColor['shtml'] = '859900'
+let g:NERDTreeExtensionHighlightColor['erb'] = '859900'
+let g:NERDTreeExtensionHighlightColor['haml'] = '859900'
+let g:NERDTreeExtensionHighlightColor['xml'] = '859900'
+let g:NERDTreeExtensionHighlightColor['rdf'] = '859900'
+let g:NERDTreeExtensionHighlightColor['css'] = '859900'
+let g:NERDTreeExtensionHighlightColor['sass'] = '859900'
+let g:NERDTreeExtensionHighlightColor['scss'] = '859900'
+let g:NERDTreeExtensionHighlightColor['less'] = '859900'
+let g:NERDTreeExtensionHighlightColor['js'] = '859900'
+let g:NERDTreeExtensionHighlightColor['coffee'] = '859900'
+let g:NERDTreeExtensionHighlightColor['man'] = '859900'
+let g:NERDTreeExtensionHighlightColor['0'] = '859900'
+let g:NERDTreeExtensionHighlightColor['1'] = '859900'
+let g:NERDTreeExtensionHighlightColor['2'] = '859900'
+let g:NERDTreeExtensionHighlightColor['3'] = '859900'
+let g:NERDTreeExtensionHighlightColor['4'] = '859900'
+let g:NERDTreeExtensionHighlightColor['5'] = '859900'
+let g:NERDTreeExtensionHighlightColor['6'] = '859900'
+let g:NERDTreeExtensionHighlightColor['7'] = '859900'
+let g:NERDTreeExtensionHighlightColor['8'] = '859900'
+let g:NERDTreeExtensionHighlightColor['9'] = '859900'
+let g:NERDTreeExtensionHighlightColor['l'] = '859900'
+let g:NERDTreeExtensionHighlightColor['n'] = '859900'
+let g:NERDTreeExtensionHighlightColor['p'] = '859900'
+let g:NERDTreeExtensionHighlightColor['pod'] = '859900'
+let g:NERDTreeExtensionHighlightColor['tex'] = '859900'
+let g:NERDTreeExtensionHighlightColor['go'] = '859900'
+
+" ### Multimedia formats
+
+" # Image
+let g:NERDTreeExtensionHighlightColor['bmp'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['cgm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['dl'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['dvi'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['emf'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['eps'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['gif'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['jpeg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['jpg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['JPG'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mng'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['pbm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['pcx'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['pdf'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['pgm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['png'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['PNG'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ppm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['pps'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ppsx'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ps'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['svg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['svgz'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['tga'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['tif'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['tiff'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['xbm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['xcf'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['xpm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['xwd'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['xwd'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['yuv'] = 'b58900'
+
+" # Audio
+let g:NERDTreeExtensionHighlightColor['aac'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['au '] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['flac'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['m4a'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mid'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['midi'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mka'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mp3'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mpa'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mpeg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mpg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ogg '] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ra'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['wav'] = 'b58900'
+
+" # Video
+let g:NERDTreeExtensionHighlightColor['anx'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['asf'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['avi'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['axv'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['flc'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['fli'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['flv'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['gl'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['m2v'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['m4v'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mkv'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mov'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['MOV'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mp4'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mp4v'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mpeg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['mpg'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['nuv'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ogm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ogv'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['ogx'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['qt'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['rm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['rmvb'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['swf'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['vob'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['webm'] = 'b58900'
+let g:NERDTreeExtensionHighlightColor['wmv'] = 'b58900'
+
+" ### Misc
+
+" # Binary document formats and multimedia source
+let g:NERDTreeExtensionHighlightColor['doc'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['docx'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['rtf'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['dot'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['dotx'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['xls'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['xlsx'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['ppt'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['pptx'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['fla'] = 'dc322f'
+let g:NERDTreeExtensionHighlightColor['psd'] = 'dc322f'
+
+" # Archives, compressed
+let g:NERDTreeExtensionHighlightColor['7z'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['apk'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['arj'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['bin'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['bz'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['bz2'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['cab'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['deb'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['dmg'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['gem'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['gz'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['iso'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['jar'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['msi'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['rar'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['rpm'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['tar'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['tbz'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['tbz2'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['tgz'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['tx'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['war'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['xpi'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['xz'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['z'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['Z'] = '6c71c4'
+let g:NERDTreeExtensionHighlightColor['zip'] = '6c71c4'
+
+let g:NERDTreeExtensionHighlightColor['log'] = '839496'
+" let g:NERDTreeExtensionHighlightColor['*~'] = ''
+" let g:NERDTreeExtensionHighlightColor['*#'] = ''
+
+" # Unimportant non-text files
+let g:NERDTreeExtensionHighlightColor['bak'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['BAK'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['old'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['OLD'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['org_archive'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['off'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['OFF'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['dist'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['DIST'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['orig'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['ORIG'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['swp'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['swo'] = '93a1a1'
+let g:NERDTreeExtensionHighlightColor['*,v'] = '93a1a1'
+
+let g:NERDTreeExtensionHighlightColor['gpg'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['gpg'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['pgp'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['asc'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['3des'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['aes'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['enc'] = '268bd2'
+let g:NERDTreeExtensionHighlightColor['sqlite'] = '268bd2'
+
+let g:NERDTreeExtensionHighlightColor['png'] = '859900'
+let g:NERDTreeExtensionHighlightColor['bmp'] = '859900'
+let g:NERDTreeExtensionHighlightColor['dvi'] = '859900'
+let g:NERDTreeExtensionHighlightColor['eps'] = '859900'
+let g:NERDTreeExtensionHighlightColor['gif'] = '859900'
+let g:NERDTreeExtensionHighlightColor['jpeg'] = '859900'
+let g:NERDTreeExtensionHighlightColor['jpg'] = '859900'
+let g:NERDTreeExtensionHighlightColor['pdf'] = '859900'
+let g:NERDTreeExtensionHighlightColor['png'] = '859900'
+let g:NERDTreeExtensionHighlightColor['ppm'] = '859900'
+let g:NERDTreeExtensionHighlightColor['ps'] = '859900'
+let g:NERDTreeExtensionHighlightColor['svg'] = '859900'
+let g:NERDTreeExtensionHighlightColor['tga'] = '859900'
+let g:NERDTreeExtensionHighlightColor['tif'] = '859900'
+let g:NERDTreeExtensionHighlightColor['tiff'] = '859900'
+let g:NERDTreeExtensionHighlightColor['xcf'] = '859900'
+let g:NERDTreeExtensionHighlightColor['yuv'] = '859900'
+
 
 " vim:tw=76:ts=4:sw=4

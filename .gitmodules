@@ -66,3 +66,6 @@
 [submodule "dirs/vim/bundle/vim-devicons"]
 	path = dirs/vim/bundle/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
+[submodule "dirs/vim/bundle/vim-nerdtree-syntax-highlight"]
+	path = dirs/vim/bundle/vim-nerdtree-syntax-highlight
+	url = https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
