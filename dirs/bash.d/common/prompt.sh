@@ -25,7 +25,7 @@ function __prompt_command()
 	# Show python virtual environment if one is active
 	if [ -n "$VIRTUAL_ENV" ];  then
 		local virtualenv=$(basename "$VIRTUAL_ENV")
-		PS1+=" $CYAN($GREEN$virtualenv$CYAN)$NONE"
+		PS1+=" $CYAN($YEL$virtualenv$CYAN)$NONE"
 	fi
 
 	local git_status="$(git status 2>&1)"
