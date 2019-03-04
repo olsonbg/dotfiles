@@ -32,6 +32,36 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+" Settings for vim-go
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+" autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>d  <Plug>(go-doc)
+autocmd FileType go setlocal autowrite
+
+let g:go_list_type = "locationlist"
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_auto_type_info = 1
+" End Settings for vim-go
+
 let mapleader       = ',' " Use , as leader.
 
 
@@ -88,6 +118,7 @@ noremap <C-l> <C-w>l
 
 noremap [l :lnext<CR>
 noremap ]l :lprev<CR>
+noremap [c :lclose<CR>
 
 " set # to toggle line numbers on and off:
 " map # :set invnumber<CR>
@@ -341,7 +372,7 @@ function! SyntasticSetup ()
 	let g:syntastic_check_on_wq = 0
 	let g:tsuquyomi_disable_quickfix = 1
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
-	let g:syntastic_go_checkers = ['gofmt']
+	let g:syntastic_go_checkers = ['']
 	let g:syntastic_tex_checkers = ['']
 	" let g:syntastic_cpp_compiler=system('mpicxx --showme:compiler')
 	let g:syntastic_cpp_check_header = 1

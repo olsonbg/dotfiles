@@ -69,3 +69,6 @@
 [submodule "dirs/vim/bundle/vim-nerdtree-syntax-highlight"]
 	path = dirs/vim/bundle/vim-nerdtree-syntax-highlight
 	url = https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
+[submodule "dirs/vim/bundle/vim-go"]
+	path = dirs/vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go
