@@ -54,9 +54,21 @@ hotkey_cmd_gmail() {
 		return
 	fi
 
-	check_for_program google-chrome-stable
+	use_web_browser "--app=https://mail.google.com/mail"
+}
 
-	google-chrome-stable --app=https://mail.google.com/mail;
+hotkey_cmd_androidmessages() {
+	if [ "$1" == "classname" ]; then
+		echo "messages.android.com"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Android Messages"
+		return
+	fi
+
+	use_web_browser "--app=https://messages.android.com"
 }
 
 hotkey_cmd_thunderbird() {
@@ -70,7 +82,7 @@ hotkey_cmd_thunderbird() {
 		return
 	fi
 
-	check_for_program google-chrome-stable
+	check_for_program thunderbird
 
 	thunderbird
 }
@@ -86,9 +98,7 @@ hotkey_cmd_calendar() {
 		return
 	fi
 
-	check_for_program google-chrome-stable
-
-	google-chrome-stable --app=https://www.google.com/calendar;
+	use_web_browser "--app=https://www.google.com/calendar"
 }
 
 hotkey_cmd_gdrive() {
@@ -102,9 +112,17 @@ hotkey_cmd_gdrive() {
 		return
 	fi
 
+	use_web_browser "--app=https://drive.google.com"
+}
+
+use_web_browser() {
 	check_for_program google-chrome-stable
 
-	google-chrome-stable --app=https://drive.google.com;
+	if [ -f "$HOME/.config/chrome-flags.conf" ]; then
+		xargs --arg-file="$HOME/.config/chrome-flags.conf" google-chrome-stable "$@"
+	else
+		google-chrome-stable "$@"
+	fi
 }
 
 check_for_program() {
@@ -227,6 +245,7 @@ showhelp() {
 	echo -e "   \\t(A) gmail"
 	echo -e "   \\t(A) calendar"
 	echo -e "   \\t(A) drive"
+	echo -e "   \\t(A) androidmessages"
 	echo -e "   \\t(N) web-browser"
 	echo -e "\\n A: If application is already launched, activate it, otherwise"
 	echo -e "    launch a new instance."
@@ -272,6 +291,9 @@ case "$1" in
 	"gmail")
 		doByClassName "$(hotkey_cmd_gmail classname)" "hotkey_cmd_gmail" "$(hotkey_cmd_gmail notification)"
 		;;
+	"androidmessages")
+		doByClassName "$(hotkey_cmd_androidmessages classname)" "hotkey_cmd_androidmessages" "$(hotkey_cmd_androidmessages notification)"
+		;;
 	"calendar")
 		doByClassName "$(hotkey_cmd_calendar classname)" "hotkey_cmd_calendar" "$(hotkey_cmd_calendar notification)"
 		;;
@@ -279,7 +301,7 @@ case "$1" in
 		doByClassName "$(hotkey_cmd_gdrive classname)" "hotkey_cmd_gdrive" "$(hotkey_cmd_gdrive notification)"
 		;;
 	"web-browser")
-		doLaunch "google-chrome-stable" "Google Chrome Stable"
+		doLaunch "use_web_browser" "Google Chrome Stable"
 		;;
 	"calculator")
 		# doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
