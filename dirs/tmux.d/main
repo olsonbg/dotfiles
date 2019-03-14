@@ -38,4 +38,8 @@ set-option -g status-style fg=yellow,bg=white
 set  -g base-index 1
 setw -g pane-base-index 1
 
+# Set terminal window titles
+set-option -g set-titles on
+set-option -g set-titles-string "#S / #W"
+
 # vim:ft=tmux
