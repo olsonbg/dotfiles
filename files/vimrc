@@ -373,7 +373,8 @@ function! SyntasticSetup ()
 	let g:syntastic_check_on_wq = 0
 	let g:tsuquyomi_disable_quickfix = 1
 	let g:syntastic_typescript_checkers = ['tsuquyomi']
-	let g:syntastic_go_checkers = ['']
+	let g:syntastic_go_checkers = ['golangci_lint']
+	let g:syntastic_go_golangci_lint_args = "run ./..."
 	let g:syntastic_tex_checkers = ['']
 	" let g:syntastic_cpp_compiler=system('mpicxx --showme:compiler')
 	let g:syntastic_cpp_check_header = 1
