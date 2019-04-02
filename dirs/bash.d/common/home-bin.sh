@@ -1,13 +1,14 @@
 # Add ${HOME}/bin to PATH, if it exists.
-if [ -d "${HOME}/bin" ]; then
+TADDPATH="${HOME}/bin"
+if [ -d "$TADDPATH" ]; then
 	TPATH=""
 
-	if [ $(echo $PATH|grep -c "${HOME}/bin") == "0" ]; then
-		TPATH="$PATH:${HOME}/bin"
+	if [ $(echo $PATH|grep -c "$TADDPATH") == "0" ]; then
+		TPATH="$PATH:$TADDPATH"
 	fi
 
 	[[ -n "$TPATH" ]] && export PATH="$TPATH"
 
 	unset TPATH
 fi
-
+unset TADDPATH
