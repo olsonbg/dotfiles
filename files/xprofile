@@ -1,10 +1,12 @@
+#!/bin/bash
+#
 # Make sure $HOME/bin is added to path when logging in from a display manager
 # Add ${HOME}/bin to PATH, if it exists.
 TADDPATH="${HOME}/bin"
 if [ -d "$TADDPATH" ]; then
 	TPATH=""
 
-	if [ $(echo $PATH|grep -c "$TADDPATH") == "0" ]; then
+	if [ "$(echo "$PATH"|grep -c "$TADDPATH")" == "0" ]; then
 		TPATH="$PATH:$TADDPATH"
 	fi
 
@@ -13,3 +15,20 @@ if [ -d "$TADDPATH" ]; then
 	unset TPATH
 fi
 unset TADDPATH
+
+#
+# Make a cache directory in ram and link ~/.cache to it.
+#
+
+# Create a directory in ram.
+if [ ! -e "/dev/shm/cache-$USER" ] ; then
+	mkdir --mode=700 "/dev/shm/cache-$USER"
+fi
+
+# If ~/.cache already exists, and it's not a symbolic link, than back it up.
+[[ -d ~/.cache ]] && [[ ! -h ~/.cache ]] && mv ~/.cache ~/.cache-old
+
+# Link ~/.cache to the cache directory in ram.
+if [ ! -e ~/.cache ] ; then
+	ln -s "/dev/shm/cache-$USER" ~/.cache
+fi
