@@ -16,7 +16,7 @@ function __prompt_command()
 	local PURPLE=$E'[0;35m'$R
 	local NONE=$E'[0m'$R
 
-	SUS=`ps T |grep -v "grep"|grep -c " su"|grep -v "^0"`
+	SUS=$(ps T |grep -v "grep"|grep -c " su"|grep -v "^0")
 
 	PS1+="$CYAN\h$CYAN($YEL\u$CYAN)$NONE"
 	PS1+="$YEL$SUS$NONE"
@@ -24,7 +24,8 @@ function __prompt_command()
 
 	# Show virtualenv virtual environment if one is active
 	if [ -n "$VIRTUAL_ENV" ];  then
-		local virtualenv=$(basename "$VIRTUAL_ENV")
+		local virtualenv
+		virtualenv=$(basename "$VIRTUAL_ENV")
 		PS1+="$CYAN(${PURPLE}v:$YEL$virtualenv$CYAN)$NONE"
 	fi
 
@@ -38,9 +39,12 @@ function __prompt_command()
 		PS1+="$CYAN(${PURPLE}jobid:$YEL$SLURM_JOBID$CYAN)$NONE"
 	fi
 
-	local git_status="$(git status 2>&1)"
+	local git_status
 	local Color_On
 	local branch
+
+	git_status="$(git status 2>&1)"
+
 	if ! [[ "$git_status" =~ [nN]ot\ a\ git\ repo ]]; then
 		if [[ "$git_status" =~ nothing\ to\ commit ]]; then
 			Color_On=$GREEN;
@@ -58,13 +62,15 @@ function __prompt_command()
 
 		# Anything stashed?
 		local s
-		if $(git rev-parse --verify --quiet refs/stash >/dev/null); then
+		if git rev-parse --verify --quiet refs/stash >/dev/null; then
 			s="$"
 		fi
 
 		# How many commits we are ahead/behind our upstream
 		local p
-		local count=$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
+		local count
+
+		count=$(git rev-list --count --left-right "@{upstream}...HEAD" 2>/dev/null)
 
 		case "$count" in
 		"") # no upstream
@@ -79,7 +85,7 @@ function __prompt_command()
 			p="+${count#*	}-${count%	*}" ;;
 		esac
 
-		PS1+=" $Color_On[$branch$s$p]$NONE"
+		PS1+=" ${Color_On}[$branch$s$p]$NONE"
 	fi
 
 	# PS1+='$(__git_ps1 " [%s]")'
