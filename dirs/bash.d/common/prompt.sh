@@ -33,6 +33,11 @@ function __prompt_command()
 		PS1+="$CYAN(${PURPLE}c:$YEL$CONDA_DEFAULT_ENV$CYAN)$NONE"
 	fi
 
+	# Show SLURM jobid if in a slurm environment (salloc or srun)
+	if [ -n "$SLURM_JOBID" ]; then
+		PS1+="$CYAN(${PURPLE}jobid:$YEL$SLURM_JOBID$CYAN)$NONE"
+	fi
+
 	local git_status="$(git status 2>&1)"
 	local Color_On
 	local branch
@@ -101,3 +106,5 @@ function __prompt_command()
 }
 
 PROMPT_COMMAND=__prompt_command
+
+# vim: ft=sh
