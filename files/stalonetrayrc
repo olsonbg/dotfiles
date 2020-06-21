@@ -13,7 +13,7 @@
 
 # background <color>         # color can be specified as an HTML hex triplet or
                              # as a name from rgb.txt, note that '#' must be quoted
-background "#FFFFFF"
+background "#000000"
 
 # decorations <decspec>      # set trays window decorations; possible values for
                              # decspec are: all, title, border, none
@@ -78,7 +78,7 @@ no_shrink false
 
 # parent_bg [<bool>]         # whether to use pseudo-transparency 
                              # (looks better when reparented into smth like FvwmButtons)
-parent_bg true
+parent_bg false
 
 # pixmap_bg <path_to_xpm>    # use pixmap from specified xpm file for (tiled) background
 # pixmap_bg /home/user/.stalonetraybg.xpm
@@ -105,7 +105,7 @@ skip_taskbar true
 sticky true
 
 # tint_color <color>         # set tinting color
-tint_color yellow
+#tint_color yellow
 
 # tint_level <level>         # set tinting level; level ranges from 0 (disabled)
                              # to 255
@@ -113,7 +113,7 @@ tint_level 0
 
 # transparent [<bool>]       # whether to use root-transparency (background
                              # image must be set with Esetroot or compatible utility)
-transparent true
+transparent false
 
 # vertical [<bool>]          # whether to use vertical layout (horisontal layout
                              # is used by default)
