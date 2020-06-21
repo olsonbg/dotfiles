@@ -48,16 +48,23 @@ fi
 if [[ $2 = *.html ]]; then
 	# Generate the html. For LaTeX equations, use mathjax.
 	pandoc -B "$BEFORE" -A "$AFTER" --mathjax -o "$2" "$1"
+
+	TITLE=$(awk -vRS="</title>" '/<title>/{gsub(/.*<title>|\n+/,"");print;exit}' "$2")
+
 elif [[ $2 = *.pdf ]]; then
 	# Generate the pdf.
 	pandoc --listings -H "$HEADER" -V geometry:margin=1in -o "$2" "$1"
+	TITLE="$(pdfinfo "$2" | sed -n 's/Title: *//p')"
 else
 	# If not html or pdf, just try anyway.
 	pandoc -o "$2" "$1"
 fi
 
-# Name of tab in Google Chrome.
-TAB="$(basename "$2").* - Google Chrome"
+if [ -z "$TITLE" ]; then
+	TITLE="$(basename "$2")"
+fi
+
+TAB="$TITLE - Google Chrome"
 
 # Is a tab of this file currently active?
 WINDOWID=$(xdotool search --name "$TAB" 2>/dev/null)
@@ -68,6 +75,6 @@ if [ $? != 0 ]; then
 	xdotool search --sync --name "$TAB" windowactivate 2>/dev/null
 else
 	# Reload browser tab if current tab is <output html file>
-	xdotool windowactivate "$WINDOWID" key --clearmodifiers ctrl+r
+	xdotool windowactivate --sync "$WINDOWID" key 'ctrl+r' 2>/dev/null
 fi
 
