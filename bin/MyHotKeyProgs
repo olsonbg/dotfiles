@@ -31,6 +31,19 @@
 USAGE="Usage: $(basename "$0") [-nh] <application>"
 
 SHOW_NOTIFICATION=0
+#WEBBROWSER=chromium-browser
+WEBBROWSER=google-chrome-stable
+
+hotkey_cmd_terminal() {
+	if [ "$1" == "notification" ]; then
+		echo "terminal"
+		return
+	fi
+
+	check_for_program urxvtc-d
+
+	urxvtc-d
+}
 
 hotkey_cmd_calculator() {
 	if [ "$1" == "notification" ]; then
@@ -116,13 +129,33 @@ hotkey_cmd_gdrive() {
 }
 
 use_web_browser() {
-	check_for_program google-chrome-stable
+	local WEBBROWSERCONFIG
 
-	if [ -f "$HOME/.config/chrome-flags.conf" ]; then
-		xargs --arg-file="$HOME/.config/chrome-flags.conf" google-chrome-stable "$@"
-	else
-		google-chrome-stable "$@"
+	if [ "$WEBBROWSER" == "chromium-browser" ]; then
+		WEBBROWSERCONFIG=chromium-flags.conf
+	elif [ "$WEBBROWSER" == "google-chrome-stable" ]; then
+		WEBBROWSERCONFIG=chrome-flags.conf
 	fi
+
+	check_for_program "$WEBBROWSER"
+
+	if [ -f "$HOME/.config/$WEBBROWSERCONFIG" ]; then
+		xargs --arg-file="$HOME/.config/$WEBBROWSERCONFIG" "$WEBBROWSER" "$@"
+	else
+		"$WEBBROWSER" "$@"
+	fi
+}
+
+use_chromium_browser() {
+	WEBBROWSER=chromium-browser
+
+	use_web_browser "$@"
+}
+
+use_chrome_browser() {
+	WEBBROWSER=google-chrome-stable
+
+	use_web_browser "$@"
 }
 
 check_for_program() {
@@ -194,9 +227,11 @@ backlight()
 
 	case "$OPT" in
 		"up")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Increase Brightness"
 			xbacklight +5
 			;;
 		"down")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Decrease Brightness"
 			xbacklight -5
 			;;
 		*)
@@ -246,6 +281,7 @@ showhelp() {
 	echo -e "   \\t(A) calendar"
 	echo -e "   \\t(A) drive"
 	echo -e "   \\t(A) androidmessages"
+	echo -e "   \\t(N) terminal"
 	echo -e "   \\t(N) web-browser"
 	echo -e "\\n A: If application is already launched, activate it, otherwise"
 	echo -e "    launch a new instance."
@@ -282,29 +318,44 @@ fi
 shift $((OPTIND - 1))
 
 case "$1" in
+	"terminal")
+		wmctrl -s 0
+		doLaunch "hotkey_cmd_terminal" "$(hotkey_cmd_terminal notification)"
+		;;
 	"thunderbird")
+		wmctrl -s 2
 		# doByName '.* - Earlybird' "thunderbird"
 		doByName "$(hotkey_cmd_thunderbird name)" \
 		         "hotkey_cmd_thunderbird" \
 		         "$(hotkey_cmd_thunderbird notification)"
 		;;
 	"gmail")
+		wmctrl -s 2
 		doByClassName "$(hotkey_cmd_gmail classname)" "hotkey_cmd_gmail" "$(hotkey_cmd_gmail notification)"
 		;;
 	"androidmessages")
 		doByClassName "$(hotkey_cmd_androidmessages classname)" "hotkey_cmd_androidmessages" "$(hotkey_cmd_androidmessages notification)"
 		;;
 	"calendar")
+		wmctrl -s 2
 		doByClassName "$(hotkey_cmd_calendar classname)" "hotkey_cmd_calendar" "$(hotkey_cmd_calendar notification)"
 		;;
 	"drive")
 		doByClassName "$(hotkey_cmd_gdrive classname)" "hotkey_cmd_gdrive" "$(hotkey_cmd_gdrive notification)"
 		;;
 	"web-browser")
-		doLaunch "use_web_browser" "Google Chrome Stable"
+		wmctrl -s 1
+		doLaunch "use_web_browser" "Web Browser Loading"
+		;;
+	"chrome")
+		wmctrl -s 1
+		doLaunch "use_chrome_browser" "Google Chrome Stable"
+		;;
+	"chromium")
+		wmctrl -s 1
+		doLaunch "use_chromium_browser" "Chromium"
 		;;
 	"calculator")
-		# doLaunch "urxvtc-d" "-geometry 30x10 -e bc -lq"
 		doLaunch "hotkey_cmd_calculator" "$(hotkey_cmd_calculator notification)"
 		;;
 	"monBrightnessUp")
