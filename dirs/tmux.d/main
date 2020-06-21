@@ -26,10 +26,11 @@ bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
 
 # Status line settings
 set-option -g status-left "[#S] "
+set-option -g status-left '#[fg=white,bg=brightcyan] #S #[fg=brightcyan,bg=white]'
 set-option -g status-left-length 10
 set-option -g status-left-style default
 set-option -g status-position bottom
-set-option -ga status-right " "#{=22:pane_title}" %H:%M %d-%b-%y"
+set-option -g status-right " \"#{=22:pane_title}\" %H:%M %d-%b-%y"
 set-option -g status-right-length 40
 set-option -g status-right-style default
 set-option -g status-style fg=yellow,bg=white
@@ -37,5 +38,12 @@ set-option -g status-style fg=yellow,bg=white
 # Start windows and panes at 1, not 0
 set  -g base-index 1
 setw -g pane-base-index 1
+
+# Set terminal window titles
+set-option -g set-titles on
+set-option -g set-titles-string "#S / #W"
+
+# Reset these everytime starting or joining a session
+set-option -g update-environment "DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
 
 # vim:ft=tmux
