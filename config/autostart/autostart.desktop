@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Custom Autostart Programs
-Exec=myautostart
+Exec=bash -c $(xdg-user-dir)/bin/myautostart
 StartupNotify=false
 Type=Application
