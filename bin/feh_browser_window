@@ -7,4 +7,4 @@
 # Get personal settings.
 . "$(MyPersonalConfigs -c -f feh_browser_window)"
 
-feh_browser "$@" -g ${FEH_GEOMETRY:-800x450}
+feh_browser "$@" -g ${FEH_GEOMETRY:-800x450} --scale-down
