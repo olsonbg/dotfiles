@@ -52,7 +52,7 @@ touch "${LOGFILE}"
 
 for p in "${startups[@]}" "${extras[@]}"; do
 	killandstart $p
-done > "$LOGFILE" 2>&1
+done >> "$LOGFILE" 2>&1
 
 # Make sure Xresources get processed
 [[ -f ~/.Xresources ]] && xrdb ~/.Xresources

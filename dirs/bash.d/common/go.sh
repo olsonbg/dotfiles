@@ -1,10 +1,10 @@
-# Add ${HOME}/bin to PATH, if it exists.
-TADDPATH="${HOME}/bin"
+# Add ${HOME}/go/bin to PATH, if it exists.
+TADDPATH="${HOME}/go/bin"
 if [ -d "$TADDPATH" ]; then
 	TPATH=""
 
 	if [ $(echo $PATH|grep -c "$TADDPATH") == "0" ]; then
-		TPATH="$PATH:$TADDPATH"
+		TPATH="$TADDPATH:$PATH"
 	fi
 
 	[[ -n "$TPATH" ]] && export PATH="$TPATH"

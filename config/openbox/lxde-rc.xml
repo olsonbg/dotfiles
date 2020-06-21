@@ -371,6 +371,7 @@
           gmail            (open on desktop 3, only 1 instance)
           google calendar  (open on desktop 3, only 1 instance)
           google drive     (open on desktop 2, only 1 instance)
+		  android messages (open on desktop 3, only 1 instance)
 
     -->
     <keybind key="W-c">
@@ -406,6 +407,14 @@
             <command>~/bin/MyHotKeyProgs drive</command>
         </action>
       </keybind>
+      <keybind key="m">
+        <action name="GoToDesktop">
+          <to>3</to>
+        </action>
+        <action name="Execute">
+            <command>~/bin/MyHotKeyProgs androidmessages</command>
+        </action>
+      </keybind>
     </keybind>
     <!-- End: Nested keybinding for:
 
@@ -413,6 +422,7 @@
           gmail            (open on desktop 3, only 1 instance)
           google calendar  (open on desktop 3, only 1 instance)
           google drive     (open on desktop 2, only 1 instance)
+		  android messages (open on desktop 3, only 1 instance)
 
     -->
     <keybind key="W-t">

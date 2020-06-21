@@ -3,6 +3,7 @@ session=${1:-lxde}
 
 # To create ConsoleKit session.
 consolekit="ck-launch-session dbus-launch --sh-syntax --exit-with-session"
+consolekit=""
 
 case $session in
     awesome           ) exec $consolekit awesome;;
