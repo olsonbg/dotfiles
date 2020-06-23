@@ -81,13 +81,13 @@ endfunction
 
 command! DiffOrig new|set bt=nofile|r #|0d_|diffthis|wincmd p|diffthis
 
-" If buffer modified, update any 'Last modified: ' in the first 20 lines.
+" If buffer modified, update any 'Last modified: ' in the first 40 lines.
 " " 'Last modified: Tue May 26, 2009  06:44PM
 " " Restores position using s mark.
 function! LastModified()
 	if &modified
 		normal ms
-		let n = min([20, line("$")])
+		let n = min([40, line("$")])
 		exe '1,' . n . 's#^\(.\{,10}Last modified: \).*#\1' .
 		\ strftime('%c') . '#e'
 		normal `s
