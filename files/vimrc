@@ -249,6 +249,7 @@ endfunction
 function! NERDCommenterSetup ()
 	let g:NERDShutUp      = 1   " Don't warn on unsupported filetype
 	let g:NERDSpaceDelims = 1   " Put a space between comment delimiter and text
+	let g:NERDCustomDelimiters = { 'lammps': {'left': '#'} }
 endfunction
 
 "
