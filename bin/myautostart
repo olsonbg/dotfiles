@@ -12,7 +12,7 @@ case $XDG_CURRENT_DESKTOP in
 	LXDE          ) extras=( "dunst" "compton -b" "nm-applet"  "stalonetray" );;
 	LXQt          ) extras=( "compton -b" "stalonetray" );;
 	enlightenment ) extras=( "nm-applet"  "stalonetray" );;
-	XFCE          ) extras=( "stalonetray" );;
+	XFCE          ) extras=( "dunst" "stalonetray" );;
 esac
 
 startit()
