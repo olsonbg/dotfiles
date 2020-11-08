@@ -56,6 +56,22 @@ hotkey_cmd_calculator() {
 	urxvtc-d -geometry 30x10 -e bc -lq
 }
 
+hotkey_cmd_spotify() {
+	if [ "$1" == "classname" ]; then
+		echo "spotify.Spotify"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Spotify"
+		return
+	fi
+
+	check_for_program spotify
+
+	spotify
+}
+
 hotkey_cmd_gmail() {
 	if [ "$1" == "classname" ]; then
 		echo "mail.google.com__mail"
@@ -112,6 +128,20 @@ hotkey_cmd_calendar() {
 	fi
 
 	use_web_browser "--app=https://www.google.com/calendar"
+}
+
+hotkey_cmd_outlook() {
+	if [ "$1" == "classname" ]; then
+		echo "outlook.office.com__calendar_view_"
+		return
+	fi
+
+	if [ "$1" == "notification" ]; then
+		echo "Outlook Calendar"
+		return
+	fi
+
+	use_web_browser "--app=https://outlook.office.com/calendar/view/month"
 }
 
 hotkey_cmd_gdrive() {
@@ -192,6 +222,21 @@ doActivate()
 	fi
 }
 
+doKey()
+{
+	local XWINID="$1"
+	local NOTIFICATION="$2"
+	local KEY="$3"
+
+	if [ -n "$XWINID" ]; then
+		DESKTOP=$(xdotool get_desktop)
+		xdotool set_desktop_for_window "$XWINID" "$DESKTOP"
+		# The 'Alt' is just a dummy keypress hack to get this to work for
+		# spotify.
+		xdotool windowactivate --sync "$XWINID" key --delay 250 Alt "$KEY"
+		xdotool windowminimize "$XWINID"
+	fi
+}
 
 doLaunch()
 {
@@ -202,6 +247,30 @@ doLaunch()
 
 	"$PROG" &
 }
+
+doByWmctrl()
+{
+	local WMCTRL="$1"
+	local PROG="$2"
+	local NOTIFICATION="$3"
+
+	WID="$(wmctrl -xl| grep "$WMCTRL" | awk '{print $1}')"
+
+	doActivate "$WID" "$PROG" "$NOTIFICATION"
+}
+
+doByWmctrlKey()
+{
+	local WMCTRL="$1"
+	local NOTIFICATION="$2"
+	local KEY="$3"
+
+	WID="$(wmctrl -xl| grep "$WMCTRL" | awk '{print $1}')"
+
+	doKey "$WID" "$NOTIFICATION" "$KEY"
+}
+
+
 
 doByClassName()
 {
@@ -239,6 +308,21 @@ backlight()
 			exit 1
 			;;
 	esac
+}
+
+screenshot() {
+	local TYPE="$1"
+
+	case "$TYPE" in
+		"window")
+			scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/' -s
+			;;
+		*)
+			scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
+			;;
+	esac
+
+	showNotification "Shot Saved to ~/shots"
 }
 
 pulseaudioVolume()
@@ -281,8 +365,10 @@ showhelp() {
 	echo -e "   \\t(A) calendar"
 	echo -e "   \\t(A) drive"
 	echo -e "   \\t(A) androidmessages"
+	echo -e "   \\t(A) spotify"
 	echo -e "   \\t(N) terminal"
 	echo -e "   \\t(N) web-browser"
+	echo -e "   \\t    spotify_pauseplay"
 	echo -e "\\n A: If application is already launched, activate it, otherwise"
 	echo -e "    launch a new instance."
 	echo -e " N: Always launch a new instance.\\n"
@@ -329,6 +415,17 @@ case "$1" in
 		         "hotkey_cmd_thunderbird" \
 		         "$(hotkey_cmd_thunderbird notification)"
 		;;
+	"spotify")
+		doByWmctrl "$(hotkey_cmd_spotify classname)" "hotkey_cmd_spotify" "$(hotkey_cmd_spotify notification)"
+		;;
+	"spotify_pauseplay")
+		if pgrep spotify >/dev/null; then
+			doByWmctrlKey "$(hotkey_cmd_spotify classname)" "$(hotkey_cmd_spotify notification)" "space"
+		else
+			# If spotify is not running, we must be using cmus.
+			cmus-remote -u 2>/dev/null
+		fi
+		;;
 	"gmail")
 		wmctrl -s 2
 		doByClassName "$(hotkey_cmd_gmail classname)" "hotkey_cmd_gmail" "$(hotkey_cmd_gmail notification)"
@@ -339,6 +436,10 @@ case "$1" in
 	"calendar")
 		wmctrl -s 2
 		doByClassName "$(hotkey_cmd_calendar classname)" "hotkey_cmd_calendar" "$(hotkey_cmd_calendar notification)"
+		;;
+	"outlook")
+		wmctrl -s 2
+		doByClassName "$(hotkey_cmd_outlook classname)" "hotkey_cmd_outlook" "$(hotkey_cmd_outlook notification)"
 		;;
 	"drive")
 		doByClassName "$(hotkey_cmd_gdrive classname)" "hotkey_cmd_gdrive" "$(hotkey_cmd_gdrive notification)"
@@ -375,6 +476,12 @@ case "$1" in
 		;;
 	"sleep")
 		suspendToRAM
+		;;
+	"screenshot-window")
+		screenshot "window"
+		;;
+	"screenshot-desktop")
+		screenshot "desktop"
 		;;
 	*)
 		showhelp
