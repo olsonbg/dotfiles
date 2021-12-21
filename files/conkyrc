@@ -1,6 +1,6 @@
 conky.config={
 alignment="top_right",
-xinerama_head=2,
+xinerama_head=0,
 background=true,
 border_width=1,
 cpu_avg_samples=2,
@@ -113,10 +113,10 @@ ${color0}CPU 2:$color ${freq cpu3} MHz ${alignr}${exec sensors | grep 'Core 2' |
 ${template0 cpugraph cpu3 ""}
 ${color0}CPU 3:$color ${freq cpu4} MHz ${alignr}${exec sensors | grep 'Core 3' | cut -c 15-22}
 ${template0 cpugraph cpu4 ""}
-${color0}CPU 4:$color ${freq cpu5} MHz ${alignr}${exec sensors | grep 'Core 4' | cut -c 15-22}
-${template0 cpugraph cpu5 ""}
-${color0}CPU 5:$color ${freq cpu6} MHz ${alignr}${exec sensors | grep 'Core 5' | cut -c 15-22}
-${template0 cpugraph cpu6 ""}
+# ${color0}CPU 4:$color ${freq cpu5} MHz ${alignr}${exec sensors | grep 'Core 4' | cut -c 15-22}
+# ${template0 cpugraph cpu5 ""}
+# ${color0}CPU 5:$color ${freq cpu6} MHz ${alignr}${exec sensors | grep 'Core 5' | cut -c 15-22}
+# ${template0 cpugraph cpu6 ""}
 #-
 #- Disk
 #-
@@ -149,9 +149,9 @@ ${template9 Entropy entropy_avail entropy_bar}
 #-
 #- Wired Internet
 #-
-${if_up eno1}${color0}Link Speed:${alignr}${exec cat /sys/class/net/eno1/speed} Mb/s
-${template3 downspeed upspeed eno1 eno1-D U}
-${template2 downspeedgraph upspeedgraph eno1}${endif}
+${if_up enp2s0f1}${color0}Link Speed:${alignr}${exec cat /sys/class/net/enp2s0f1/speed} Mb/s
+${template3 downspeed upspeed enp2s0f1 eno1-D U}
+${template2 downspeedgraph upspeedgraph enp2s0f1}${endif}
 #-
 #- Wired Internet (USB Dongle)
 #-
@@ -159,9 +159,9 @@ ${template2 downspeedgraph upspeedgraph eno1}${endif}
 #- ${template3 downspeed upspeed enp0s20f0u4u1 enp-D U}
 #- ${template2 downspeedgraph upspeedgraph enp0s20f0u4u1}${endif}
 #-
-${if_up enp0s20f0u1u1}${color0}Link Speed:${alignr}${exec cat /sys/class/net/enp0s20f0u1u1/speed} Mb/s
-${template3 downspeed upspeed enp0s20f0u1u1 enp-D U}
-${template2 downspeedgraph upspeedgraph enp0s20f0u1u1}${endif}
+# ${if_up enp0s20f0u1u1}${color0}Link Speed:${alignr}${exec cat /sys/class/net/enp0s20f0u1u1/speed} Mb/s
+# ${template3 downspeed upspeed enp0s20f0u1u1 enp-D U}
+# ${template2 downspeedgraph upspeedgraph enp0s20f0u1u1}${endif}
 #-
 #- ${if_up vboxnet0}${color0}Link Speed:${alignr}${exec cat /sys/class/net/vboxnet0/speed} Mb/s
 #- ${template3 downspeed upspeed vboxnet0 vbox-D U}
@@ -173,17 +173,24 @@ ${color0}Procs:${color}${processes}${alignr}${color0}Running:${color}${running_p
 #-
 #- Top (by CPU)
 #-
-${color0}Name            PID   CPU%
+${color0}-------- CPU (%) --------
 $color${top name 1} ${top pid 1} ${top cpu 1}
 $color${top name 2} ${top pid 2} ${top cpu 2}
 $color${top name 3} ${top pid 3} ${top cpu 3}
 #-
 #- Top (by Memory)
 #-
-${color0}Name            PID   MEM%
+${color0}------ Memory (%) -------
 $color${top_mem name 1} ${top_mem pid 1} ${top_mem mem 1}
 $color${top_mem name 2} ${top_mem pid 2} ${top_mem mem 2}
 $color${top_mem name 3} ${top_mem pid 3} ${top_mem mem 3}
+#-
+#- Top (by IO)
+#-
+${color0}---------- IO -----------
+$color${top_io name 1} ${top_io pid 1}
+$color                 ${top_io io_read 1}
+$color                 ${top_io io_write 1}
 #
 # Battery
 #
