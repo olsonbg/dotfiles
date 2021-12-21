@@ -134,7 +134,7 @@ ${template2 diskiograph_read diskiograph_write md127}
 #-
 $hr
 ${template9 RAM mem membar}
-${color0}Swap:${alignr}${color}${exec awk '/dev/ {used = $4} END {print used"iB"}' /proc/swaps}${color2}${execbar awk '/dev/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}' /proc/swaps}
+${color0}Swap:${alignr}${color}${exec awk '/dev/ {used = $4} END {print used/1024"MiB"}' /proc/swaps}${color2}${execbar awk '/dev/ {size += $3; used += $4} END {print int(used*100/size)" 7,50"}' /proc/swaps}
 #-${template9 Swap swap swapbar}
 ${template9 Entropy entropy_avail entropy_bar}
 #-
