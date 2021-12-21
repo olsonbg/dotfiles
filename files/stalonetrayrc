@@ -24,7 +24,7 @@ decorations none
 # dockapp_mode <mode>        # set dockapp mode, which can be either simple (for
                              # e.g. OpenBox, wmaker for WindowMaker, or none
                              # (default). NEW in 0.8.
-dockapp_mode simple
+dockapp_mode none
 
 # fuzzy_edges [<level>]      # enable fuzzy edges and set fuzziness level. level
                              # can be from 0 (disabled) to 3; this setting works
