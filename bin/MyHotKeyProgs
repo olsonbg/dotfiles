@@ -328,7 +328,7 @@ screenshot() {
 pulseaudioVolume()
 {
 	local OPT="$1"
-	local SINK=0
+	local SINK=$(pactl list short sinks |grep 'alsa_output.pci-0000_00_1f.3.analog-stereo'|awk '{print $1}')
 	local VOLSTEP="5%"
 
 	case "$OPT" in
@@ -343,6 +343,15 @@ pulseaudioVolume()
 		"audioMute")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Mute Volume"
 			pactl set-sink-mute $SINK toggle
+			;;
+		"echoMute")
+			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Echo Mute"
+			echoSink=$(pactl list short sink-inputs |grep 'module-loopback.c'|cut -f 1)
+			if [[ -n $echoSink ]]; then
+				pactl set-sink-input-mute "$echoSink" toggle
+			else
+				showNotification "Can not find sink numeber for echo loopback."
+			fi
 			;;
 		*)
 			showhelp
@@ -420,10 +429,49 @@ case "$1" in
 		;;
 	"spotify_pauseplay")
 		if pgrep spotify >/dev/null; then
-			doByWmctrlKey "$(hotkey_cmd_spotify classname)" "$(hotkey_cmd_spotify notification)" "space"
+			dbus-send --type=method_call \
+			          --dest=org.mpris.MediaPlayer2.spotify \
+			          /org/mpris/MediaPlayer2 \
+			          org.mpris.MediaPlayer2.Player.PlayPause
 		else
 			# If spotify is not running, we must be using cmus.
 			cmus-remote -u 2>/dev/null
+		fi
+		;;
+	"spotify_next")
+		if pgrep spotify >/dev/null; then
+			dbus-send --type=method_call \
+			          --dest=org.mpris.MediaPlayer2.spotify \
+			          /org/mpris/MediaPlayer2 \
+			          org.mpris.MediaPlayer2.Player.Next
+		else
+			# If spotify is not running, we must be using cmus.
+			# cmus-remote -u 2>/dev/null
+			:
+		fi
+		;;
+	"spotify_previous")
+		if pgrep spotify >/dev/null; then
+			dbus-send --type=method_call \
+			          --dest=org.mpris.MediaPlayer2.spotify \
+			          /org/mpris/MediaPlayer2 \
+			          org.mpris.MediaPlayer2.Player.Previous
+		else
+			# If spotify is not running, we must be using cmus.
+			# cmus-remote -u 2>/dev/null
+			:
+		fi
+		;;
+	"spotify_stop")
+		if pgrep spotify >/dev/null; then
+			dbus-send --type=method_call \
+			          --dest=org.mpris.MediaPlayer2.spotify \
+			          /org/mpris/MediaPlayer2 \
+			          org.mpris.MediaPlayer2.Player.Stop
+		else
+			# If spotify is not running, we must be using cmus.
+			# cmus-remote -u 2>/dev/null
+			:
 		fi
 		;;
 	"gmail")
@@ -473,6 +521,9 @@ case "$1" in
 		;;
 	"audioMute")
 		pulseaudioVolume "audioMute"
+		;;
+	"echoMute")
+		pulseaudioVolume "echoMute"
 		;;
 	"sleep")
 		suspendToRAM
