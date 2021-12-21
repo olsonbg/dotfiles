@@ -1,7 +1,7 @@
 XMgrace*renderTable: variable
-XMgrace*renderTable.variable.fontName: Liberation Sans
-XMgrace*renderTable.variable.fontType: FONT_IS_XFT
-XMgrace*renderTable.variable.fontSize: 9
+! XMgrace*renderTable.variable.fontName: Liberation Sans
+! XMgrace*renderTable.variable.fontType: FONT_IS_XFT
+XMgrace*renderTable.variable.fontSize: 12
 XMgrace*background: S_base3
 XMgrace*foreground: S_base00
 XMgrace*XmText*background: S_base2
