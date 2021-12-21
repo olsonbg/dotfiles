@@ -315,10 +315,12 @@ screenshot() {
 
 	case "$TYPE" in
 		"window")
-			scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/' -s
+			rate >> /dev/shm/da.txt
+			sleep 0.5s
+			scrot '%Y%m%dT%H%M%S_$wx$h.png' -D :0.0 -s -e 'mv $f ~/shots/ && gimp ~/shots/$f'
 			;;
 		*)
-			scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
+			scrot '%Y%m%dT%H%M%S_$wx$h.png' -e 'mv $f ~/shots/ && gimp ~/shots/$f'
 			;;
 	esac
 
@@ -334,15 +336,15 @@ pulseaudioVolume()
 	case "$OPT" in
 		"audioLowerVolume")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Lower Volume"
-			pactl set-sink-volume $SINK -$VOLSTEP
+			pactl set-sink-volume "$SINK" "-$VOLSTEP"
 			;;
 		"audioRaiseVolume")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Raise Volume"
-			pactl set-sink-volume $SINK +$VOLSTEP
+			pactl set-sink-volume "$SINK" "+$VOLSTEP"
 			;;
 		"audioMute")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Mute Volume"
-			pactl set-sink-mute $SINK toggle
+			pactl set-sink-mute "$SINK" toggle
 			;;
 		"echoMute")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Echo Mute"
