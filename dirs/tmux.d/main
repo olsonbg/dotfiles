@@ -45,4 +45,6 @@ set-option -g set-titles-string "#S / #W"
 
 # Reset these everytime starting or joining a session
 set-option -g update-environment "DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+
+set-hook -g client-attached 'run-shell $HOME/bin/tmux_update_display.sh'
 # vim:ft=tmux
