@@ -348,7 +348,11 @@ pulseaudioVolume()
 			;;
 		"echoMute")
 			[[ $SHOW_NOTIFICATION -ne 0 ]] && showNotification "Toggle Echo Mute"
-			echoSink=$(pactl list short sink-inputs |grep 'module-loopback.c'|cut -f 1)
+			echoSink=$(pactl list sink-inputs|\
+			           grep -E '(Sink Input|media.name)'|\
+			           paste - -|\
+			           grep 'Loopback from Yeti'|\
+			           sed 's/Sink Input #\([0-9]\).*/\1/')
 			if [[ -n $echoSink ]]; then
 				pactl set-sink-input-mute "$echoSink" toggle
 			else
