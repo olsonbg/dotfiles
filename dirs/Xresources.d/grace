@@ -1,6 +1,6 @@
 XMgrace*renderTable: variable
-! XMgrace*renderTable.variable.fontName: Liberation Sans
-! XMgrace*renderTable.variable.fontType: FONT_IS_XFT
+XMgrace*renderTable.variable.fontName: Liberation Sans
+XMgrace*renderTable.variable.fontType: FONT_IS_XFT
 XMgrace*renderTable.variable.fontSize: 12
 XMgrace*background: S_base3
 XMgrace*foreground: S_base00
@@ -10,7 +10,7 @@ XMgrace*XmFileSelectionBox*XmList.background: S_base2
 XMgrace*XmFileSelectionBox*XmTextField.background: S_base2
 XMgrace*XmPushButton.background: S_base2
 XMgrace*XmPushButton.foreground: S_base01
-XMgrace*geometry: 1034x700
+XMgrace*geometry: 1142x911
 !XMgrace*font: xft:arial:size=10:antialias=true
 
 ! vim:ft=xdefaults
