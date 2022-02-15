@@ -5,10 +5,13 @@ font = "Noto Mono for Powerline 10"
 markup = yes
 format = "<b>[%a] %s %p</b>\n%b"
 sort = yes
-indicate_hidden = true
-# geometry = "x5"
 idle_threshold = 0
-geometry = "300x5-20+20"
+width = 300
+height = 200
+origin = top-right
+offset = 20x20
+notification_limit = 4
+indicate_hidden = true
 alignment = left
 show_age_threshold = 60
 sticky_history = yes
@@ -18,7 +21,6 @@ separator_height = 2
 padding = 10
 horizontal_padding = 10
 separator_color = frame
-startup_notification = false
 icon_position = left
 icon_path = /usr/share/icons/Adwaita/scalable/actions/:/usr/share/icons/Adwaita/scalable/apps/:/usr/share/icons/Adwaita/scalable/categories/:/usr/share/icons/Adwaita/scalable/devices/:/usr/share/icons/Adwaita/scalable/emblems/:/usr/share/icons/Adwaita/scalable/emotes/:/usr/share/icons/Adwaita/scalable/mimetypes/:/usr/share/icons/Adwaita/scalable/places/:/usr/share/icons/Adwaita/scalable/status/:/usr/share/icons/Adwaita/48x48/actions/:/usr/share/icons/Adwaita/48x48/apps/:/usr/share/icons/Adwaita/48x48/categories/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/emblems/:/usr/share/icons/Adwaita/48x48/emotes/:/usr/share/icons/Adwaita/48x48/mimetypes/:/usr/share/icons/Adwaita/48x48/places/:/usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/HighContrast/scalable/status-extra/:/usr/share/icons/hicolor/22x22/apps/
 #dmenu = /usr/bin/dmenu -p dunst: -nb '#FFFFFF' -nf '#000000' -sb '#94DBFF' -sf '#000000'
@@ -32,11 +34,11 @@ max_icon_size = 32
 transparency = 5
 
 
-[shortcuts]
-close = ctrl+space
-close_all = ctrl+shift+space
-history = ctrl+grave
-context = ctrl+shift+period
+# [shortcuts]
+# close = ctrl+space
+# close_all = ctrl+shift+space
+# history = ctrl+grave
+# context = ctrl+shift+period
 
 [urgency_low]
 frame_color = "#268bd2"
@@ -44,11 +46,10 @@ frame_color = "#268bd2"
 #background = "#191311"
 #background = "#2B313C"
 background = "#fdf6e3"
-timeout = 4
+timeout = "4s"
 #background = "#ffffff"
 #foreground = "#000000"
 foreground = "#268bd2"
-timeout = 6000
 icon = "dialog-information"
 
 [urgency_normal]
@@ -57,11 +58,10 @@ frame_color = "#859900"
 #background = "#191311"
 #background = "#2B313C"
 background = "#fdf6e3"
-timeout = 6
+timeout = "6s"
 #background = "#94DBFF"
 #foreground = "#000000"
 foreground = "#859900"
-timeout = 6000
 icon = "dialog-information"
 
 [urgency_critical]
@@ -70,12 +70,11 @@ frame_color = "#dc322f"
 #background = "#191311"
 #background = "#2B313C"
 background = "#fdf6e3"
-timeout = 8
 #background = "#ff9999"
 #foreground = "#000000"
 #foreground = "#657b83"
 foreground = "#dc322f"
-timeout = 0
+timeout = "0"
 icon = "emblem-important"
 
 # Every section that isn't one of the above is interpreted as a rules to
@@ -112,7 +111,7 @@ icon = "emblem-important"
 
 [NetworkManager]
 summary = "Connection Established"
-timeout = 2
+timeout = "2s"
 
 [notify-send]
 format = "<b>%s %p</b>\n%b"
