@@ -36,7 +36,7 @@ do
 	case "${pane_process[1]}" in
 		zsh|bash)
 			tmux send-keys -t "${pane_process[0]}" \
-			     "export DISPLAY=$NEW_DISPLAY" Enter
+			     " export DISPLAY=$NEW_DISPLAY" Enter
 			;;
 		*python*)
 			tmux send-keys -t "${pane_process[0]}" \
