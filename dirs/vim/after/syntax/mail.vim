@@ -3,8 +3,7 @@ set tw=76 softtabstop=4 expandtab
 " Setting "X-Editor":
 " Let Vim identify itself in the message header
 " when editing emails with Mutt and Slrn:
-let verstring=""
-call ComputeVer(verstring)
+let verstring=v:version/100.0
 let @"="X-Editor: VIM - Vi IMproved v".verstring." http://www.vim.org/\n"|exe 'norm 1G}""P'
 
 map ,cs msHmtgg/Subject:\s*/e<CR>:noh<CR>D"=strftime(" %Y %b %d")<CR>p'tzt`s
