@@ -65,8 +65,18 @@ getpic() {
 	local DAYSAGO="$1"
 	local OFILE="$2"
 
-	curl -s "$(getpiclink $DAYSAGO)" |\
-		convert - -geometry $APOD_NWSIZE -bordercolor black -border 4 "$OFILE"
+	echo "$(getpiclink $DAYSAGO)" >> /dev/shm/apod.txt
+
+	tmppic=$(mktemp)
+	curl -s "$(getpiclink $DAYSAGO)" --output "$tmppic"
+
+	# Check if we got a file
+	if [ -s "$tmppic" ]; then
+		# Use [0] to get only first frame of animated image
+		convert "${tmppic}[0]" -geometry $APOD_NWSIZE -bordercolor black -border 4 "$OFILE"
+	fi
+
+	rm "$tmppic"
 }
 
 showhelp() {
