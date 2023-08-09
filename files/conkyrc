@@ -73,20 +73,21 @@ own_window_colour="002b36",
 --default_color 7A7771
 default_outline_color="839496",
 default_shade_color="839496",
--- Single, wide graph
-template0=[[$color2$alignc${\1 \2 25,175 \3 -t -l}]],
+-- Single, wide graph, 3 parameters
+template0=[[$color2$alignc${\1 \2 25,175 657b83 657b83 \3 -t -l}]],
+-- Single, wide graph, 2 parameters
+template7=[[$color2$alignc${\1 25,175 657b83 657b83 \2 -t -l}]],
 -- Two graphs
-template1=[[$color2${\1 25,87 -t -l}${alignr}$color2${\2 25,87 -t -l}]],
+template1=[[$color2${\1 25,87 657b83 657b83 -t -l}${alignr}$color2${\2 25,87 657b83 657b83 -t -l}]],
 -- Two graphs that need options
-template2=[[$color2${\1 \3 25,87 -l -t}${alignr}$color2${\2 \3 25,87 0 -l -t}]],
+template2=[[$color2${\1 \3 25,87 657b83 657b83 -l -t}${alignr}$color2${\2 \3 25,87 657b83 657b83 -l -t}]],
 -- Label for Two graphs
 template3=[[${color0}\4:${color}${\1 \3}${alignr}${color0}\5:${color}${\2 \3}]],
 template4=[[${color0}\3:${color}${\1}${alignr}${color0}\4:${color}${\2}]],
 -- Short bar
-template5=[[$color2${\1 7,50 \2}]],
+template5=[[$color2${\1 7,50 657b83 657b83 \2}]],
 --
 template6=[[${color0}\1:${alignr}${color}${\2}]],
-template7=[[${color0}\1:${alignr}${color}${\2 \3}]],
 template8=[[${template6 \1 \2}${template5 \3 \4}]],
 template9=[[${template6 \1 \2}${template5 \3}]],
 --
@@ -99,7 +100,7 @@ ${alignc}$color$nodename
 ${color0}Uptime:$alignr$color$uptime
 ${color0}System temp:${alignr}${exec sensors | grep 'Package' | cut -c 15-23}
 ${color0}Load:$alignr$color$loadavg
-${template0 loadgraph "" 8}
+${template7 loadgraph "8"}
 #-
 #- CPUs
 #-
